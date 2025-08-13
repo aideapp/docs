@@ -1,0 +1,173 @@
+---
+title: "Scenarios"
+description: "Scenarios are how Aide takes actions, such as generating a draft for an agent, or taking an action via AI"
+---
+
+Scenarios are composed of two pieces: **conditions** and **actions**.
+
+How scenarios work: when a message is received, Aide looks at whether the interaction matches any of the conditions of your scenarios. If they are all true, then the actions are executed. _There are two types of scenarios:_
+
+- **Always-on Scenario** - always-on Scenarios have no conditions, they always apply. They are useful for adding AI instructions that should always be referenced by the AAI in every conversation like, brand, tone, and style. Following is an example of simple always-on instructions. Notice how it says that the scenario is always applied.
+
+![A simple example of always-on Scenario. It includes a note above specifying that the scenario is always applied unless you add conditions.](/images/image%209.png)
+
+A simple example of always-on Scenario. It includes a note above specifying that the scenario is always applied unless you add conditions.
+
+- **Normal Scenario** with conditions. They are only applied when all the conditions listed are true.
+
+## Conditions
+
+Conditions are based on fields for a given conversation. The fields you have available depend on the integrations you have connected. For example, if you use Zendesk, ticket and user fields are available as conditions. If you use Shopify, order information, and tracking information such as whether an order has been shipped, delivered, or which country it’s being shipped to are available as conditions. If you use Salesforce or a different CRM, account or record specific fields are available as conditions.
+
+Each condition is a row structured as follows:
+
+- **Condition** - Select the condition you want. These can be Aide conditions, or conditions based on your connected integrations (Zendesk, Shopify, Salesforce, etc.)
+
+![image.png](/images/image%2010.png)
+
+- **Operator** - Select whether that condition should be (is) or shouldn’t be (is not).
+
+![image.png](/images/image%2011.png)
+
+- **Value** - this varies based on the selected condition, but can be true or false, or a set of options to choose from.
+
+**Combining conditions:** you can add multiple conditions using the “and” or “or” buttons. For conditions combined with “and” they all have to be true for the scenario to be applied. So if you have two groups of conditions combined with “or”, either group needs to be true for the scenario to apply.
+
+![Conditions combined with and: you can have multiple conditions that should evaluate to true for the scenario to apply. Within each “or” group, you can have multiple “and” statements.](/images/image%2012.png)
+
+Conditions combined with and: you can have multiple conditions that should evaluate to true for the scenario to apply. Within each “or” group, you can have multiple “and” statements.
+
+![Conditions combined with or: you can have multiple sets of conditions in a scenario any of which should evaluate to true for the scenario to apply. Within each “or” group, you can have multiple “and” statements.](/images/image%2013.png)
+
+Conditions combined with or: you can have multiple sets of conditions in a scenario any of which should evaluate to true for the scenario to apply. Within each “or” group, you can have multiple “and” statements.
+
+### Aide conditions
+
+By default Aide has several conditions available:
+
+- **Is first message** - only applies the scenario if the message is the first message received in a conversation.
+- **Topic** - apply the scenario to messages that have the selected topic.
+- **Highest Topic** - if multiple topics are detected, this condition allows you to specify the highest topic as a condition for the scenario to run.
+- **Topic confidence -** because Aide assigns a conditions score (from 0 to 100%) to every topic it detects, you can use its confidence as a condition for a scenario. Confidence thresholds run from 80% to 97.5% in increments of 2.5%**.**
+- **Inbox** - if you have multiple inboxes connected, you can limit the scenario to running in the inboxes you want.
+
+## Integration specific conditions:
+
+**Zendesk Conditions -** ticket and user fields created in Zendesk are synced to Aide during the integration process, making them available to use as conditions for scenarios.
+
+![Custom Zendesk ticket fields.](/images/image%2014.png)
+
+Custom Zendesk ticket fields.
+
+![Zendesk ticket fields available as conditions when building an Aide scenario.](/images/image%2015.png)
+
+Zendesk ticket fields available as conditions when building an Aide scenario.
+
+This is especially handy if you have a mature Zendesk setup where ticket and user fields are populated when a ticket is created, so you can then create a scenario with the appropriate conditions to handle those tickets.
+
+### Front Conditions
+
+Similar to Zendesk, Front conversation or contact fields can be used as conditions.
+
+### Gorgias Conditions
+
+Ticket tags and statuses, and other ticket fields can be used as conditions.
+
+## **eCommerce Conditions**
+
+These are the most powerful conditions in Aide and are available as soon as you integrate your eCommerce platform. Shopify and WooCommerce are supported. You can also integrate your custom platform if you contact us.
+
+![image.png](/images/image%2016.png)
+
+- **Order exists** (true or false) \*\*\*\*- when a customer reaches out Aide checks if their order exists, as long as their order ID, email, or phone number are provided. This condition allows you create scenarios for when an order exists for a customer or if it doesn’t. Available options for this condition are true or false.
+- **Order created** (time in hours ago) - If an order is found, Aide is able to look at when it was placed. This condition is helpful things like canceling orders if they were placed recently enough and haven’t been processed yet.
+- **Tracking exists** (true or false) **-** For a given order, Aide checks if tracking information is available or not. This condition allows you create scenarios for when a shipping label has been created for an order or not yet. Available options for this condition are true or false.
+
+![image.png](/images/image%2017.png)
+
+- **Tracking begun** (time in weeks ago) \*\*\*\*- If tracking exists, Aide is able to look at when the label was created, typically that is the indicator of “tracking begun”.
+- **Tracking last updated** (time in weeks ago) - if tracking exists, \*\*\*\* you can decide things like whether an order should be replaced based on whether a shipment is missing and its tracking status is not delivered, and tracking was last updated a week or more ago.
+- **Destination country** (multiple countries) - if a shipment was fulfilled, then destination country can be selected when building Scenarios where your shipping policies differ per country.
+- **Shipment status** (label_created, in_transit, delivered, exception, not_trackable) - you can add a Scenario condition based on the shipment status.
+- **Tracking company** (UPS, Fedex, DHL, etc.) - you can create scenario conditions based on couriers as well!
+
+### Salesforce conditions:
+
+When you connect Salesforce or any other CRM to Aide, contact fields are available to use as conditions.
+
+![Salesforce CRM contact fields available for use as Scenario conditions.](/images/image%2018.png)
+
+Salesforce CRM contact fields available for use as Scenario conditions.
+
+## Actions
+
+Scenario actions are only executed if all the conditions for a given scenario are true. For example, you could have a scenario with a certain topic, received in a certain inbox, with a certain custom field value as conditions. Only then would the actions be executed.
+
+Aide has many different actions categorized into AI agent actions and Agent panel actions:
+
+### **AI agent actions**
+
+Aide’s AI agent works behind the scenes based on your Scenarios to solve tickets automatically. When using Aide as an agent, the following actions are available:
+
+![Aide AI agent actions.](/images/image%2019.png)
+
+Aide AI agent actions.
+
+1. **AI reply** - \***\*allows you to automatically send responses composed with generative AI. The responses are composed based on knowledge articles, macros (or message templates), and can be steered by combining them with a prompt **instructions action.\*\*
+
+![The AI reply action and escalation options when building a scenario.](/images/image%2020.png)
+
+The AI reply action and escalation options when building a scenario.
+
+**Using AI replies safely**: Aide requires configuring scenarios to ensure that it only responds when all conditions are met. This is done by creating a scenario for a given topic and adding conditions to ensure that it only acts on desired messages. This helps ensure Aide only sends generative responses when it is expected to. Additionally, you should pair generate response with the **prompt instructions action** to define how the response should be written or any factors that it should take into account when writing the response.
+
+<aside>
+💡
+
+Tip: You can test how Aide would respond using the [Simulator](https://my.aide.app/simulator).
+
+</aside>
+
+**Handling escalation (when AI should not reply):** by default, Aide will verify the generated response before it is sent to ensure that it addresses the customer’s concerns. if it does not (e.g. they ask a question that is not covered by the knowledge and configuration in Aide), then it will be escalated to a human agent.
+
+**There are two types of escalation:**
+
+- **Escalate with internal comment:** Aide will not send a reply to the customer and will only post an internal comment describing why it did not respond.
+- **Escalate with hand-off message:** Aide will send a reply to the customer informing them that a member of the support team will get back to them.
+
+1. **Run automation** - Aide’s AI agent can run actions automatically, but the actions are predefined. For example, if you have an eCommerce integration, you can put an order on hold or update a shipping address.
+
+![The Run automation action for an eCommerce account when building a scenario.](/images/image%2021.png)
+
+The Run automation action for an eCommerce account when building a scenario.
+
+<aside>
+💡
+
+If you want to run custom automations, contact support@aide.app.
+
+</aside>
+
+1. **Send canned response** - is a simple action type that sends a canned response verbatim. It supports Liquid Markup, enables the automated placement of data in responses.
+
+![Example of a canned response that uses Liquid Markup and available data. See appendix for an example of available data object.](/images/image%2022.png)
+
+Example of a canned response that uses Liquid Markup and available data. See appendix for an example of available data object.
+
+1. **Apply macro** - Automatically applies a macro (set of actions) in Zendesk or Front. Macros are help desk shortcuts that when executed can resnd a response, or atake any other type of action, like tagging, assigning conversations, setting priority, and so on. If you want to perform any type of help desk action, chances are it is done using a macro. When you connect Zendesk or Front, Aide automatically imports your macros and they can be applied by scenarios.
+
+- **Post internal comment** - Use this to post a piece of text as an internal comment.
+- **Collect field -** If there is certain information you need to collect from a given message, like a date or a number, you can have Aide automatically collect that and save it to a field of your choice. You may need our team’s assistance configuring this.
+- **AI instructions** - Is one of the most powerful actions, especially handy when you’re using AI replies or creating drafts. This is where you can add instructions for the LLM to follow when composing the response.
+
+### **Agent panel actions**
+
+You can configure actions in the Scenario that are displayed to your human agents in the “Agent Panel” (see Appendix I).
+
+![Aide Agent Panel (for human agents) actions.](/images/image%2023.png)
+
+Aide Agent Panel (for human agents) actions.
+
+1. **Create draft** - are composed using generative AI just like the AI reply action, with the only exception being that the responses are not sent to the customer, but rather, are left as drafts for agents to review, insert, and send manually. They are presented in the Aide panel, available in Zendesk and Front. If using Gorgias, they will be pasted as internal comments visible only to agents.
+2. **Suggest response** - is an action that presents a text response verbatim for agents to see in the Aide panel, available in Zendesk and Front. These suggested responses are independent of generated drafts and are displayed as-is. Like canned responses, they can also use variables. Suggest response can be paired with **generate response** or **pre-generate draft** actions to be used as a base for composing a response with generative AI. You can also add a **prompt instructions** action to modify the generated response further if you choose to.
+3. **Suggest macro** - presents a macro for agents to see in the Aide panel, available in Zendesk and Front. These suggested macros are displayed independently and can be applied by an agent in 1-click.

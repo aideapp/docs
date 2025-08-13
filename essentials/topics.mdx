@@ -1,0 +1,63 @@
+---
+title: "Topics"
+description: "Auto-sort every incoming message into a 'bucket'"
+---
+
+Aide trains and finetunes a classifier for every customer account based on their data. This is essential for the categorization of incoming conversations, so that when it comes in it gets sorted in a bucket for further actions.
+
+Aide creates topics automatically when you connect your ticket source (such as Front, Zendesk, Gorgias, or Gmail to Aide). We encourage teams to edit topics, create new ones to ensure maximal coverage of incoming tickets.
+
+Coverage means the percentage of conversations that are identified as belonging to the existing topics. This represents the percentage of conversation where at least one topic is detected.
+
+Topics are organized in a 3 level hierarchy called a “taxonomy” it is a list of topics organized by category and group. You can create new categories, new groups within those categories, and new topics under each group.
+
+![Create a topic or a new category using the “Create” button on the [Topics page](https://admin.aide.app/topics).](/images/image.png)
+
+Create a topic or a new category using the “Create” button on the [Topics page](https://admin.aide.app/topics).
+
+![Edit categories or create new subgroups under them by hovering over the 3 dots menu.](/images/image%201.png)
+
+Edit categories or create new subgroups under them by hovering over the 3 dots menu.
+
+![Edit groups or create new topics under them by hovering over the 3 dots menu.](/images/image%202.png)
+
+Edit groups or create new topics under them by hovering over the 3 dots menu.
+
+The benefit of detecting topics in incoming messages is that you can define how each topic is handled (via **Scenarios**), whether through automation or suggestions for agents.
+
+## How to train topics and improve detection
+
+Aide uses a topic’s name, description, and examples to determine whether a conversation belongs to that topic or not. For the following examples, let’s assume we have a topic named “**Book review**”, with a description of “**Customer provides the review of a book they recently read”**, and have the following examples:
+
+![image.png](/images/image%203.png)
+
+You can add examples through the Aide dashboard by going into the topic and manually adding the example. Or through the agent copilot in Zendesk or Front (_see Agent Panel documentation for instructions on how this is done_), by providing feedback (thumbs up or down) adds a positive or negative example respectively, the two types of examples:
+
+- **Positive examples** - when training, if you give a message thumbs up, Aide will add the message as a positive example. When teaches Aide to choose that topic for similar messages in the future. Positive examples are unmarked.
+  ![What a positive example looks like.](/images/image%204.png)
+  What a positive example looks like.
+- **Negative examples** - when training if you give a message thumbs down, Aide will add the message as a “negative example”, which teaches Aide not to choose that topic for similar messages in the future. Negative examples are highlighted in red and are noted as such.
+  ![What a negative example looks like.](/images/image%205.png)
+  What a negative example looks like.
+
+**Automated review of examples**
+
+To make your life easier, when a new topic is created. This happens regardless of whether a topic is created by Aide during initial setup or by you after that, this helps build up training examples for the topic to improve accuracy.
+
+- **Suggested examples** - Aide automatically scans new conversations for examples for existing topics and adds them as suggestions for you to approve or rejected.
+
+![image.png](/images/image%206.png)
+
+- **Outlier examples** - Aide automatically reviews examples present in every topic, even if they were manually added by your team, to ensure that they match the topic name, description, and other examples. In the following example, the message is asking for an update on their order, but as noted above, the topic we are looking at is “Book views”, so Aide is suggesting that it be moved to the correct topic, “**Order tracking**” and is presenting a button for you to do click and it will do so. You also choose keep it where it is by clicking “keep”.
+
+![An example that does not belong to “Book reviews”, Aide wants to move it to the “Order tracking” topic.](/images/image%207.png)
+
+An example that does not belong to “Book reviews”, Aide wants to move it to the “Order tracking” topic.
+
+More importantly, when new examples are added, Aide compares them with the existing examples to determine if they really belong in that topic. If they don’t, Aide will suggest moving it to a more fitting topic. This is to ensure the consistency training examples and maintain the topic integrity for precise and accurate detection.
+
+## **Managing existing examples**
+
+For a given example, you can either switch it from positive to negative (or vice versa), move it to a different topic, or delete it entirely.
+
+![image.png](/images/image%208.png)

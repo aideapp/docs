@@ -1,0 +1,54 @@
+---
+title: "Reports"
+description: "View Aide performance and feedback metrics"
+---
+
+![image.png](/images/image%2034.png)
+
+The reports page on the Aide dashboard is organized into 3 main sections:
+
+## **Conversations section**
+
+The conversations section is made of 4 columns:
+
+1. **Topics** - Overall topic detection rate is reported. i.e. how many conversations got at least one topic. Ideally this number would be as high as possible. If it is low, chances are you do not have enough topics, not enough examples, or inaccurate topic names and descriptions. To dive further, you can click the “**No topics**” row, which would show you a list of conversations with no topics. If you intend to setup automations, we recommend having a comprehensive set of topics. To learn more, read (building a taxonomy).
+2. **Scenarios** - An automation rate is reported, which reflects the % of conversations with detected topics that had a full or a partial automation applied. They are divided into two subsections **AI Agent Automations** and **Agent Panel Suggestions:**
+   1. **AI Agent Automations** - count Scenarios that contain an _AI agent_ actions.
+      1. **Full automations -** are Scenarios where the _AI agent_ closes a conversation in one-touch. i.e. they include updating the conversation status to “**closed**” by applying a Zendesk or Front macro.
+      2. **Partial automations -** are Scenarios with _AI agent_ actions but leave the conversation open.
+   2. **Agent Panel Suggestions** - count Scenarios that contain _Agent Panel_ actions. These stats relate to Agent Panel usage by human agents.
+      1. **Applied suggestions** - are Scenarios with **Suggest response** or **Suggest macro** that were applied by human agents (does not include AI created drafts, which are counted in their own **Drafts** section).
+      2. **Suggested to agents** - are Scenarios with **Suggest response** or **Suggest macro** that were not applied. So a more apt name for this would be “**Suggested but not applied by agents**”.
+3. **Drafts** - An insertion rate is reported, this reflects the % of drafts that were inserted by agents.
+   1. **Insertions** - count of drafts and whether they were inserted or not.
+      1. **Inserted drafts** - are drafts that were inserted. This is measured by how many times the “Insert” button for AI drafts on the _Agent Panel_ is clicked.
+      2. **Unused drafts -** are drafts that were not inserted by human agents.
+   2. **Generations** - count of created drafts, and whether they were manually generated or auto-generated.
+      1. **Auto-generated drafts** - drafts that were created by a Scenario using a **Create draft** action on the _Agent Panel_.
+      2. **Manually generated drafts** - drafts created by human agents by clicking the “generate” button on the _Agent Panel_.
+4. **Bots** - Handle rate reflects % of conversations that were answered by a bot.
+   1. **Handled conversations** - total number of conversations that involved a bot interaction.
+   2. **Unresolved conversations** - conversations that involved a bot interaction but were not resolved.
+
+## **Feedback section**
+
+![image.png](/images/image%2035.png)
+
+One of the powers of Aide is the ability for your team members to provide feedback as QA and training for the AI system. Feedback is provided by clicking thumbs up or down on the _Conversations page_ or the _Agent Panel_. You can provide feedback on Topics, Scenarios, and Drafts.
+
+The metric we’re measuring with feedback is accuracy, it is based on the things you provided feedback on. For example, if you give one thumbs up and one thumbs down, accuracy would be 50%. It is not calculated over all conversations with topics, just the ones where you provide either thumbs up or down.
+
+The columns of the feedback feedback section are:
+
+1. **Topic detection accuracy**
+2. **Automation accuracy**
+3. **Drafting accuracy**
+4. **Bot** **accuracy**
+
+Within each section denoting how many thumbs up or down were provided. The last section, percent of items reviewed represent the % of conversations where feedback was provided.
+
+## **Topics section**
+
+![image.png](/images/image%2036.png)
+
+In the topics section you’ll see a list of your topics sorted by volume. You can also see how many examples were added for training and how many topic detections were corrected. If any corrections are made, the topic detection accuracy is reduced.
