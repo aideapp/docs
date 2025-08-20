@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Aide docs",
   "colors": {
     "primary": "#3b3b3b",
@@ -16,7 +16,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
             "group": "Getting started",
@@ -26,20 +26,27 @@
             ]
           },
           {
-            "group": "Dashboard",
+            "group": "Products",
             "pages": [
-              "essentials/topics",
-              "essentials/scenarios",
-              "essentials/knowledge",
-              "essentials/bots"
+              "products/AI-agent",
+              "products/agent-panel"
             ]
           },
           {
-            "group": "Review",
+            "group": "Dashboard",
             "pages": [
-              "essentials/reports",
-              "essentials/conversations",
-               "essentials/simulator"
+              "dashboard/topics",
+              "dashboard/scenarios",
+              "dashboard/knowledge",
+              "dashboard/bots"
+            ]
+          },
+          {
+            "group": "Monitor",
+            "pages": [
+              "dashboard/reports",
+              "dashboard/conversations",
+               "dashboard/simulator"
             ]
           }
         ]
@@ -50,8 +57,8 @@
     }
   },
   "logo": {
-    "light": "/logo/aide-logo-white-bg.svg",
-    "dark": "/logo/aide-logo-black-bg.svg"
+    "light": "/logo/aide-logo-white-bg-docs.svg",
+    "dark": "/logo/aide-logo-black-bg-docs.svg"
   },
   "navbar": {
     "links": [
