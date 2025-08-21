@@ -28,7 +28,10 @@
           {
             "group": "Products",
             "pages": [
-              "products/AI-agent",
+              {
+                "path": "products/ai-agent",
+                "label": "AI agent"
+              },
               "products/agent-panel"
             ]
           },
@@ -42,10 +45,15 @@
             ]
           },
           {
-            "group": "Monitor",
+            "group": "Review",
             "pages": [
               "dashboard/reports",
-              "dashboard/conversations",
+              "dashboard/conversations"
+            ]
+          },
+          {
+            "group": "Test",
+            "pages": [
                "dashboard/simulator"
             ]
           }

@@ -1,31 +1,101 @@
 ---
 title: "AI Agent"
-description: "Respond to customers and perform common actions"
+description: "Automatically respond to customers and perform actions using AI"
 ---
 
-Aide's AI agent uses past responses, macros or response templates (which are automatically imported from your help desk once it is connected), and Knowledge in Aide, which that includes any imported help center or documentation that was imported or added manually, including content from your website, and last but not least, "AI instructions" from Scenarios configured in Aide.
+Aide's AI agent works behind the scenes to automatically handle customer conversations and perform actions based on your configured Scenarios. The AI agent can respond to customers using generative AI and automate various help desk and business operations.
 
-In other words, out of the box, Aide's AI agent relies on past responses, macros or response templates, and knowledge (imported help center aticles.) In addition, if you use an eCommerce platform, your products including their descriptions, pricing, and stock availability are also automatically known to Aide.
+![Aide AI agent actions available in Scenarios.](/images/image%2019.png)
 
-Do note however, that the AI instructions for the agent are not global, but are only used when the Scenario is found to match.
+Aide AI agent actions available in Scenarios.
 
-1. Reply to customers with generative AI and auto-escalate when necessary.
-2. Automate help desk actions - like tagging, assigning, or setting ticket statuses and priority.
-3. Automate eCommerce or CRM actions - like putting orders on hold, updating addresses, or other custom actions.
+## How the AI agent works
 
-#Generating responses
+The AI agent operates through **Scenarios** - combinations of conditions and actions that determine when and how the AI should respond. When a message is received, Aide evaluates whether it matches your scenario conditions, and if so, executes the configured actions.
 
-Aide's AI agent is able to reply to customers using generative AI, but only when it is confident that the answers are correct. This is accomplished using the "AI reply" action. To ensure customers always receive meaningful responses, Aide verifies that the response fully addresses the customers question before sending a response. And when it finds that the response is not helpful, it escalates to a member of your team by posting an internal comment and optionally letting the customer know.
+The AI agent relies on several sources of knowledge to create accurate responses:
+
+- **Knowledge articles** - imported help center content, manually added articles, and scraped website data
+- **Macros and templates** - automatically imported from your help desk platform
+- **Product information** - automatically synced from your eCommerce platform
+- **AI instructions** - custom prompts and guidelines defined in your Scenarios
+
+## AI agent actions
+
+When using Aide as an AI agent, the following actions are available in Scenarios:
+
+### AI Reply
+
+The **AI reply** action allows you to automatically send responses composed with generative AI. Responses are created based on your knowledge base, macros, and can be guided by AI instructions.
+
+![The AI reply action and escalation options when building a scenario.](/images/image%2020.png)
+
+The AI reply action and escalation options when building a scenario.
+
+**Safety features:** Aide requires configuring scenarios with specific conditions to ensure the AI only responds when appropriate. This prevents the AI from sending responses to unexpected messages.
+
+**Response verification:** By default, Aide verifies that generated responses fully address customer questions before sending them. If verification fails, the conversation is escalated to a human agent.
 
 The options for escalation are as follows:
 
 - **Escalate with internal comment:** Aide will not send a reply to the customer and will only post an internal comment describing why it did not respond.
 - **Escalate with hand-off message:** Aide will send a reply to the customer informing them that a member of the support team will get back to them.
 
-- Learns from previous responses and macros - to reduce setup time.
-- Built-in verification for safety — Aide verifies that a given answer fully addresses the customer's question. If verification fails, then it is escalated.
-- Easily import your existing help center or add articles manually.
+## Escalation handling
 
-# Enhanced Safety
+When the AI agent cannot create a meaningful response or encounters issues, it escalates to human agents using one of two methods:
 
-AI agent actions are defined using Scenarios so it's only running on the tickets that matched defined conditions. If you operate in a regulated industry or one where accuracy is paramount, it is recommended to make your system more deterministic and fool-proof using Topics and Scenarios instead of simply relying on past responses, macros, and knowledge articles; Topics and Scenarios rely on a combination of conditions that need to be true before an action is taken (e.g. a response or sent or a tag is applied). This helps ensure that Aide's AI agent only behaves when specified and does not hallucinate.
+- **Escalate with internal comment** - No customer response is sent; only an internal comment explains why the AI didn't respond
+- **Escalate with hand-off message** - A customer-facing message informs them that a support team member will follow up
+
+### Run Automation
+
+Aide's AI agent can automatically execute predefined actions, such as:
+
+- **eCommerce actions** - putting orders on hold, updating shipping addresses, canceling orders
+- **Help desk actions** - applying tags, changing ticket status, assigning conversations
+- **CRM actions** - updating contact information, creating records
+
+![The Run automation action for an eCommerce account when building a scenario.](/images/image%2021.png)
+
+The Run automation action for an eCommerce account when building a scenario.
+
+### Send Canned Response
+
+Send predefined responses verbatim, with support for Liquid Markup to dynamically insert customer and order data.
+
+### Apply Macro
+
+Automatically execute help desk macros (Zendesk/Front) or templates to perform actions like tagging, assigning, or changing ticket properties.
+
+### Other Actions
+
+- **Post internal comment** - Add internal notes for your team
+- **Collect field** - Automatically extract and save specific information from messages
+- **AI instructions** - Provide custom guidance for the AI when composing responses
+
+## Enhanced safety and control
+
+AI agent actions are only executed when all scenario conditions are met, ensuring predictable behavior. For regulated industries or situations requiring high accuracy:
+
+1. **Use Topics and Scenarios** instead of relying solely on past responses and knowledge
+2. **Define specific conditions** that must be true before actions are taken
+3. **Test scenarios** using the [Simulator](https://my.aide.app/simulator) to verify AI behavior
+
+This deterministic approach helps prevent AI hallucinations and ensures the agent only acts when explicitly configured to do so.
+
+## Getting started
+
+To set up your AI agent:
+
+1. **Configure Topics** to categorize incoming messages
+2. **Create Scenarios** with conditions and AI agent actions
+3. **Import Knowledge** from your help center and add custom articles
+4. **Test scenarios** using the simulator before going live
+
+<aside>
+💡
+
+**Tip:** Start with simple scenarios and gradually add complexity. Use the simulator to test how your AI agent will respond before deploying to production.
+
+</aside>
