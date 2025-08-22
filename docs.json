@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "aspen",
   "name": "Aide docs",
   "colors": {
     "primary": "#3b3b3b",
@@ -12,7 +12,7 @@
     "light":"#fafafa",
     "dark": "#fafafa"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
@@ -28,10 +28,7 @@
           {
             "group": "Products",
             "pages": [
-              {
-                "path": "products/ai-agent",
-                "label": "AI agent"
-              },
+              "products/ai-agent",
               "products/agent-panel"
             ]
           },
