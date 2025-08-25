@@ -1,0 +1,210 @@
+---
+title: "Custom integration"
+description: "Connecting a custom integration to Aide"
+---
+
+### Custom integrations
+
+This document provides a simple OpenAPI specification for the minimum API requirements needed to connect your data systems with Aide. We maintain flexibility regarding the fields returned in responses, requiring only a server endpoint with a URL and API token that implements three core endpoints: listing latest orders, retrieving individual order details, and fetching customer information.
+
+````openapi: 3.0.0
+info:
+title: Order & Customer Management Integration API
+version: '1.0.0'
+description: |
+Specification for integrating order and customer management platforms with Aide AI.
+This API defines the minimum required endpoints and data structures
+while allowing flexibility in implementation details.
+
+    Aide AI will poll these endpoints regularly (approximately once per minute)
+    to sync order and customer data.
+
+servers:
+
+- url: https://api.{platform}.com/v1
+  variables:
+  platform:
+  default: yourplatform
+  description: Your platform's API domain
+
+paths:
+/latest_orders:
+get:
+summary: List most recently updated orders
+description: |
+Retrieve the most recently updated orders, sorted by last update time in descending order.
+This endpoint will be polled approximately once per minute by Aide AI to detect changes.
+Implementation must provide at least the order ID and last update time.
+parameters: - in: query
+name: page_size
+schema:
+type: integer
+minimum: 1
+maximum: 100
+default: 50
+required: false
+description: Number of orders to return per page - in: query
+name: page_token
+schema:
+type: string
+required: false
+description: Token for pagination. Can be implemented as cursor or page number
+responses:
+'200':
+description: Successfully retrieved orders
+content:
+application/json:
+schema:
+type: object
+required: - orders
+properties:
+orders:
+type: array
+items:
+$ref: '#/components/schemas/OrderSummary'
+next_page_token:
+type: string
+description: Token for retrieving the next page of results
+
+/orders/{orderId}:
+get:
+summary: Get order details
+description: Retrieve detailed information about a specific order
+parameters: - name: orderId
+in: path
+required: true
+schema:
+type: string
+responses:
+'200':
+description: Successfully retrieved order details
+content:
+application/json:
+schema:
+$ref: '#/components/schemas/OrderDetail'
+'404':
+description: Order not found
+
+/customers/{customerId}:
+get:
+summary: Get customer details
+description: Retrieve detailed information about a specific customer
+parameters: - name: customerId
+in: path
+required: true
+schema:
+type: string
+responses:
+'200':
+description: Successfully retrieved customer details
+content:
+application/json:
+schema:
+$ref: '#/components/schemas/CustomerDetail'
+'404':
+description: Customer not found
+
+components:
+schemas:
+OrderSummary:
+type: object
+required: - id - updated_at
+properties:
+id:
+type: string
+description: Unique identifier for the order
+updated_at:
+type: string
+format: date-time
+description: Time the order was last updated # Additional optional fields can be included
+
+    OrderDetail:
+      type: object
+      required:
+        - id
+        - created_at
+        - total_amount
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the order
+        display_id:
+          type: string
+          description: Human-readable order identifier (e.g., order number, confirmation number)
+        created_at:
+          type: string
+          format: date-time
+          description: Time the order was placed
+        updated_at:
+          type: string
+          format: date-time
+          description: Time the order was last updated
+        total_amount:
+          type: number
+          format: float
+          description: Total amount for the order
+        currency:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+        canceled_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Time the order was canceled, if applicable
+        customer_id:
+          type: string
+          description: ID of the customer who placed the order
+        status:
+          type: string
+          description: Current status of the order
+        billing_address:
+          type: object
+          description: |
+            Billing address as a JSON object. Common fields include:
+            - address1: Primary street address
+            - address2: Secondary street address (apt, suite, etc)
+            - city: City name
+            - province/state: Province or state
+            - zip/postal_code: ZIP or postal code
+            - country: Country code (e.g., US, GB)
+            You may include additional fields as needed for your platform
+        # Additional fields can be included
+
+    CustomerDetail:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the customer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        country:
+          type: string
+          description: Country code (e.g., US, GB)
+        billing_address:
+          type: object
+          description: |
+            Billing address as a JSON object. Common fields include:
+            - address1: Primary street address
+            - address2: Secondary street address (apt, suite, etc)
+            - city: City name
+            - province/state: Province or state
+            - zip/postal_code: ZIP or postal code
+            - country: Country code (e.g., US, GB)
+            You may include additional fields as needed for your platform
+        # Additional fields can be included
+
+securitySchemes:
+ApiKeyAut```
+
+---
+````

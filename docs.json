@@ -55,6 +55,17 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Developers",
+        "groups": [
+          {
+            "group": "Integrating Aide",
+            "pages": [
+                "developers/custom-integration"
+            ]
+          }
+        ]
       }
     ],
     "global": {
