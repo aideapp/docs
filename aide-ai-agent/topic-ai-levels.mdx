@@ -1,0 +1,30 @@
+---
+title: "Control what Aide is allowed to do for each topic"
+description: "Each topic has an AI level that decides how far Aide may go on conversations about it."
+---
+
+{/* Generated from the Aide help center article "topic-ai-levels" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Each topic has an AI level that decides how far Aide may go on conversations about it. Set it on the topic's page under Topics, in the **AI replies** field.
+
+## The three levels
+
+**Answer only, no helpdesk drafts.** In chat, email and messaging, Aide answers from your knowledge and hands anything it would have to do or promise to your team. In Gorgias, Zendesk and Front, Aide doesn't draft replies to these tickets. A good choice for sensitive topics such as legal complaints or chargebacks.
+
+**Draft for review.** Aide can propose actions, such as a refund or an address change, but a person confirms them before anything happens. New topics start at this level. When Aide writes a draft for your team on these topics, it leaves a blank where a fact is missing; see [Drafts leave blanks for your team to fill in](/copilot/draft-blanks).
+
+**Fully automated.** Aide can act within the scenarios that match this topic, without waiting for a person.
+
+## Keeping Aide away from a topic
+
+To keep Aide off a topic, set it to "Answer only, no helpdesk drafts" and add a scenario that assigns those conversations to your team. In analytics, conversations Aide wasn't allowed to handle appear as "Not routed to Aide".
+
+## Refund approvals
+
+Whatever the level, refunds Aide makes are checked against your limits in Settings > Helpdesk > Statuses and timers, under **Aide order actions in chat**:
+
+- **Aide refunds above this amount need approval**
+- **Aide refunds above this share of the order need approval**
+- **Aide's refunds per 24 hours**
+
+Refunds over a limit wait for a teammate to approve them. For the order changes Aide can make and how to switch each one off, see [Let Aide cancel, refund and change orders in chat](/shopify/aide-order-actions).

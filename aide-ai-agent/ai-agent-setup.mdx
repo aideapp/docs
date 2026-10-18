@@ -1,0 +1,77 @@
+---
+title: "Set up the Aide AI Agent"
+description: "The Aide AI Agent answers your customers."
+---
+
+{/* Generated from the Aide help center article "ai-agent-setup" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+The Aide AI Agent answers your customers. Your workspace has one agent, and it can answer every channel you switch on: website chat, your support email addresses, messaging and your helpdesk inboxes, all with the same knowledge, instructions and handoff rules.
+
+Open **Aide AI Agent** in the sidebar. Every workspace starts with an agent, switched off, so nothing reaches customers until you deploy it. Until then the sidebar shows **Deploy Aide AI Agent**.
+
+## The agent's tabs
+
+| Group     | Tab              | What it's for                                         |
+| --------- | ---------------- | ----------------------------------------------------- |
+| Train     | Identity         | Name, how it refers to itself, tone and answer length |
+| Train     | Instructions     | How it should behave on every reply                   |
+| Train     | Fields           | What it finds out from the customer                   |
+| Train     | Content          | The knowledge it answers from                         |
+| Train     | Scenarios        | Rules for specific situations                         |
+| Deploy    | Where it answers | The channels it's switched on for                     |
+| Deploy    | Chat             | What it says in the chat widget                       |
+| Deploy    | Email            | How it answers email, and its signature               |
+| Deploy    | Handoff          | When and how it brings in your team                   |
+| Analytics | Performance      | How it's doing                                        |
+| Analytics | Logs             | Every conversation it has been in                     |
+
+## Identity
+
+- **Name** is how the agent introduces itself.
+- **Refers to itself as** is what it says it is when someone asks, for example "AI agent" or "virtual assistant". It never claims to be human.
+- **Tone of voice**: Friendly, Neutral, Matter-of-fact, Professional or Light-hearted.
+- **Answer length**: Concise, Standard or Thorough.
+
+Identity applies on every channel.
+
+## Instructions
+
+Write how the agent should behave in your own words, like a briefing for a new teammate: what to always mention, what never to promise. Instructions can be up to 20,000 characters. Under the main field you can add:
+
+- **Business context**
+- **Style**
+- **Length and formatting**: how replies are laid out and what to leave out.
+- **AI disclosure**: tell customers they are talking to an AI when they ask.
+
+Keep policies in your knowledge rather than in instructions, so they stay in one place.
+
+When you connect a helpdesk that already holds conversations, Aide fills in the business context, style, and length and formatting from how your team has been replying, as long as nobody has edited the starter instructions yet. See [How Aide learns your team's writing style](/aide-ai-agent/agent-style-guide).
+
+## Fields
+
+Fields are what the agent should find out from every customer, such as an order number or the reason for contact. It reads each value from the conversation and asks only for what's missing, in the order you list them.
+
+## Content
+
+The agent answers from everything published in Knowledge. The Content tab shows how much of its answers each source fed.
+
+## Where it answers
+
+Switch on each place the agent should answer: your website chat, each support address and each helpdesk inbox. Each place has one agent; switching it off means no agent answers there and your team handles it as before. Replies follow the channel: chats use your chat settings, and emails end with the agent's email signature.
+
+Each row tells you whether Aide sends replies there or writes drafts for your team instead.
+
+To bring in more places for the agent to answer, see [Let Aide answer your support email](/channels/aide-answers-email) and [Connect WhatsApp, Messenger and Instagram](/channels/whatsapp-messenger-instagram).
+
+## Chat
+
+- **Greeting messages**: how the agent introduces itself when the chat opens. Each line is sent as its own bubble.
+- **Description**: shown under the agent's name when the chat opens.
+- **Contact information (for escalation)**: where the agent sends people who need a human, one channel per line.
+- **Reply speed**: Standard (best quality) or Fast (lower latency). Every reply is still checked before it's sent.
+
+Suggested questions, the widget's look and the install snippet are set in Aide Chat.
+
+## Deploy and pause
+
+Click **Deploy** to make the agent answer in the places you switched on. Click **Pause** to stop new replies without losing your settings. Before deploying, try it in the preview (see [Test your agent before going live](/aide-ai-agent/test-agent)).

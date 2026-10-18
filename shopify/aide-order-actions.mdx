@@ -1,0 +1,51 @@
+---
+title: "Let Aide cancel, refund and change orders in chat"
+description: "Aide can handle the most common order requests itself."
+---
+
+{/* Generated from the Aide help center article "aide-order-actions" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide can handle the most common order requests itself. Once a shopper has shown the order is theirs, Aide can cancel it, refund it, change the shipping address, remove an item that hasn't shipped, or add a note to it.
+
+## Choose what Aide may do
+
+Go to Settings > Helpdesk > Statuses and timers, section "Aide order actions in chat". Each action has its own switch, and all are on by default:
+
+- Cancel unshipped orders
+- Refund orders
+- Change the shipping address
+- Remove unshipped items and refund them
+- Add a note to the order
+
+Returns have their own setting in the Returns section below (see [Returns in Shopify or your returns portal](/shopify/shopify-returns)). Aide never holds orders or sends free replacements; those stay with your team.
+
+## How it works in a conversation
+
+- **The shopper asks with every detail:** "Please change the street on #1001 to 2 Elgin St" is done in the same reply, and Aide says what it did. A new street keeps the city, postal code, country, name and phone already on the order.
+- **Aide needs to fill in a detail, choose between orders or items, or makes the suggestion itself:** it describes exactly what it will do ("cancel order #1001 and refund your payment") and waits for the shopper to say yes. If the shopper moves on without confirming, nothing changes.
+- **Shopify refuses:** Aide tells the shopper honestly and doesn't claim it worked.
+- **Later in the chat:** Aide remembers what it did or sent for approval, and whether your team approved it, so "any news?" gets an accurate answer. A teammate's reason for declining stays internal.
+
+Aide only acts for a verified shopper. See [How shoppers prove an order is theirs](/shopify/order-verification).
+
+## Refund limits
+
+Every refund Aide offers, including the refund that comes with a cancellation, waits for a teammate until you raise Aide's limits. In the same settings section:
+
+| Setting                                                  | Default                  |
+| -------------------------------------------------------- | ------------------------ |
+| Aide refunds above this amount need approval             | 0, so every refund waits |
+| Aide refunds above this share of the order need approval | Off                      |
+| Aide's refunds per 24 hours                              | 250                      |
+
+A refund over any limit waits for approval, whatever the topic's setting.
+
+## Topics that need review
+
+On a topic set to "Draft for review", a confirmed action goes to your team for approval instead of running, and Aide tells the shopper a teammate will review it.
+
+## Approvals and notifications
+
+The waiting action shows on the order with Approve and Reject. Any teammate can approve, except that a refund above your workspace's refund approval threshold still needs an Owner or Admin. The teammates who can approve get an "Order action needs approval" notification (change it in Settings > Notifications).
+
+Every action Aide offers, runs or sends for approval appears in the order's history marked as done by Aide, and in the conversation timeline.

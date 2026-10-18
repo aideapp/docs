@@ -1,0 +1,20 @@
+---
+title: "Business hours and holidays"
+description: "Business hours tell Aide when your team is around."
+---
+
+{/* Generated from the Aide help center article "business-hours" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Business hours tell Aide when your team is around. They're used by SLAs, routing rules, handoff messages, notifications and Aide Chat's outside-hours behaviour. Set them in Settings > Helpdesk > Business hours.
+
+## Schedules
+
+A schedule has a name, a time zone and, for each weekday, opening and closing times or Closed. One schedule is the default: teams, SLAs and rules without their own schedule use it. You can create more schedules, for example for a team in another country, and pick them where a schedule is asked for (an SLA policy, or Aide Chat > Behaviour). Each schedule shows what uses it.
+
+## Holidays
+
+Add the days you're closed, up to 200 per schedule. To save typing, import the public holidays for a year: enter a country code (US, GB, CA, FR, DE, AU, IE, NL or ES) and click **Import**, then remove the days you work on.
+
+## What customers are told
+
+Each schedule has a **Reply-time message inside hours** ("We usually reply within an hour.") and a **Reply-time message outside hours**. Handoff messages use your hours through the `{{reply_time}}` variable: outside hours it becomes your next opening time, so a customer writing at night knows when to expect an answer.

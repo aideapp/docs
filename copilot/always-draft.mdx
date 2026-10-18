@@ -1,0 +1,39 @@
+---
+title: "Always draft a reply on every helpdesk conversation"
+description: "In a helpdesk inbox where your team answers every conversation itself and Aide only drafts, Always draft gives each customer message a ready reply."
+---
+
+{/* Generated from the Aide help center article "always-draft" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+In a helpdesk inbox where your team answers every conversation itself and Aide only drafts, Always draft gives each customer message a ready reply. Instead of stopping at a handoff note, Aide writes the best reply it can, and your teammate edits and sends it.
+
+## How it behaves
+
+- **One plain draft per customer message:** an internal note, or wherever the inbox keeps Aide's drafts, holding the reply alone. There's no handoff summary and no line saying Aide handed the conversation to your team.
+- **The customer asks for a person:** Aide still drafts a reply, since a person is already answering.
+- **Aide isn't sure of the answer:** the reply is still checked and revised as usual, and the last version is drafted for your teammate to review instead of being dropped.
+- **Something Aide doesn't know:** the draft marks the gap in bold where the missing detail goes, such as `⟦FILL IN: ship date⟧`, without a list of blanks above it. See [Drafts leave blanks for your team to fill in](/copilot/draft-blanks).
+- **A scenario that escalates with a message:** Aide drafts a reply instead.
+- **Email conversations:** the draft ends with your agent's sign-off (the Signature under Aide AI Agent > Email), so your teammate's own helpdesk signature completes it with their name. Chat and messaging drafts have no sign-off.
+- **Nothing is reassigned or tagged as a handoff:** Aide doesn't assign the conversation, add the handoff tag or change its handoff state.
+- **Aide can't write a reply at all:** it tries once more. If that fails too, it leaves no note and the conversation stays with your team as it is.
+
+Each draft counts as one AI reply, like any other draft.
+
+## When Aide still works as before
+
+- Aide has run an order action in the conversation: it hands off as usual, so your team sees the result.
+- AI replies are paused by your plan or a daily usage limit.
+- Topics where Aide is set to off.
+- A teammate mentions Aide on the ticket.
+
+## Turn it on
+
+Always draft is off by default, and it's only for helpdesk inboxes (Gorgias, Front or Zendesk) where Aide never sends replies and keeps its drafts somewhere. In the inbox's settings on the integration page, "Send replies" must be off and "Where drafts go" must have at least one place.
+
+There's no switch for Always draft in the dashboard. Turn it on with the Aide API, using an API key (see [API keys and webhooks](/developers/api-keys-webhooks)):
+
+- For one inbox: `PATCH /v1/integrations/{id}/inboxes/{inboxId}/settings` with `{"alwaysDraft": true}`.
+- For every inbox of a helpdesk that doesn't override it: `PATCH /v1/integrations/{id}/inbox-defaults` with the same body.
+
+Turning it on where Aide sends replies or has nowhere to put drafts, or later turning "Send replies" on or emptying "Where drafts go" while it's on, is refused with "Aide always drafts only where it never sends replies and has somewhere to put its drafts."

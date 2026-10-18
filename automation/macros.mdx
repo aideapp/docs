@@ -1,0 +1,53 @@
+---
+title: "Macros for Aide, Zendesk and Front"
+description: "A macro is a named bundle of actions that scenarios and your team can run, in Aide or your helpdesk."
+---
+
+{/* Generated from the Aide help center article "macros" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+A macro is a named bundle of actions that scenarios and your team can run, in Aide or your helpdesk. One macro can hold actions for Aide Helpdesk, Zendesk and Front, so it works wherever the conversation lives. Find macros under **Scenarios > Macros**.
+
+## Create a macro
+
+1. Open **Scenarios > Macros** and create a new macro.
+2. Name it and add a description.
+3. Under **Actions**, add each action and pick where it applies.
+4. Choose **Save macro**.
+
+Each macro shows how many times it ran, when it was last updated, and the topics it's attached to.
+
+## Actions per helpdesk
+
+**Aide:** **Set status** (Open, Waiting on customer, On hold, Closed), **Set priority**, **Assign team**, **Add tags**, **Internal note**, **Reply to customer**, **Set subject**.
+
+**Zendesk:** set subject, status (Open, Pending, Solved), priority, type, brand, form, group, assignee, add a follower, set, add or remove tags, and a comment (plain or rich text) that is public or private. Brand, form, group, assignee and follower take the Zendesk id as text.
+
+**Front:** status (Archived, Open, Deleted, Spam), assignee (Front id), tag, internal comment and auto reply.
+
+Zendesk and Front actions are offered while that helpdesk is connected. Each helpdesk can hold up to 30 actions per macro.
+
+## Macros from your helpdesk
+
+When Zendesk or Gorgias is connected, Aide brings in your macros from there and refreshes them every hour. They carry a "From Zendesk" or "From Gorgias" badge and open read-only: change them in your helpdesk and Aide follows at the next refresh, or select **Sync now** on the integration page.
+
+From Gorgias, archived macros are left out, and so is the "Aide: insert draft" macro Aide adds to Gorgias (see [The Aide card and insert-draft macro in Gorgias](/integrations/gorgias-aide-card)).
+
+A scenario or a teammate in Aide that runs a Zendesk macro on a Zendesk ticket applies it as Zendesk would. A macro that would reply to the customer only runs where Aide is allowed to send replies.
+
+Zendesk macros and Front message templates can also be a knowledge source, so Aide can learn your usual answers from them.
+
+## Use a macro in the reply box
+
+In a conversation, the **Macros** button in the reply box lists your active macros, with search.
+
+1. Pick a macro. Its reply goes in the box ready to edit, with variables filled in as reply templates fill them.
+2. Its other actions show as chips above the send button, such as "Close", "Priority: High" or "Tag: refund". Remove a chip to leave that action out this time.
+3. Send. The actions run right after your reply goes. If the reply doesn't send, the actions don't run either.
+
+A macro with no reply turns the send button into **Apply macro**. In an internal note, the macro brings its actions but not its reply. The changes show in the conversation's activity as yours.
+
+Macros that only act in Zendesk or Front can't be picked in the reply box.
+
+## Use macros from scenarios
+
+A scenario can **Run a macro** itself or **Suggest a macro** to your team. On a Zendesk ticket or a Front conversation, the macro's actions for that helpdesk apply through the connection; on any other conversation they're skipped, and the thread says so. Copilot also suggests macros in the Aide panel inside Zendesk and Front (see [The Aide panel in Zendesk and Front](/integrations/aide-panel-zendesk-front)).

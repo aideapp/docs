@@ -1,0 +1,64 @@
+---
+title: "Understand Aide analytics"
+description: "Analytics has three tabs: AI Agent, about what Aide did on its own; Overview, about your whole support operation; and Knowledge, about the documents Aide answers from."
+---
+
+{/* Generated from the Aide help center article "analytics" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Analytics has three tabs: **AI Agent**, about what Aide did on its own; **Overview**, about your whole support operation; and **Knowledge**, about the documents Aide answers from. Owners and admins see Analytics.
+
+Pick a date range and filter by channel and topic at the top. Metric names with a dashed underline show their definition on hover. Figures refresh every few minutes, and "Updated" shows when they were computed.
+
+## Open the conversations behind a number
+
+Click any number and the inbox opens filtered to exactly the conversations it counts, for the same dates, channel and topic. The filters show as removable "Analytics" chips in the inbox, and the list total matches the number on the report.
+
+## Download as CSV
+
+Each section (volume, channels, topics, handoff reasons, knowledge documents, knowledge gaps) downloads as CSV for the selected dates and filters.
+
+## AI Agent tab
+
+**AI Resolution Rate.** Conversations the AI Agent handled with no human message and that the same customer did not re-open on the same topic within 72 hours, over conversations with a known outcome. Resolutions are split into **Confirmed**, **Assumed** and **Re-opened**. Conversations Aide is still handling count once they end or are handed off.
+
+**Handle rate.** A chart of ended conversations, day by day (week by week past about six weeks), split into **Handled** (Aide handled it without anyone on your team stepping in, and the customer didn't re-open it) and **Handed off** (everything else). A conversation has ended when it was closed or the customer hasn't replied for 72 hours. The headline shows Aide's share and how it moved against the previous period.
+
+**Involvement and quality:**
+
+- **Automation Rate**: conversations with at least one scenario applied, split into full (Aide replied) and partial (Aide ran an action without replying).
+- **Topic detected**: share of conversations where Aide recognised the topic with enough confidence to act on it.
+- **Not routed to Aide**: conversations Aide was not allowed to handle: the topic is set to no automation, the channel is off, or the usage cap was reached.
+- **Not re-opened**: Aide resolutions the customer did not re-open on the same topic within 72 hours.
+- **CSAT**: share of survey responses rating 4 or 5 on conversations Aide handled end to end.
+- **Verified by your team**: items your team reviewed and marked correct, across topic detection, scenarios and drafts.
+- **Median first response**, on conversations where Aide replied first.
+- **Team response after handoff**: time from Aide's last message to the first teammate message.
+
+**Customer satisfaction.** CSAT for Aide and for your team, the spread of 1 to 5 ratings, the trend and the latest comments. Headline scores appear once there are 30 responses.
+
+**Sales from Aide chats.** For Shopify stores: **Orders** and **Revenue** from carts a shopper filled using Aide's product cards, placed within 30 days of the chat. **Orders after a chat** counts orders placed within 30 days of a chat without Aide's cart, from shoppers who accepted analytics cookies. Totals are as placed, cancelled orders are left out, and revenue is shown per currency. The section appears once there is an order to show. See [Measure the sales your chats bring in](/shopify/sales-from-chats).
+
+**Handoffs.** Conversations Aide handed to a person, by reason (the customer asked, confidence was under the threshold, a guardrail fired, data or identity was missing, or policy required it), by day and by channel.
+
+**By channel** and **By topic** tables close the tab.
+
+## Overview tab
+
+- **Conversations**: volume by day, split into AI-handled and Handed off.
+- **AI Resolution Rate**, **CSAT** for conversations a teammate handled or took over, **Median first response** where a teammate replied first, and **Median time to resolution** (from the first customer message to resolved, including reopens).
+- **Sales from Aide chats**.
+- **By channel** and **By topic**.
+
+## Knowledge tab
+
+**Documents Aide used** lists the help documents Aide's chat replies drew on, how many conversations cited each one, and how often those conversations were resolved (once a document has 30 conversations with a known outcome).
+
+**Knowledge gaps** groups by topic the conversations Aide handed off for missing information or answered without enough knowledge, each opening its conversations, so you know what to write next. For suggested text to add, checked against your knowledge, see Knowledge > Gaps ([Find and fix gaps in your knowledge](/knowledge/knowledge-gaps)).
+
+## AI replies for billing
+
+Analytics counts conversations, not billed AI replies. For the exact number of AI replies this billing cycle, see **Settings > Billing**, and **Settings > Billing > Usage** for every reply and draft.
+
+## Weekly summary email
+
+Turn on the **Weekly summary** in **Settings > Notifications** to get what Aide handled last week, and where it needed a human, by email.

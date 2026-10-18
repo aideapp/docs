@@ -1,0 +1,52 @@
+---
+title: "API keys and webhooks"
+description: "Connect Aide to your own tools, such as Zapier, a data warehouse or your own scripts."
+---
+
+{/* Generated from the Aide help center article "api-keys-webhooks" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Connect Aide to your own tools, such as Zapier, a data warehouse or your own scripts. API keys let you call the Aide API as your workspace, and webhooks tell your systems when something happens in Aide. Owners and admins manage both in Settings > Developers.
+
+## Create an API key
+
+1. Go to Settings > Developers and select "Create key".
+2. Give it a name. Tick "Allow changes" if it should be able to change things; without it, the key can only read.
+3. Optionally set an expiry date.
+4. Copy the key. It's shown only once; Aide keeps only a fingerprint.
+
+Send the key as `Authorization: Bearer <key>` with each request to `https://app-api.aide.app`. A key acts as the workspace, not as you.
+
+## What a key can do
+
+A key can read analytics and helpdesk settings, and read and change topics, scenarios, macros, knowledge and webhooks. It can also search your knowledge and look up synced Shopify orders.
+
+It can't see or reply to conversations, manage teammates, teams or billing, change helpdesk or widget settings, or create other keys. Those requests answer with an error saying API keys can't call them.
+
+Revoke a key from its row; requests with it fail straight away. Expired keys stop working the same way. Requests are rate limited per key.
+
+## Add a webhook endpoint
+
+1. In Settings > Developers, select "Add endpoint".
+2. Enter a public `https` URL. Private network addresses are refused.
+3. Choose the events to send, or "All events, including ones added later".
+4. Copy the signing secret. It's shown only once.
+
+Events:
+
+| Event                  | Sent when                                                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `conversation.created` | A conversation was started, by a visitor or from a channel.                                                                     |
+| `conversation.updated` | Status, priority, assignee, team, subject, snooze or handoff state changed.                                                     |
+| `conversation.closed`  | A conversation moved to the closed status.                                                                                      |
+| `message.created`      | A message or internal note was added to a conversation.                                                                         |
+| `order_action.applied` | A cancel, refund, address change, note, item removal or replacement ran in your store, whether a teammate or Aide asked for it. |
+
+## Verify and receive events
+
+Each event is a signed JSON `POST`. Check the `Aide-Signature` header against the endpoint's signing secret, and deduplicate on the event ID. Respond with a 2xx within 10 seconds; redirects aren't followed.
+
+- **Rotate signing secret:** the new secret is shown once, and for 24 hours events are signed with both secrets so you can switch without dropping deliveries.
+- **Failed deliveries** are retried with growing delays for about 4 hours. An endpoint that keeps failing for a day is switched off and marked "Disabled after failures"; turning it back on resets the count.
+- **Send test event** delivers a sample event straight away and shows the response. "Recent deliveries" shows each attempt's status, timing and response.
+
+Agents see that developer settings are managed by owners and admins.

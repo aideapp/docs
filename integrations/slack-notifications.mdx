@@ -1,0 +1,41 @@
+---
+title: "Send Aide alerts to Slack"
+description: "Aide can post workspace alerts to your Slack channels, so the whole team sees a handoff, a missed target or an order waiting for approval where it already talks."
+---
+
+{/* Generated from the Aide help center article "slack-notifications" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide can post workspace alerts to your Slack channels, so the whole team sees a handoff, a missed target or an order waiting for approval where it already talks. Owners and admins set this up.
+
+## Add a channel
+
+1. Go to Settings > Notifications and find the Slack section.
+2. Select "Add a Slack channel". Slack asks which channel Aide may post to.
+3. Repeat for each further channel.
+
+## Choose the events
+
+Each channel picks its own events:
+
+- Handoff requested
+- Unassigned conversation waiting
+- Routing rule alert
+- SLA about to be missed
+- SLA missed
+- Order action needs approval
+- Connection needs attention
+- Customer rating
+
+A new channel starts with handoffs, missed SLAs, approvals and connection problems. Use "Send test message" to check it's working.
+
+## What gets posted
+
+One message per event, however many teammates are notified. It says what happened and includes the conversation's subject, the customer's name and a link to the conversation, never the message itself or the customer's email address. A channel gets at most one message per conversation and event every 5 minutes.
+
+Personal notifications (assigned to me, mentions, replies on my conversations) stay personal and never go to Slack.
+
+## If Slack stops taking messages
+
+If the app is removed or the channel is archived or deleted, Aide stops posting there, marks the channel "Reconnect needed", and tells owners and admins in the app and by email. Select "Reconnect" and pick the same channel; it keeps the events it had.
+
+Agents don't see the Slack section. Their own notification settings are unchanged.

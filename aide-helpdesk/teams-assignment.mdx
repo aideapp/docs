@@ -1,0 +1,40 @@
+---
+title: "Teams and conversation assignment"
+description: "Teams are groups of teammates that conversations route to, such as \"Returns\" or \"Wholesale\"."
+---
+
+{/* Generated from the Aide help center article "teams-assignment" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Teams are groups of teammates that conversations route to, such as "Returns" or "Wholesale". Assignment decides who inside a team owns each conversation.
+
+## Create a team
+
+In Settings > Helpdesk > Teams, create a team, give it a name and an emoji, and add teammates (invite them under Settings > Teammates first). For each team you can also set:
+
+- **Business hours**: the workspace default or another schedule.
+- **Notify**: everyone on the team when a conversation arrives, or only the assignee, once assigned.
+- **Team signature**: used as `{{ team.signature }}` in reply templates.
+
+## How conversations are assigned
+
+Pick an assignment method per team, or leave it on the workspace default set in Settings > Helpdesk > Assignment:
+
+- **Manual**: conversations wait in the team view until someone picks them up.
+- **Round robin**: each conversation that needs a person goes to the next available member in turn.
+- **Balanced**: goes to whoever has the fewest open conversations, up to their capacity. Set a **Capacity per member** so nobody is overloaded.
+
+Conversations the AI Agent is answering are assigned to Aide; they reach a team when Aide hands off or a routing rule sends them there.
+
+## Workspace assignment defaults
+
+In Settings > Helpdesk > Assignment:
+
+- **Self-assign on reply** (on by default): replying to an unassigned conversation assigns it to you.
+- **Unassign when returning to Aide**: Return to Aide clears the assignee.
+- **Reassign when a member goes away**: open conversations on a member who sets themselves Away move back to their team's queue.
+- **Automatic away after**: minutes of inactivity in the dashboard before a member is marked Away, off by default.
+- **Default method for teams without one**.
+
+## Your availability
+
+Set yourself as away from the sidebar, with a reason: busy, in a meeting, on a break, done for the day, out of office or sick. Round robin and balanced assignment skip away members.

@@ -1,0 +1,39 @@
+---
+title: "Returns in Shopify or your returns portal"
+description: "Aide can start a return in Shopify for a verified shopper, or send shoppers to your returns portal (Loop, AfterShip or another) already open on their order."
+---
+
+{/* Generated from the Aide help center article "shopify-returns" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide can start a return in Shopify for a verified shopper, or send shoppers to your returns portal (Loop, AfterShip or another) already open on their order. Teammates can start a return from any conversation's order. Returns are off for Aide until you turn them on, because every store's policy is different.
+
+## Turn returns on
+
+Go to Settings > Helpdesk > Statuses and timers, section Returns, and choose "Aide starts returns":
+
+- **No, answer and hand off** (default): Aide answers return questions from your knowledge and hands off.
+- **Yes, in Shopify:** Aide offers and creates returns in Shopify.
+- **Link to Loop**, **Link to AfterShip** or **Link to another portal:** Aide sends a "Start your return" button to your portal.
+
+Stores connected before returns were added must approve Aide's returns permission once: open Aide in your Shopify admin and approve the updated permissions. Until then the settings say so and Aide offers no returns.
+
+## Returns in Shopify
+
+Aide offers a return only to a shopper verified in chat, or writing by email from the address on the order. It offers only shipped items Shopify can still take back, asks for a reason if the shopper didn't give one, and confirms first ("Return 1 x Blue Mug from #1042, reason: too small?"). Nothing happens until the shopper says yes.
+
+- **Your return rules:** Aide follows your return policy in Shopify, including a market's own policy for orders shipped to that market. A store with no return rules in Shopify uses "Return window" from the settings (30 days from delivery by default).
+- **Excluded products:** list tags under "Never offer returns for products tagged", for example `final-sale`. Aide also skips items outside the window and orders that already have a return in progress.
+- **New returns:** "Wait for the store's approval" (default) creates a request you approve in Shopify, which then emails the customer. "Open straight away" opens it at once, and the store sends the return label.
+- **Topics set to Draft for review:** the confirmed return waits for a teammate's approval.
+
+## Returns portals
+
+Enter your "Returns portal address" (it must start with `https://`). For Loop, set "Loop looks orders up by" to email address or shipping ZIP, whichever your portal asks for. After saving, "Try the link on your latest order" shows what a verified shopper would see.
+
+When a shopper wants to return or exchange something, Aide shows a "Start your return" button in their language. For a verified shopper it opens the portal on their order; anyone else gets the portal's start page. By email, the button is a link under the reply. Aide creates nothing in Shopify, and doesn't promise what the portal will accept or refund.
+
+## Start a return as a teammate
+
+In a conversation, open the order's menu and choose "Start a return". The dialog lists what Shopify can still take back, read live from the store. Pick quantities and a reason, then "Ask the store to approve it" or "Open it now". Teammates can return items Aide wouldn't offer, and the dialog marks them.
+
+Refunds stay separate from returns. Return labels and exchanges aren't created by Aide.

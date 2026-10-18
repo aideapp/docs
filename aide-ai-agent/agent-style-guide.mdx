@@ -1,0 +1,37 @@
+---
+title: "How Aide learns your team's writing style"
+description: "When a new workspace connects a helpdesk that already holds conversations, Aide reads how your team has been answering customers and writes your Aide AI Agent's style guide from it."
+---
+
+{/* Generated from the Aide help center article "agent-style-guide" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+When a new workspace connects a helpdesk that already holds conversations, Aide reads how your team has been answering customers and writes your Aide AI Agent's style guide from it. The agent is ready to review and deploy without anyone writing instructions from scratch.
+
+## Your agent is there from signup
+
+Every new workspace gets its Aide AI Agent as soon as it's created, switched off. The sidebar always offers it: the link reads "Deploy Aide AI Agent" until an agent is deployed.
+
+## What Aide writes
+
+Once your helpdesk's past conversations have finished importing, Aide looks at up to 32 recent replies from the last 90 days, one per conversation and spread across teammates. From them it fills in three parts of the agent's instructions:
+
+- **Business context:** who the business is, what it sells, who its customers are and how things normally work.
+- **Style:** how customers are addressed, how replies close, what to avoid.
+- **Length and formatting:** how replies are laid out and how long each kind runs.
+
+It also adds the standard AI disclosure, so the agent says it's an AI when a customer asks.
+
+Open Aide AI Agent > Instructions to read and edit what Aide wrote.
+
+## When Aide doesn't write a style guide
+
+- **Fewer than 20 replies:** a workspace with fewer than 20 teammate replies to customers gets no style guide yet, and the agent keeps its starter instructions.
+- **Instructions someone already changed:** Aide only writes the style guide while the instructions are still the starter ones. It never overwrites your edits.
+- **No history:** a mailbox connected with no past conversations, such as a new Gmail inbox or forwarding address, has nothing to learn from yet.
+
+Aide writes the style guide once, after the first helpdesk import.
+
+## What it never does
+
+- **It doesn't switch the agent on.** The agent stays off until someone deploys it.
+- **It keeps customer details out.** Names, email addresses, phone numbers, order numbers and addresses are removed from the replies before Aide reads them. A style guide that still names a customer, or that sets policies, limits or promises, is rejected and written again.

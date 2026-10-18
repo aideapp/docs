@@ -1,0 +1,26 @@
+---
+title: "Automate on Aide conversations with Shopify Flow"
+description: "Shopify Flow can start a workflow when Aide hands a conversation to your team or when a conversation is resolved."
+---
+
+{/* Generated from the Aide help center article "shopify-flow" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Shopify Flow can start a workflow when Aide hands a conversation to your team or when a conversation is resolved. Use Flow's own conditions and actions to tag the customer, alert a channel, add an order note or follow up after a resolution.
+
+## The triggers
+
+- **Aide conversation handed off to a person:** runs when Aide asks for a person to take over. It carries the handoff reason when Aide recorded one.
+- **Aide conversation resolved:** runs each time a conversation is closed, including after it's reopened and closed again. It says who resolved it: `aide` when Aide resolved it on its own, `person` when someone on your team took part.
+
+## What each trigger carries
+
+- The conversation's Aide ID and a link that opens it in Aide.
+- The Shopify customer ID, order ID and order name (such as #1001), when the conversation is linked to a verified customer or an order. They are empty otherwise, so add a condition when your workflow needs them.
+
+No customer details or message text are sent to Flow: no email, no name, no chat content.
+
+## Good to know
+
+- Workflows start a few seconds after the change, without slowing down the chat.
+- Test chats from the Aide dashboard never start a workflow.
+- With several stores in one workspace, the trigger runs in the store the conversation's order or customer belongs to, or in every connected store when it has neither.

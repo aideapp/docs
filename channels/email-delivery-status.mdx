@@ -1,0 +1,29 @@
+---
+title: "Check whether an email reply was sent and delivered"
+description: "Email conversations show who each message is from and who it went to, and every reply shows whether it was sent, delivered or failed."
+---
+
+{/* Generated from the Aide help center article "email-delivery-status" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Email conversations show who each message is from and who it went to, and every reply shows whether it was sent, delivered or failed.
+
+## Before you send
+
+Above the reply box you see "To" (the customer) and "From" (your support address). When replies go out from Aide's shared sending address because your domain isn't verified yet, a note explains that customer replies still come back to your support address.
+
+## After you send
+
+| Status         | What it means                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| Sending…       | The reply is on its way. You can keep working.                                                  |
+| Sent           | The email provider accepted it.                                                                 |
+| Delivered      | The customer's mail server accepted it.                                                         |
+| Failed to send | It couldn't be sent or delivered. The reason shows with it, and the message is outlined in red. |
+
+## When a reply fails
+
+- **The provider refused it, no mailbox is connected, or the provider is unavailable:** the reason shows on the message. Temporary outages are retried automatically before a reply is marked failed.
+- **It bounced after being accepted:** for example the address no longer exists or the mailbox is full. The reply changes to "Failed to send" with the reason.
+- **It never reached Aide** (your connection dropped, for example): choose Retry to send the same text again, or Discard to remove it.
+
+For a Gmail inbox, the reason can also be that Gmail access was removed or Gmail's daily sending limit was reached. See [Connect a Gmail inbox](/channels/gmail-inbox).

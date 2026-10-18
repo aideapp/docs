@@ -1,0 +1,39 @@
+---
+title: "Product recommendations and add to cart in chat"
+description: "When a shopper asks Aide for a suggestion, the products it recommends appear in a carousel under its reply, and the shopper can add one to their cart without leaving the chat."
+---
+
+{/* Generated from the Aide help center article "product-recommendations" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+When a shopper asks Aide for a suggestion, the products it recommends appear in a carousel under its reply, and the shopper can add one to their cart without leaving the chat.
+
+## What the shopper sees
+
+Aide answers in words and shows up to four products from your synced Shopify catalogue, best fit first. Each tile has the photo, name and price, with the original price struck through when the product is on sale. When options are priced differently, the tile shows "From" the lowest price in stock.
+
+Tapping a tile opens the product's details, with Aide's line on why it fits. A product with sizes, colours or other options has one picker per option, as on your product page; sold-out choices are marked. A product with every option sold out still shows, marked "Sold out".
+
+## Turn it on
+
+Recommendations come from your Products knowledge source, so it must be on for the agent. An agent limited to certain knowledge sources only recommends products when your catalogue is one of them. Draft or archived products, products without a price, and products from a disconnected store never show.
+
+## Add to cart on your store
+
+On your Shopify storefront, "Add to cart" puts the chosen option in the shopper's own Shopify cart and confirms once the store accepts it. If the store refuses (for example, the option just sold out), the shopper sees the store's reason and can try again.
+
+On themes that support Shopify's standard storefront actions, your theme's cart count updates straight away and the button becomes "View cart". On other themes the count updates on the next page the shopper opens.
+
+## Add to cart on other sites
+
+Where the chat runs on another domain, such as your blog or help centre, "Add to cart" puts the item in a cart on your Shopify store, and the button becomes "Checkout", which opens your store's checkout in a new tab.
+
+- Everything added from the chat on that site goes in the same cart until the shopper checks out or the cart expires.
+- This cart is separate from the shopper's storefront cart, so items won't appear in your store's cart icon.
+- Headless storefronts, and products whose page isn't on `https`, open the product page instead.
+- Sites with a strict Content Security Policy must allow connections to your store's domain (`connect-src`).
+
+There is nothing to set up and no extra permission to approve.
+
+## In the inbox
+
+The conversation shows the same products under Aide's reply, with each "why it fits" line, so your team sees exactly what the shopper was offered. Orders placed from carts filled this way count as sales from Aide; see [Measure the sales your chats bring in](/shopify/sales-from-chats).

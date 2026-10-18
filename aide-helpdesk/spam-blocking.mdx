@@ -1,0 +1,49 @@
+---
+title: "Block spam and automated senders"
+description: "Keep junk out of your inbox with sender rules, in Settings > Helpdesk > Senders."
+---
+
+{/* Generated from the Aide help center article "spam-blocking" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Keep junk out of your inbox with sender rules, in Settings > Helpdesk > Senders. Aide sorts every incoming email and helpdesk message by who sent it before anyone works on it: receipts, newsletters and other automated mail are filed out of the queue, spam is ignored, and real customers reach your team.
+
+Senders replaced the old Spam and blocked settings. Blocked addresses and domains you had there became a "Blocked senders" rule, with your allowed domains as exceptions.
+
+## How Aide decides
+
+Aide checks your rules in order, and the first match decides. When no rule matches, the built-in **Automated mail** recognition files mailing lists and newsletters, no-reply and notification senders, calendar invitations, automated notices and other tools' autoresponders. Everyone else is a customer.
+
+Bounces and out-of-office replies are always dropped. Aide never replies automatically to no-reply addresses or mailing lists, even with the built-in recognition off.
+
+## What a rule can do with a message
+
+| Outcome                    | What happens                                                                       |
+| -------------------------- | ---------------------------------------------------------------------------------- |
+| A customer                 | Aide treats it as the customer's message                                           |
+| Automated or internal      | Kept and filed under the Automated view; no reply, no notification                 |
+| Ignore                     | Goes to Spam; no reply, no notification                                            |
+| A form relaying a customer | The customer's email and name are taken from the message, and Aide replies to them |
+| A pasted conversation      | The text is read as the customer's words                                           |
+
+## Block a sender or a domain
+
+1. In Settings > Helpdesk > Senders, create a rule.
+2. Under **When a message matches**, add a condition on the sender's address or domain, for example the domain `spammy-offers.com`. Rules can also match on the recipients, the sender's name, the subject or body, the channel or the inbox.
+3. Under **Unless any of these**, add exceptions, such as domains you always want to reach you.
+4. Under **Then it is**, choose **Ignore**.
+
+A condition can list up to 1,000 addresses or domains, a rule can have up to 30 conditions, and a workspace up to 200 rules.
+
+Each rule shows how many messages it matched in the last 7 days. Use **Test a message** to see which rule would decide a pasted email and why, or replay a rule over your last 500 messages before you trust it.
+
+## Fix it from the inbox
+
+A message Aide filed carries a chip saying how, for example "Mailing list or newsletter" or "Spam". From its menu, choose "This is a customer", "Not a customer (keep)" or "Ignore (Spam)". Admins can tick "Always for this sender" to add the sender to a rule at the top of Senders. You can also mark any conversation as spam yourself.
+
+## Zendesk, Front and Gorgias
+
+The same rules apply to messages from your helpdesk. Aide never answers an automated or ignored message there, but never changes the helpdesk's status, tags or spam folder because of it.
+
+## Spam and billing
+
+Aide never bills for replies on conversations marked as spam, and spam is excluded from satisfaction surveys.

@@ -1,0 +1,33 @@
+---
+title: "Order and tracking cards in chat"
+description: "When a shopper asks about one of their orders in Aide Chat, Aide can show the answer as a card under its reply instead of spelling it out."
+---
+
+{/* Generated from the Aide help center article "order-tracking-cards" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+When a shopper asks about one of their orders in Aide Chat, Aide can show the answer as a card under its reply instead of spelling it out.
+
+## The two cards
+
+- **Tracking card,** for "where is my order?" on an order that has shipped: carrier, tracking number, expected delivery (or the delivery date once it arrives), the shipment's progress, and a link to the carrier's tracking page.
+- **Order card,** for "what did I order?", "how much did I pay?" or "what's the status?": the order number and date, each item with its picture, variant, quantity and price, the total, and the payment and fulfilment status. A shipped order's card has a Track link.
+
+When a card shows the details, Aide's text stays short and doesn't repeat them. A reply carries at most one order card and one tracking card. An order that hasn't shipped gets no tracking card.
+
+## Only for verified orders
+
+Cards appear only for orders the shopper has verified in the conversation. Otherwise Aide asks them to verify first. See [How shoppers prove an order is theirs](/shopify/order-verification).
+
+## Which order Aide picks
+
+When a logged-in shopper with several orders asks about "my order" without naming one, Aide works out which orders the question can be about:
+
+- **Shipping, delivery or tracking questions:** orders still on their way. If one fits, Aide answers about it and names it, so the shopper can correct it. If a few fit, it names those and asks which one.
+- **Returns, exchanges, damaged or wrong items:** delivered orders.
+- **Cancelled or fully refunded orders:** not brought up unless the shopper asks.
+
+A shopper can still ask about an older order or all their orders. Aide looks at their five most recent orders.
+
+## Where else cards show
+
+Your team sees the same cards under Aide's replies in the conversation. On WhatsApp, Messenger and Instagram, orders and shipments go out as that app's own cards. By email, they appear as text and links.

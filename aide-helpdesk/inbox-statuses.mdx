@@ -1,0 +1,50 @@
+---
+title: "Conversation statuses, snoozing and automatic timers"
+description: "Every conversation in Aide Helpdesk has a status, a priority and an assignee."
+---
+
+{/* Generated from the Aide help center article "inbox-statuses" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Every conversation in Aide Helpdesk has a status, a priority and an assignee. Timers move conversations on their own so your inbox stays current. Set them in Settings > Helpdesk > Statuses and timers.
+
+## Statuses
+
+| Status              | Meaning                                       |
+| ------------------- | --------------------------------------------- |
+| New                 | Nobody has looked at it yet                   |
+| Open                | Someone on your team needs to act             |
+| Waiting on customer | You replied and are waiting for the customer  |
+| On hold             | Waiting on something else, such as a supplier |
+| Snoozed             | Hidden until a time you chose                 |
+| Closed              | Done                                          |
+| Spam                | Not a real conversation                       |
+
+Priorities are Urgent, High, Normal and Low.
+
+## Aide as assignee
+
+Conversations the AI Agent is answering are assigned to Aide, so they don't show under Unassigned. When Aide asks for a person, the conversation becomes unassigned until someone picks it up. Assigning a teammate or team, replying, or clicking **Take over** takes it off Aide; **Return to Aide** gives it back.
+
+## Replying sets Waiting on customer
+
+With **Reply sets Waiting on customer** on (the default), sending a public reply moves the conversation to Waiting on customer. Turn it off to keep it Open.
+
+**When Aide replies** sets the status Aide's reply leaves: like a teammate's reply (the default), keep it Open, Waiting on customer, or close it. A connected helpdesk's status is left as it is, and a connection or inbox can set its own. Replies your team sends from Aide on Gorgias, Front and Zendesk tickets go out through the helpdesk (see [Reply to Gorgias, Front and Zendesk tickets from Aide](/aide-helpdesk/reply-on-helpdesk-tickets)).
+
+## Auto-close
+
+**Close Waiting on customer after**: conversations waiting on the customer close on their own after 5 days without a reply by default. Change the number of days or turn it off.
+
+## When a customer replies to a closed conversation
+
+**Replies to closed conversations start a new one after** 7 days by default. Within that window, a reply reopens the closed conversation instead.
+
+## Snooze
+
+Snoozing hides a conversation until a chosen time, then it comes back. The default presets are Later today, Tomorrow morning, Next Monday and In a week; you can have up to 10 presets. By default internal notes and assignments don't wake a snoozed conversation; turn on **Notes and assignments unsnooze** to change that.
+
+## Approvals
+
+**Refunds above this amount need an Admin**: teammates in the Agent role see Request approval instead of Refund for larger refunds. It's in your store's currency, 200 by default; off means no gate. See [Cancel, refund and change Shopify orders from a conversation](/shopify/shopify-order-actions).
+
+What the AI Agent may do to orders, and its refund limits, are set in the same place, under **Aide order actions in chat** (see [Let Aide cancel, refund and change orders in chat](/shopify/aide-order-actions)). The **Returns** section sets how Aide handles return requests (see [Returns in Shopify or your returns portal](/shopify/shopify-returns)).

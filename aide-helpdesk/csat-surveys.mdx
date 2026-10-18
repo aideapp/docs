@@ -1,0 +1,40 @@
+---
+title: "Customer satisfaction (CSAT) surveys"
+description: "Aide can ask customers to rate a conversation, for conversations the AI Agent handled and for those your team handled."
+---
+
+{/* Generated from the Aide help center article "csat-surveys" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide can ask customers to rate a conversation, for conversations the AI Agent handled and for those your team handled. Configure the survey in Settings > Helpdesk > Satisfaction.
+
+## Where to ask
+
+Send the survey on chat, on email, or both (both by default). Turn both off to send no surveys. On chat the rating appears inside the conversation. On email it goes out after the **Email delay**, 2 hours by default, so a quick follow-up from the customer isn't cut off.
+
+## When to ask
+
+Pick one or more moments:
+
+- **The conversation is closed**, by a person or by Aide (the default).
+- **Aide confirms it is resolved**: the customer says the answer helped.
+- **The chat goes quiet**: no reply from the customer for a number of minutes, 30 by default.
+
+## The survey
+
+- **Scale**: five faces, or thumbs up and down.
+- **Question**: "How did we do?" by default.
+- **Follow-up**: shown after the customer picks a rating, "Anything we could have done better?" by default. The answer lands on the conversation as a note.
+
+## Do not ask when
+
+- **The conversation was spam** (on by default).
+- **It had fewer than** a number of messages, 2 by default. Short exchanges rarely deserve a survey.
+- **The customer was surveyed in the last** number of days, 30 by default.
+
+## Sending a survey by hand
+
+From a conversation, a teammate can use **Send CSAT survey**, for example after solving a tricky case.
+
+## Where results appear
+
+The rating shows on the conversation. In Analytics, CSAT is the share of responses rated 4 or 5, shown separately for conversations Aide handled end to end and conversations a teammate handled or took over. Teammates can be notified when a rating comes in on their conversation, and owners and admins can send ratings to Slack (see [Notifications and email preferences](/account/notifications)).

@@ -1,0 +1,43 @@
+---
+title: "Cancel, refund and change Shopify orders from a conversation"
+description: "Your team can act on a customer's Shopify order without leaving the conversation."
+---
+
+{/* Generated from the Aide help center article "shopify-order-actions" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Your team can act on a customer's Shopify order without leaving the conversation. Open the conversation, find the order in the Orders section on the right, and use the buttons under it.
+
+## What you can do
+
+Refund and Cancel sit under the order. The menu next to them has the rest:
+
+- **Refund:** a full refund of what is left on the order, or a partial amount. Refunds go back to the original payment method, and you can't refund more than the order still has to refund.
+- **Cancel:** only for orders that haven't shipped. Pick a reason, and choose whether to refund the payment and restock the items. Shopify finishes some cancellations in the background; the order updates when it does.
+- **Edit shipping address:** until the order has fully shipped.
+- **Remove an item:** only units that haven't shipped. Choose how many to remove and whether to restock them.
+- **Send free replacement:** see below.
+- **Start a return:** see [Returns in Shopify or your returns portal](/shopify/shopify-returns).
+- **Hold fulfillment:** see below.
+- **Add note:** a note on the order in Shopify. Your team sees it, the customer doesn't.
+
+Cancelling, refunding, removing an item and sending a replacement have an "Email the customer from the store" box. It is ticked by default.
+
+## Send a free replacement
+
+Choose "Send free replacement", tick the items and set how many of each, up to the quantity on the original order. Shopify gets a new order for those items with a 100% discount and free shipping, sent to the original order's address and tagged `aide-reship`. The order's history shows the new order's number.
+
+Cancelled orders, orders without a shipping address, and items whose product was deleted can't be reshipped. Stores connected before replacements were added must re-approve the Aide app's permissions in Shopify first.
+
+## Hold fulfillment
+
+A hold stops the store from shipping the parts of an order that haven't started shipping, while you sort something out with the customer. Pick one of Shopify's reasons (such as incorrect address or high risk of fraud) and add an optional staff note. The customer isn't told. The order card shows the hold and its reason.
+
+"Release hold" releases only a hold placed from Aide. Holds from Shopify or another app stay until they are released in Shopify. Aide never offers holds to customers in chat.
+
+## Approvals
+
+Refunds above your approval threshold need an Owner or Admin. Set it in Settings > Helpdesk > Statuses and timers, under Approvals ("Refunds above this amount need an Admin", 200 by default, in your store's currency). A replacement counts toward the same threshold by the value of the items sent. An Agent above the threshold sees Request approval instead, and the request waits on the order with Approve and Reject for Owners and Admins.
+
+## If Shopify refuses
+
+If Shopify refuses an action (an invalid address, an order already closed), it shows as failed with Shopify's reason and nothing changes in the store. Every action is listed under the order's History with who asked, who approved and the result. A disconnected store can't be acted on until you reconnect Shopify.

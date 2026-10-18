@@ -1,0 +1,106 @@
+---
+title: "Build scenarios"
+description: "A scenario is a rule for what Aide does when a conversation matches certain conditions, usually a topic."
+---
+
+{/* Generated from the Aide help center article "scenarios" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+A scenario is a rule for what Aide does when a conversation matches certain conditions, usually a topic. For example: when the topic is "Where is my order" and the customer has an order, add an instruction about delivery times, tag the conversation and assign it to your shipping team.
+
+Find scenarios under **Scenarios**. The list puts scenarios that apply to every conversation first, then files the rest under the topic their conditions name. Each agent's **Scenarios** tab lists the scenarios that shape its replies.
+
+## Create a scenario
+
+1. Open **Scenarios** and create a new scenario. Give it a name.
+2. Under **If this is true**, add the conditions it should match.
+3. Under **Do this**, choose **Add an action** for each thing Aide should do.
+4. Switch the scenario **On** and choose **Save changes**.
+
+A scenario needs at least one condition before you can turn it on, unless it applies to every conversation.
+
+## Conditions
+
+Conditions sit in groups. Inside a group, every condition must be true; between groups, any group can match ("or"). You can have up to 20 groups of up to 20 conditions.
+
+Conditions can check:
+
+- the **topic**, the **highest topic**, a **priority topic** and the **topic confidence**
+- whether it **is first message**
+- the **inbox** and the **integration** the conversation came from
+- the ticket's tags, status and fields, and contact and user fields
+- Salesforce contact fields, when Salesforce is connected
+- Shopify order data: **order exists**, **order tag**, **order created**, **destination country**, **tracking exists**, **tracking begun**, **tracking last updated**, **shipment status** and **tracking company**
+- **message or subject**: a pattern (regular expression) the customer's message or subject matches, ignoring case. Name it, and test it on a pasted message and subject before saving.
+
+Each condition uses "is" or "is not" ("matches" or "doesn't match" for a pattern).
+
+### Apply to every conversation
+
+Switch on **Apply to every conversation** for instructions that should always hold, such as a tone rule. The scenario then has no conditions.
+
+## Actions
+
+A scenario runs up to 20 actions, in order:
+
+- **Add an instruction**: a rule Aide follows while writing, such as tone, things to avoid or things to always say.
+- **Answer only from these sources**: Aide looks for its answer only in the knowledge sources you pick (up to 20). One per scenario.
+- **Write a reply**: Aide writes and sends the reply for this message, even on a topic that only drafts. Choose what happens when it can't answer: **Escalate with an internal comment** (its reply goes to your team as a note instead) or **Escalate with a hand-off message** (the conversation goes to your team straight away).
+- **Pre-write a reply**: prepare a Copilot draft for your team ahead of time.
+- **Suggest a reply**: suggest the text you write to the teammate.
+- **Run a macro** or **Suggest a macro**: a suggested macro appears in the thread under the customer's message.
+- **Post internal comment**: leave a note for the team.
+- **Collect a field**: Aide asks the customer for a field's value. Text, number, choice and yes/no fields can be collected.
+- **Add a tag**, **Assign to a group**, **Close the conversation**.
+- **Tag the Shopify order**: add a tag to the customer's newest Shopify order.
+- **Run an automation**: **Update shipping address for Shopify order**. See **Order changes from a scenario** below.
+
+Scenarios carried over from the old Aide app can also have **Send a reply**: on a connected helpdesk, its text is sent to the customer exactly as written; on Aide's own chat and email, it guides what Aide writes.
+
+### Order changes from a scenario
+
+An automation never changes an order by itself. Order changes such as a new address happen only through the order action rules you've set: the topic's AI level, the customer's confirmation and your approval limits (see [Let Aide cancel, refund and change orders in chat](/shopify/aide-order-actions)).
+
+On a message where a **Write a reply** scenario lets Aide act as on a fully automated topic, Aide offers only the order changes the scenario's automation names: with **Update shipping address for Shopify order**, the address change. Without an automation, it offers none.
+
+### Answer only from these sources
+
+Use this to keep one brand's questions on that brand's help center, or a wholesale inbox on the wholesale guide. It narrows where Aide looks; it doesn't change how Aide answers.
+
+- When several matching scenarios pick sources, Aide looks in all of them together.
+- An agent limited to some sources answers from the sources it shares with the scenario. If it shares none, the scenario's sources are ignored for that agent and it answers from its usual knowledge. After you save, the editor names each agent this affects.
+- Copilot drafts follow the same rule.
+- Deleting a source removes it from every scenario that picked it.
+
+### Tag the Shopify order
+
+Type the tag, for example "Do not import", so your fulfilment app skips an order the customer asked to hold.
+
+- The tag goes on the customer's newest order, once Aide knows the customer is who they say they are (a verified chat shopper, a linked order, or a helpdesk's trusted sender). If the newest order is cancelled, nothing is tagged.
+- The tag is added at once and sits next to the order's existing tags.
+- When it can't be added, an internal note says which order wasn't tagged and why.
+- Tags are up to 40 characters, with no commas. A scenario can add up to five order tags.
+
+## Priority and delay
+
+Under **Execution**:
+
+- **Priority**: **Low** runs only if no other matching scenario does. **Medium (default)** runs whenever its conditions match. **High** runs when its conditions match, and no other scenario's actions run.
+- **Delay**: **Immediately**, or **After 5 minutes**, **After 10 minutes** or **After 15 minutes**. A delay makes the reply feel more natural and gives your team a chance to answer first.
+
+Scenarios are checked on each customer message, chat or email, and again once Aide has tagged the message's topics. A scenario's actions run once per conversation, even when it matches again later. Each run shows in the conversation's thread, with the actions that ran and any that were skipped.
+
+## Run a scenario on existing conversations
+
+A new or changed scenario doesn't have to wait for the next customer message. Owners and admins can apply it to open conversations that are already waiting:
+
+1. Turn the scenario on and save it.
+2. Choose **Run on existing conversations**.
+3. Filter by status, channel, topic and when the conversations were created (**Created after**, **Created before**). With no filters, every open conversation is picked, oldest first, up to 5,000.
+4. Choose **Preview**. Aide shows how many conversations match, how many already ran this scenario and are skipped, and which actions won't run. Nothing changes yet.
+5. Run it. You can close the dialog and follow progress on the scenario, or stop it.
+
+Only actions that are safe on older conversations run: tags, assignment, closing, internal comments, reading fields from what the customer wrote, and macros. Replies and drafts never run, a helpdesk macro that would answer the customer is skipped, and delays don't apply. Closed and spam conversations are never included. One run per workspace at a time.
+
+## Turning a scenario on and off
+
+Use the **On** / **Off** switch at the top of the scenario, then save. Switching a scenario off stops it for new messages. **Times run this month** shows how often it ran; select it to see those conversations.

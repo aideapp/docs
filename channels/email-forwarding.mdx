@@ -1,0 +1,40 @@
+---
+title: "Connect your support email by forwarding"
+description: "Forward the address your customers already write to, such as support@yourstore.com, and every email becomes a conversation in Aide."
+---
+
+{/* Generated from the Aide help center article "email-forwarding" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Forward the address your customers already write to, such as support@yourstore.com, and every email becomes a conversation in Aide. Customer replies stay in the same conversation, and once your domain is verified, your replies are sent from your own address. Owners and Admins set this up.
+
+## Set up forwarding
+
+1. Go to Channels > Email and choose "Forward an address".
+2. Enter your support address and, optionally, a sender name.
+3. Aide gives the address its own forwarding address. Copy it and follow the guide for your provider: Gmail and Google Workspace, Google Groups, Outlook and Microsoft 365, or others.
+4. Under "Check that it works", select "Send a test email". When it comes back through forwarding, the address shows as connected. The first real customer email connects it too.
+
+**Gmail's confirmation:** Gmail emails a confirmation code to the new forwarding address. That email goes to Aide, and the code and link appear on the settings page within a minute or two.
+
+**Google Groups:** if your support address is a Google Workspace group, add the forwarding address as a member of the group instead. There's no confirmation email.
+
+To bring in another mailbox, select "Add address". Each one gets its own forwarding address.
+
+## Send replies from your own domain
+
+Until your domain is verified, replies go out from Aide's shared sending address with your sender name, and "reply to" set to your support address, so customer answers come back through forwarding.
+
+To send from your support address itself, add the DNS records listed under Channels > Email at your domain provider. Each has a copy button and a status; select "Check again" once they're in. There are three CNAME records that sign your email, plus an MX and a TXT record on a `send` subdomain.
+
+Free addresses such as Gmail, Outlook.com or Yahoo can't be verified, so their replies always use Aide's shared address.
+
+## What comes in
+
+- Each new customer email starts a conversation, with its attachments. A reply on the thread joins the existing conversation, including recently closed ones.
+- Bounces, out-of-office replies and auto-replies are ignored. Senders on your block list land in Spam.
+- Newsletters and bulk mail come in but are never answered automatically.
+- A new email notifies the conversation's team, or everyone when it has no team.
+
+## Next steps
+
+To have Aide answer these emails, see [Let Aide answer your support email](/channels/aide-answers-email). If your support inbox is a Gmail account, you can sign in with Google instead of forwarding; see [Connect a Gmail inbox](/channels/gmail-inbox).

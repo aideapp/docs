@@ -1,0 +1,33 @@
+---
+title: "SLA policies"
+description: "An SLA policy sets response and resolution targets for conversations, and what happens when they slip."
+---
+
+{/* Generated from the Aide help center article "sla-policies" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+An SLA policy sets response and resolution targets for conversations, and what happens when they slip. Manage policies in Settings > Helpdesk > SLAs.
+
+## Targets
+
+Each policy can set up to three targets, up to 90 days each. Turn off the ones you don't need:
+
+- **First response**: from the customer's first message to your first reply.
+- **Next response**: from each later customer message to your next reply.
+- **Resolution**: from the first message to the conversation being closed.
+
+## Which conversations a policy applies to
+
+Under **Applies to**, a policy uses the same conditions as routing rules (channel, topic, priority and so on). Policies are checked top to bottom, and a conversation gets the first policy that claims it; a policy with no conditions applies to every conversation the ones above didn't claim. Drag policies to set their order. A routing rule can also apply a policy directly with **Apply SLA**.
+
+## The clock
+
+- **Business hours only** (on for new policies): clocks pause outside the schedule's hours and on holidays, so a message on Saturday night doesn't breach a Monday morning target. Choose the **Schedule** to use.
+- **An Aide reply counts as the first response**: with this on, an AI Agent reply meets the first-response target. Off means the clock runs until a person replies, which suits an SLA that promises a human reply.
+- **Pause while**: the clock can pause while a conversation is Waiting on customer, On hold or Snoozed.
+
+## Warnings and breaches
+
+- **When the clock reaches** a percentage of the target (80% by default), the SLA is about to be missed and the conversation turns amber in the list.
+- **When the target is missed**, it turns red and the breach shows in reports.
+
+Each can run actions, the same as routing rules: assign to a team or teammate, set the priority or status, notify a team or teammate in app or by email, and more. Teammates can also get notifications for SLAs about to be missed or missed (see [Notifications and email preferences](/account/notifications)).

@@ -1,0 +1,51 @@
+---
+title: "Custom fields on conversations and customers"
+description: "Custom fields store structured data, such as an order number, the reason for contact or whether a replacement was offered, on a conversation or on a customer."
+---
+
+{/* Generated from the Aide help center article "custom-fields" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Custom fields store structured data, such as an order number, the reason for contact or whether a replacement was offered, on a conversation or on a customer. Aide can fill them in, and your team can too. Manage fields in Settings > Fields.
+
+## Field types
+
+Text, Number, Date, Yes / no, Single choice and Multiple choice.
+
+## Conversation or customer
+
+Each field has a scope. A **Conversation** field belongs to one conversation. A **Customer** field follows the customer across all their conversations.
+
+## Name, key and description
+
+- **Name** is what your team sees.
+- **Key** is used in templates, rules and the API. It starts with a lowercase letter and uses lowercase letters, numbers and underscores, for example `order_number`. It can't be changed after the field is created.
+- **Description** is what Aide reads to recognise the value and to ask for it, so be specific: "The order number from the confirmation email, starting with #."
+
+## How Aide fills it
+
+- **AI reads it**: Aide reads the value out of the conversation, using the description.
+- **Pattern**: Aide takes the first value a pattern you write finds in the customer's messages, then in the subject. No AI involved.
+
+Aide can read and ask for Text, Number, Single choice and Yes / no fields. Date and Multiple choice fields are set by teammates.
+
+## Letting Aide ask for a field
+
+Add the field to the AI Agent's **Fields** tab, or use a scenario's collect-a-field action. For each, choose how it's collected:
+
+- **Extract only**: Aide reads the value from the conversation and never asks.
+- **Ask if missing**: Aide uses the value if the customer already gave it, and asks otherwise.
+- **Always ask**: Aide asks even when the value appears in the conversation.
+
+On the field you can also set the **Question Aide asks** (blank lets Aide phrase it from the name) and, for text and number fields, a pattern the **Answer must match**.
+
+## Required on close
+
+Turn on **Required on close** and a person can't close the conversation until the field has a value.
+
+## Fields from your helpdesk
+
+Fields from a connected Zendesk, Front or Gorgias show a "From Zendesk", "From Front" or "From Gorgias" badge. Their name and options come from the helpdesk; change them there.
+
+## Where values come from
+
+On a conversation, each value shows where it came from: from the conversation, from your site, answered by the customer, set by a teammate, or corrected.

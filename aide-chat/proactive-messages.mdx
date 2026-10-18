@@ -1,0 +1,38 @@
+---
+title: "Proactive messages in Aide Chat"
+description: "Proactive messages pop up next to the chat launcher to start a conversation, for example \"Returns are free within 30 days. Want me to start one?\" on your returns page."
+---
+
+{/* Generated from the Aide help center article "proactive-messages" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Proactive messages pop up next to the chat launcher to start a conversation, for example "Returns are free within 30 days. Want me to start one?" on your returns page. They're small, dismissible, and shown one at a time. Set them up in Aide Chat > Proactive.
+
+## Message
+
+- **Message**: a short text, up to 200 characters. Two lines read best.
+- **From**: an optional sender name, up to 40 characters. It defaults to your agent's name.
+- **Button**: optional, up to 30 characters. It can open the widget, open a screen (Home, A new chat, Messages or Help) or send a message for the visitor. Clicking the card opens the widget either way.
+
+## When it shows
+
+Every rule you set must hold. Leave them all empty to show the message on every page as soon as it loads.
+
+- **Page URL matches**: `*` matches within a path segment, `**` across them, for example `**/returns**`.
+- **Seconds on the page**
+- **Scrolled at least (%)**
+- **Visits, at least** and **Visits, at most**
+- **Came from**: the referrer, for example `**google.**`.
+- **Device**: any device, mobile only or desktop only.
+- **Visitor attributes**: `key=value` pairs your site sets with `identify` or `setSessionData`.
+
+## How often
+
+- **Once per visitor**: remembered in the browser.
+- **Once per visit**: shown again in a new tab or session.
+- **Every time it matches**: on every matching page, every visit.
+
+`Aide('logout', { clearMessages: true })` forgets which messages a visitor has already seen.
+
+## Tracking
+
+The widget emits `campaign:shown`, `campaign:clicked` and `campaign:dismissed` events you can send to your analytics.

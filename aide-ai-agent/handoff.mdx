@@ -1,0 +1,68 @@
+---
+title: "How Aide hands a conversation to your team"
+description: "A hand-off moves a conversation from the AI Agent to a person."
+---
+
+{/* Generated from the Aide help center article "handoff" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+A hand-off moves a conversation from the AI Agent to a person. Aide stops replying, tells the customer someone will follow up, and leaves your team an internal note with what it tried and what it learned.
+
+## When Aide hands off
+
+A customer asking for a person always hands off. In the chat widget, **Talk to a person** in the menu hands the conversation to your team straight away, without Aide answering first. A short message that only asks for a person ("human", "can I speak to someone?") does the same, in English, French, Spanish and German.
+
+Aide can also hand off on its own judgement, for these reasons:
+
+- **Under confidence**: Aide isn't confident enough in its answer.
+- **Guardrail**: a safety or content rule was triggered.
+- **Missing data**: Aide needs information it doesn't have, such as an order number.
+- **Policy**: your policy says a person must handle it.
+
+Turn reasons on or off in Aide AI Agent > Handoff. When a reason is off, Aide asks the customer for more detail, keeps handling the conversation and leaves an internal note.
+
+## Aide tries before handing off
+
+Aide doesn't pass a conversation on without a word. When your knowledge doesn't have the answer, it says so and offers to bring in your team. When a shopper asks something open like "what do you recommend?", Aide shows a few products and asks what they're after. If Aide still can't get a reply right after two tries, it asks the shopper a short question before handing off.
+
+## What the customer sees
+
+Set the handoff messages under Aide AI Agent > Handoff > Handoff messages:
+
+- **In chat**: what Aide says in the widget as it brings a person in, with a version **During business hours** and one **Outside business hours**.
+- **By email**: the line Aide adds to its last email before a person takes over, with the same two versions.
+
+Two variables are available: `{{team_name}}`, your brand name, and `{{reply_time}}`, when the customer can expect a reply. Outside business hours, `{{reply_time}}` is your next opening time.
+
+## While AI replies are paused
+
+When Aide can't reply at all, for example because your plan's AI replies are used up, your workspace reached its daily AI usage limit or your Shopify store is disconnected, new conversations go straight to your team. The customer sees the **While AI replies are paused** message instead; customers are never told why. Your team gets an internal note explaining what happened.
+
+## If the AI service is down
+
+If the AI service behind Aide's replies is down or overloaded, Aide notices after a few failed requests and hands new chat, email and messaging conversations to your team within seconds, instead of keeping customers waiting while it retries. The customer sees your handoff message, and your team gets the note "Aide handed this chat off: Aide could not produce a reliable answer." If you turned off handing off when Aide isn't confident, the customer is asked for more detail instead and the conversation stays with Aide.
+
+Aide checks every 30 seconds or so whether the service is back, and AI replies resume on their own with the next customer message. Conversations handed off in the meantime stay with your team. In a helpdesk inbox with Always draft on, no draft is posted for a message that arrives during the outage.
+
+## "Am I talking to a bot?"
+
+Aide never claims to be a person. When a customer asks whether they're talking to a person, Aide answers with a fixed, truthful line ("I'm \{agent name\}, an AI agent for \{your store\}. I can bring in a person from our team any time you like.") and then answers the rest of the message. No setting or instruction changes this.
+
+## Before and during a hand-off
+
+- **Ask for the customer's email before handing off in chat** makes sure your team can follow up if the visitor closes the widget.
+- **Write a summary note on handoff** leaves an internal note with what Aide tried and what it learned. It's always on.
+- **Aide may return to a conversation after a person hands it back** lets the AI Agent resume after a teammate is done. Off means every conversation a person touched stays with people.
+
+## Drafts on hand-off in your helpdesk
+
+In a Zendesk, Front or Gorgias inbox where Aide drafts instead of sending, you can switch on **Draft on handoff** in the inbox settings, under Replies. When Aide hands off, your team then gets the reply Aide wrote as a draft to review, above the handoff summary. It's off until you turn it on.
+
+To have Aide draft a reply on every customer message instead of stopping at a handoff note, see [Always draft a reply on every helpdesk conversation](/copilot/always-draft).
+
+## Taking over and handing back
+
+In a conversation in Aide Helpdesk, click **Take over** at any time; Aide stops replying. When you're finished, **Return to Aide** lets the agent pick the conversation up again. To clear the assignee when a conversation returns to Aide, turn on **Unassign when returning to Aide** in Settings > Helpdesk > Assignment.
+
+## Who receives hand-offs
+
+Hand-offs follow your routing rules, then the team's assignment method picks a member. With no matching rule, hand-offs land in Unassigned. Manage the rules in Settings > Helpdesk > Rules.

@@ -1,0 +1,60 @@
+---
+title: "Install Aide Chat on your website"
+description: "Aide Chat is the chat widget on your website."
+---
+
+{/* Generated from the Aide help center article "install-widget" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide Chat is the chat widget on your website. On Shopify you turn it on in your theme with no code; on any other site you paste one snippet.
+
+## Before you start
+
+Switch the Aide AI Agent on for website chat (Aide AI Agent > Where it answers). The install instructions appear in Aide Chat > Installation once the agent is on website chat; until then the tab says "Nothing to install yet".
+
+## On Shopify
+
+With your Shopify store connected, Aide Chat is a Shopify theme app embed:
+
+1. Open Aide Chat > Installation and click **Open theme editor**.
+2. Under **App embeds**, switch on **Aide chat**.
+3. Save the theme.
+
+The chat appears on every page of your store. There's no code to paste, and Aide's home page in your Shopify admin shows whether the chat is on. For chat in checkout, on the thank-you page and in customer accounts, see [Chat in Shopify checkout, the thank-you page and customer accounts](/shopify/shopify-checkout-chat).
+
+## On any other website
+
+Copy the embed snippet from Aide Chat > Installation and paste it just before `</body>` on every page where the chat should appear. It looks like this, with your own widget key, which starts with `wk_`:
+
+```html
+<script>
+  window.Aide =
+    window.Aide ||
+    function () {
+      ;(Aide.q = Aide.q || []).push(arguments)
+    }
+  Aide.k = 'wk_...'
+</script>
+<script type="module" async crossorigin src="https://cdn.aide.app/v1/widget.js"></script>
+```
+
+The script is small and loads the rest the first time a visitor opens the chat.
+
+## Check that it works
+
+The Installation tab shows **Live** with the number of conversations in the last 30 days once real visitors have chatted. Preview conversations from the dashboard don't count. Until then it shows **No visitors yet**.
+
+## Open the chat from your own button
+
+Any element with the `data-aide-open` attribute opens Aide Chat when clicked, with no script of your own:
+
+```html
+<button data-aide-open>Chat with us</button>
+```
+
+## Restrict which sites can load it
+
+By default the widget loads on any site that has your snippet. Developers can restrict it to a list of allowed origins (for example `https://shop.example.com`, up to 50) with Aide's API, by updating the widget's `allowedOrigins`. Requests from other origins are refused.
+
+## Changing the chat
+
+Changes you make in Aide Chat (look, text, behaviour) go live without touching your site again.

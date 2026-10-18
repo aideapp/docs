@@ -1,0 +1,40 @@
+---
+title: "Use Aide from AI assistants with the Aide MCP server"
+description: "Aide runs an MCP server, so AI agents and assistants that speak the Model Context Protocol can use Aide directly: search your knowledge, look up Shopify orders, read your support analytics and, signed in as a teammate, work on conversations."
+---
+
+{/* Generated from the Aide help center article "mcp-server" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide runs an MCP server, so AI agents and assistants that speak the Model Context Protocol can use Aide directly: search your knowledge, look up Shopify orders, read your support analytics and, signed in as a teammate, work on conversations. Every tool is a call to the Aide API, with the same permissions, approval rules and limits.
+
+## Connect a client
+
+Point an MCP client that supports Streamable HTTP and a custom header at:
+
+```
+https://app-api.aide.app/mcp
+```
+
+Send `Authorization: Bearer <key>` with a workspace API key from Settings > Developers (see [API keys and webhooks](/developers/api-keys-webhooks)). A read-only key is enough. Clients that require OAuth sign-in, such as Claude's and ChatGPT's connectors, can't connect yet.
+
+## What an API key can do
+
+With a workspace API key, the assistant can:
+
+- search your published knowledge the way Aide's replies find it,
+- list your knowledge sources and read a document,
+- look up synced Shopify orders by customer email or order number,
+- read your analytics summary.
+
+API keys act as the workspace, not a person, so they never see conversations.
+
+## What a teammate can do
+
+Signed in as a teammate, the assistant can also find the Aide conversation for a Zendesk ticket or Front conversation, read its messages and Aide's draft, add internal notes, and refund or cancel orders. Notes and order actions are recorded as that teammate.
+
+## Rules still apply
+
+- An assistant is shown only the tools its key or sign-in can use.
+- A refund or cancellation above your approval limits waits for an admin, and the assistant is told it's waiting.
+- Errors come back with the reason, such as a missing order number, so the assistant can correct itself. A rate limit says how long to wait.
+- Knowledge searches share your workspace's 60 a minute, and every tool call counts against the key's API rate limit.
