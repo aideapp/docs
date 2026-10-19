@@ -2,6 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "aspen",
   "name": "Aide docs",
+  "description": "Aide is an AI helpdesk for support teams getting started with AI. Start free with Aide's own inbox and Aide Chat; connect Gmail from Starter, or run Aide inside Zendesk, Front or Gorgias on Pro. It drafts first, and you turn on automatic replies topic by topic. Aide works inside Claude and ChatGPT through its MCP server. No seat fees.",
   "colors": {
     "primary": "#3b3b3b",
     "light": "#fafafa",
@@ -264,6 +265,10 @@
     {
       "source": "/developers/custom-integration",
       "destination": "/developers/api-keys-webhooks"
+    },
+    {
+      "source": "/hc/:slug*",
+      "destination": "/"
     }
   ],
   "footer": {

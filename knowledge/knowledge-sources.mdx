@@ -24,17 +24,28 @@ Knowledge is everything Aide can quote when it answers: help-center articles, pa
 2. Choose **Import a help center** or **Import your website** and paste the address, starting with `https://`.
 3. Start the import.
 
-An import reads up to 100 pages. Aide reads the pages, splits them into passages by heading and indexes them. Large sites take a few minutes; you can keep working while the import runs.
+An import reads up to 300 pages. Aide reads the pages, splits them into passages by heading and indexes them. Large sites take a few minutes; you can keep working while the import runs.
+
+A website import starts from your site's sitemap when it has one, so it also finds pages nothing links to, and it shares the page limit between the sections of your site (such as `/blog`, `/customers` and `/glossary`) so one large section can't crowd out the others. Links inside a page are kept with their addresses, so Aide can point a customer to the right page.
+
+To skip parts of your site, add them under **Skip pages under** when you import it, for example `/glossary` or `/blog/tag`. Aide skips the pages at and under each path.
 
 When your Shopify store is connected, a website import skips product, collection, cart, account and search pages. Your products already come from Shopify with up-to-date prices, stock and variants, so a scraped copy would only repeat them. Skipped pages don't count towards the import's page limit.
 
 ## Keep knowledge up to date
 
-Open an imported source and click **Re-sync** to import it again. Pages are updated in place. Products and macros update with their integration's sync.
+Imported help centers and websites don't update on their own. Open the source and click **Re-import** to import it again; pages are updated in place, and the button's tooltip says when it was last imported. Products and macros update with their integration's sync.
+
+On a website source, the menu above its list of pages has two more options:
+
+- **Add pages from a URL** imports the page at an address on your site and the pages under it into the same source, for example a new `/customers` section. Pages already there are updated, not duplicated.
+- **Excluded paths** changes the paths imports skip. Pages already imported under a path you add are removed from answers straight away.
 
 ## Draft and published
 
 Only published knowledge is used by the AI Agent and Copilot. New articles you write start as drafts; click **Publish** when they're ready, and **Unpublish** to take one out of answers.
+
+Unpublishing takes effect from the next reply. If Aide still quotes an article you unpublished, the same text is probably in another source, such as your imported help center or website: check the articles Aide's reply links to.
 
 You can also star your best articles so Aide prefers them when they match a question; see [Star the articles Aide should prefer](/knowledge/starred-articles). To add your phone numbers, social profiles and app listings, see [Add your business information](/knowledge/business-information).
 

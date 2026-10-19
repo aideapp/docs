@@ -34,6 +34,8 @@ Anyone can run JavaScript on your page, so Aide only trusts an identity that you
 - **Signed** (with `hash`): the visitor is verified. Conversations from the same `userId` on other devices are merged and the customer sees their history.
 - **Unsigned** (no `hash`, or a wrong one): Aide uses the name and email as display information only. The visitor stays unverified, nothing is merged, and they only see conversations from this browser.
 
+If a customer's past chats don't show up when they switch devices, check that your site calls `identify` with a valid `hash`.
+
 ## Compute the hash
 
 The hash is an HMAC-SHA256 of the `userId`, using your workspace secret as the key, written as hexadecimal. Compute it on your server, never in the browser:

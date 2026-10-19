@@ -20,13 +20,13 @@ Aide('on', 'message:received', (event) => console.log(event))
 | `Aide('open')`                  | Opens the panel                                                                        |
 | `Aide('close')`                 | Closes the panel                                                                       |
 | `Aide('toggle')`                | Opens or closes it                                                                     |
-| `Aide('show')` / `Aide('hide')` | Shows or hides the launcher                                                            |
+| `Aide('show')` / `Aide('hide')` | Shows or hides the whole widget                                                        |
 | `Aide('chat')`                  | Opens straight into a chat                                                             |
 | `Aide('handoff')`               | Opens the widget and asks for a person, so the conversation goes straight to your team |
 | `Aide('article', id)`           | Opens a help article                                                                   |
 | `Aide('navigate', route)`       | Goes to `/`, `/chat`, `/articles`, `/articles/{id}`, `/history` or `/history/{id}`     |
 
-Use `Aide('handoff')` for your own "Contact us" buttons: the AI doesn't answer first.
+To open the chat from your own button, call `Aide('open')` from it. Use `Aide('handoff')` for your own "Contact us" buttons: the AI doesn't answer first.
 
 ## Visitors and session data
 
@@ -37,7 +37,7 @@ Use `Aide('handoff')` for your own "Contact us" buttons: the AI doesn't answer f
 
 ## Configuration at runtime
 
-`Aide('config', options)` changes options such as `color`, `position`, `theme` or `launcherLabel` from code, and `Aide('setLocale', 'fr')` switches the widget's language.
+`Aide('config', options)` changes options such as `color`, `position`, `theme`, `launcherLabel` or `hideLauncher` from code, and `Aide('setLocale', 'fr')` switches the widget's language.
 
 ## Events
 
@@ -54,6 +54,8 @@ Listen with `Aide('on', name, handler)`, stop with `Aide('off', name, handler)`,
 | `search`                                                     | The visitor searches help articles                 |
 | `rating:submitted`                                           | The visitor rates a conversation                   |
 | `campaign:shown` / `campaign:clicked` / `campaign:dismissed` | A proactive message is shown, clicked or dismissed |
+
+For example, listen for `message:received` to update your own page when a new chat message comes in, or for `unread:changed` to show an unread badge.
 
 `Aide('ready')` and `Aide('info')` return promises, for example to wait until the widget has loaded.
 

@@ -63,6 +63,9 @@
       "name": "ChannelSettings"
     },
     {
+      "name": "ConnectedApp"
+    },
+    {
       "name": "ContactSync"
     },
     {
@@ -88,6 +91,9 @@
     },
     {
       "name": "EmailMailbox"
+    },
+    {
+      "name": "EmailPreferences"
     },
     {
       "name": "GoogleSessions"
@@ -139,6 +145,9 @@
     },
     {
       "name": "NotificationChannel"
+    },
+    {
+      "name": "OauthAuthorization"
     },
     {
       "name": "Order"
@@ -3083,7 +3092,21 @@
                     "enum": [
                       "home",
                       "billing",
-                      "setup_gorgias"
+                      "setup_gorgias",
+                      "setup_zendesk",
+                      "setup_front",
+                      "integration_front",
+                      "integration_zendesk",
+                      "integration_gmail",
+                      "integration_gorgias",
+                      "integration_shopify",
+                      "integration_woocommerce",
+                      "integration_arlo",
+                      "integration_salesforce",
+                      "integration_whatsapp",
+                      "integration_facebook",
+                      "integration_instagram",
+                      "integration_slack"
                     ]
                   }
                 },
@@ -3682,6 +3705,149 @@
         }
       }
     },
+    "/v1/connected-apps": {
+      "get": {
+        "operationId": "connected_app.index",
+        "tags": [
+          "ConnectedApp"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ConnectedApp"
+                      }
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "metadata"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/connected-apps/{id}": {
+      "delete": {
+        "operationId": "connected_app.destroy",
+        "tags": [
+          "ConnectedApp"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/v1/conversations": {
       "get": {
         "operationId": "conversation.index",
@@ -3976,6 +4142,20 @@
           },
           {
             "name": "topicNot",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "maxItems": 50,
+              "uniqueItems": true
+            }
+          },
+          {
+            "name": "scenario",
             "in": "query",
             "required": false,
             "schema": {
@@ -9492,6 +9672,85 @@
         }
       }
     },
+    "/v1/email-preferences/unsubscribe": {
+      "post": {
+        "operationId": "email_preferences.unsubscribe",
+        "tags": [
+          "EmailPreferences"
+        ],
+        "x-audience": "public",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "preference": {
+                          "type": "string",
+                          "enum": [
+                            "onboarding_sequences",
+                            "weekly_summary"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "preference"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/v1/fields": {
       "get": {
         "operationId": "scenario.fields",
@@ -13763,6 +14022,85 @@
             "$ref": "#/components/responses/Error"
           }
         }
+      },
+      "put": {
+        "operationId": "integration.report_storefront_embed",
+        "tags": [
+          "Integration"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "enabled",
+                      "disabled"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/v1/integrations/{id}/syncs": {
@@ -14293,6 +14631,63 @@
           },
           "422": {
             "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/integrations/catalog": {
+      "get": {
+        "operationId": "integration.catalog",
+        "tags": [
+          "Integration"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/IntegrationCatalogEntry"
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           },
           "429": {
             "$ref": "#/components/responses/TooManyRequests"
@@ -16624,6 +17019,15 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 500
+                  },
+                  "excludePaths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 200,
+                      "pattern": "^\\/[^/\\s?#][^\\s?#]*$"
+                    },
+                    "maxItems": 50
                   }
                 },
                 "required": [
@@ -16782,6 +17186,15 @@
                     ],
                     "minLength": 1,
                     "maxLength": 255
+                  },
+                  "excludePaths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 200,
+                      "pattern": "^\\/[^/\\s?#][^\\s?#]*$"
+                    },
+                    "maxItems": 50
                   }
                 }
               }
@@ -16924,6 +17337,11 @@
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 500
+                  },
+                  "url": {
+                    "type": "string",
+                    "maxLength": 2048,
+                    "format": "uri"
                   }
                 }
               }
@@ -17565,6 +17983,19 @@
                     },
                     "required": [],
                     "additionalProperties": false
+                  },
+                  "useInDrafts": {
+                    "enum": [
+                      "1",
+                      1,
+                      "true",
+                      true,
+                      "on",
+                      "0",
+                      0,
+                      "false",
+                      false
+                    ]
                   }
                 }
               }
@@ -19871,6 +20302,223 @@
           },
           "422": {
             "$ref": "#/components/responses/ValidationFailed"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/oauth-authorizations/{id}": {
+      "get": {
+        "operationId": "oauth_authorization.show",
+        "tags": [
+          "OauthAuthorization"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/OauthAuthorization"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/oauth-authorizations/{id}/approval": {
+      "post": {
+        "operationId": "oauth_authorization.approve",
+        "tags": [
+          "OauthAuthorization"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "redirectTo": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "redirectTo"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/v1/oauth-authorizations/{id}/denial": {
+      "post": {
+        "operationId": "oauth_authorization.deny",
+        "tags": [
+          "OauthAuthorization"
+        ],
+        "x-audience": "public",
+        "security": [
+          {
+            "accessToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "redirectTo": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "redirectTo"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthenticated"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
           },
           "429": {
             "$ref": "#/components/responses/TooManyRequests"
@@ -29169,6 +29817,59 @@
                   "inviteCode": {
                     "type": "string",
                     "maxLength": 128
+                  },
+                  "signupContext": {
+                    "type": "object",
+                    "properties": {
+                      "plan": {
+                        "enum": [
+                          "starter",
+                          "pro",
+                          "scale"
+                        ]
+                      },
+                      "stack": {
+                        "enum": [
+                          "gmail",
+                          "gorgias",
+                          "zendesk",
+                          "front",
+                          "shopify",
+                          "woocommerce",
+                          "salesforce",
+                          "helpdesk",
+                          "email_agent",
+                          "chat_agent",
+                          "human_copilot"
+                        ]
+                      },
+                      "utmSource": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmMedium": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmCampaign": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmContent": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmTerm": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "ref": {
+                        "type": "string",
+                        "maxLength": 120
+                      }
+                    },
+                    "required": [],
+                    "additionalProperties": false
                   }
                 }
               }
@@ -29578,6 +30279,59 @@
                   "inviteCode": {
                     "type": "string",
                     "maxLength": 128
+                  },
+                  "signupContext": {
+                    "type": "object",
+                    "properties": {
+                      "plan": {
+                        "enum": [
+                          "starter",
+                          "pro",
+                          "scale"
+                        ]
+                      },
+                      "stack": {
+                        "enum": [
+                          "gmail",
+                          "gorgias",
+                          "zendesk",
+                          "front",
+                          "shopify",
+                          "woocommerce",
+                          "salesforce",
+                          "helpdesk",
+                          "email_agent",
+                          "chat_agent",
+                          "human_copilot"
+                        ]
+                      },
+                      "utmSource": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmMedium": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmCampaign": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmContent": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "utmTerm": {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      "ref": {
+                        "type": "string",
+                        "maxLength": 120
+                      }
+                    },
+                    "required": [],
+                    "additionalProperties": false
                   }
                 },
                 "required": [
@@ -35067,10 +35821,22 @@
                     "items": {
                       "type": "string",
                       "maxLength": 255,
-                      "pattern": "^https?:\\/\\/[^\\s/?#]+$"
+                      "pattern": "^https?:\\/\\/[^\\s/?#@]+\\/?$"
                     },
-                    "maxItems": 50,
-                    "uniqueItems": true
+                    "maxItems": 50
+                  },
+                  "allowAnyOrigin": {
+                    "enum": [
+                      "1",
+                      1,
+                      "true",
+                      true,
+                      "on",
+                      "0",
+                      0,
+                      "false",
+                      false
+                    ]
                   },
                   "scheduleId": {
                     "type": [
@@ -35655,6 +36421,21 @@
               "null"
             ]
           },
+          "medium": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "chat",
+              "email",
+              "messaging",
+              "public_comment",
+              "sms",
+              "voice",
+              null
+            ]
+          },
           "connection": {
             "type": "object",
             "properties": {
@@ -35672,21 +36453,6 @@
           },
           "id": {
             "type": "string"
-          },
-          "medium": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "chat",
-              "email",
-              "messaging",
-              "public_comment",
-              "sms",
-              "voice",
-              null
-            ]
           },
           "isEnabled": {
             "type": "boolean"
@@ -35713,6 +36479,9 @@
               "status"
             ]
           },
+          "kind": {
+            "type": "string"
+          },
           "assigned": {
             "type": "boolean"
           },
@@ -35721,9 +36490,6 @@
               "string",
               "null"
             ]
-          },
-          "kind": {
-            "type": "string"
           },
           "answerable": {
             "type": "boolean"
@@ -35767,14 +36533,14 @@
         "required": [
           "object",
           "name",
+          "medium",
           "connection",
           "id",
-          "medium",
           "isEnabled",
           "agent",
+          "kind",
           "assigned",
           "address",
-          "kind",
           "answerable",
           "rollout",
           "replies",
@@ -36620,14 +37386,14 @@
               "ai_resolution_rate": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36646,8 +37412,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36655,14 +37421,14 @@
               "not_reopened": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36681,8 +37447,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36690,14 +37456,14 @@
               "automation_rate": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36716,8 +37482,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36725,14 +37491,14 @@
               "topic_detected": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36751,8 +37517,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36760,14 +37526,14 @@
               "handoff_share": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36786,8 +37552,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36795,14 +37561,14 @@
               "not_routed": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36821,8 +37587,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36830,14 +37596,14 @@
               "median_first_response_aide": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36856,8 +37622,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36865,14 +37631,14 @@
               "median_first_response_human": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36891,8 +37657,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36900,14 +37666,14 @@
               "median_human_after_handoff": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36926,8 +37692,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36935,14 +37701,14 @@
               "median_time_to_resolution": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36961,8 +37727,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -36970,14 +37736,14 @@
               "csat_aide": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -36996,8 +37762,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -37005,14 +37771,14 @@
               "csat_human": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -37031,8 +37797,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -37040,14 +37806,14 @@
               "verified_by_team": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -37066,8 +37832,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -37075,14 +37841,14 @@
               "billable_conversations": {
                 "type": "object",
                 "properties": {
+                  "n": {
+                    "type": "number"
+                  },
                   "value": {
                     "type": [
                       "number",
                       "null"
                     ]
-                  },
-                  "n": {
-                    "type": "number"
                   },
                   "previous": {
                     "type": [
@@ -37101,8 +37867,8 @@
                   }
                 },
                 "required": [
-                  "value",
                   "n",
+                  "value",
                   "previous",
                   "series"
                 ]
@@ -37495,14 +38261,14 @@
           "aide": {
             "type": "object",
             "properties": {
+              "n": {
+                "type": "number"
+              },
               "value": {
                 "type": [
                   "number",
                   "null"
                 ]
-              },
-              "n": {
-                "type": "number"
               },
               "previous": {
                 "type": [
@@ -37542,8 +38308,8 @@
               }
             },
             "required": [
-              "value",
               "n",
+              "value",
               "previous",
               "series",
               "positive",
@@ -37553,14 +38319,14 @@
           "human": {
             "type": "object",
             "properties": {
+              "n": {
+                "type": "number"
+              },
               "value": {
                 "type": [
                   "number",
                   "null"
                 ]
-              },
-              "n": {
-                "type": "number"
               },
               "previous": {
                 "type": [
@@ -37600,8 +38366,8 @@
               }
             },
             "required": [
-              "value",
               "n",
+              "value",
               "previous",
               "series",
               "positive",
@@ -37619,6 +38385,9 @@
                 "createdAt": {
                   "type": "string"
                 },
+                "conversationId": {
+                  "type": "string"
+                },
                 "comment": {
                   "type": "string"
                 },
@@ -37631,17 +38400,14 @@
                 },
                 "rating": {
                   "type": "number"
-                },
-                "conversationId": {
-                  "type": "string"
                 }
               },
               "required": [
                 "createdAt",
+                "conversationId",
                 "comment",
                 "leg",
-                "rating",
-                "conversationId"
+                "rating"
               ]
             }
           },
@@ -38355,11 +39121,8 @@
                       "type": "string",
                       "const": "whatsapp"
                     },
-                    "endedAt": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "startedAt": {
+                      "type": "string"
                     },
                     "outcome": {
                       "type": "string",
@@ -38372,14 +39135,17 @@
                         "voicemail"
                       ]
                     },
-                    "startedAt": {
-                      "type": "string"
-                    },
                     "direction": {
                       "type": "string",
                       "enum": [
                         "inbound",
                         "outbound"
+                      ]
+                    },
+                    "endedAt": {
+                      "type": [
+                        "string",
+                        "null"
                       ]
                     },
                     "durationSeconds": {
@@ -38397,10 +39163,10 @@
                   },
                   "required": [
                     "provider",
-                    "endedAt",
-                    "outcome",
                     "startedAt",
+                    "outcome",
                     "direction",
+                    "endedAt",
                     "durationSeconds",
                     "voicemailMessageId"
                   ]
@@ -38838,6 +39604,13 @@
                     "null"
                   ]
                 },
+                "origin": {
+                  "type": "string",
+                  "enum": [
+                    "backfill",
+                    "live"
+                  ]
+                },
                 "actions": {
                   "type": "array",
                   "items": {
@@ -38875,13 +39648,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "origin": {
-                  "type": "string",
-                  "enum": [
-                    "backfill",
-                    "live"
-                  ]
                 },
                 "messageId": {
                   "type": "string"
@@ -38978,9 +39744,9 @@
                 "id",
                 "isActive",
                 "priority",
+                "origin",
                 "actions",
                 "skipped",
-                "origin",
                 "messageId",
                 "feedback",
                 "applyAlways",
@@ -39193,6 +39959,7 @@
           "provider": {
             "type": "string",
             "enum": [
+              "manual",
               "shopify",
               "stripe"
             ]
@@ -39510,6 +40277,18 @@
               "null"
             ]
           },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "after_reply",
+              "agent_reply",
+              "command",
+              "handoff",
+              "reply_turn",
+              "scenario",
+              "topic"
+            ]
+          },
           "summary": {
             "type": "string"
           },
@@ -39563,18 +40342,6 @@
           },
           "attempts": {
             "type": "number"
-          },
-          "origin": {
-            "type": "string",
-            "enum": [
-              "after_reply",
-              "agent_reply",
-              "command",
-              "handoff",
-              "reply_turn",
-              "scenario",
-              "topic"
-            ]
           },
           "skipReason": {
             "type": [
@@ -39640,13 +40407,13 @@
           "updatedAt",
           "position",
           "externalId",
+          "origin",
           "summary",
           "error",
           "errorKind",
           "type",
           "appliedAt",
           "attempts",
-          "origin",
           "skipReason",
           "transport",
           "setId",
@@ -39683,6 +40450,18 @@
           },
           "position": {
             "type": "number"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "after_reply",
+              "agent_reply",
+              "command",
+              "handoff",
+              "reply_turn",
+              "scenario",
+              "topic"
+            ]
           },
           "summary": {
             "type": "string"
@@ -39731,18 +40510,6 @@
           },
           "attempts": {
             "type": "number"
-          },
-          "origin": {
-            "type": "string",
-            "enum": [
-              "after_reply",
-              "agent_reply",
-              "command",
-              "handoff",
-              "reply_turn",
-              "scenario",
-              "topic"
-            ]
           },
           "skipReason": {
             "type": [
@@ -39805,12 +40572,12 @@
           "id",
           "status",
           "position",
+          "origin",
           "summary",
           "errorKind",
           "type",
           "appliedAt",
           "attempts",
-          "origin",
           "skipReason",
           "transport",
           "setId",
@@ -40311,19 +41078,6 @@
                         "voice"
                       ]
                     },
-                    "drafts": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "enum": [
-                          "composer_insert",
-                          "macro_insert",
-                          "native_draft",
-                          "note",
-                          "panel"
-                        ]
-                      }
-                    },
                     "reply": {
                       "type": "object",
                       "properties": {
@@ -40393,6 +41147,19 @@
                         "automated"
                       ]
                     },
+                    "drafts": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "composer_insert",
+                          "macro_insert",
+                          "native_draft",
+                          "note",
+                          "panel"
+                        ]
+                      }
+                    },
                     "vendorAi": {
                       "type": "boolean"
                     },
@@ -40402,8 +41169,8 @@
                   },
                   "required": [
                     "medium",
-                    "drafts",
                     "reply",
+                    "drafts",
                     "vendorAi",
                     "internalNote"
                   ]
@@ -40969,6 +41736,61 @@
           "name",
           "id",
           "role"
+        ]
+      },
+      "ConnectedApp": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "connected_app"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "lastUsedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "aide:read",
+                "aide:write"
+              ]
+            }
+          },
+          "uri": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "object",
+          "name",
+          "createdAt",
+          "id",
+          "lastUsedAt",
+          "scopes",
+          "uri"
         ]
       },
       "ContactSync": {
@@ -41899,11 +42721,8 @@
                       "type": "string",
                       "const": "whatsapp"
                     },
-                    "endedAt": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                    "startedAt": {
+                      "type": "string"
                     },
                     "outcome": {
                       "type": "string",
@@ -41916,14 +42735,17 @@
                         "voicemail"
                       ]
                     },
-                    "startedAt": {
-                      "type": "string"
-                    },
                     "direction": {
                       "type": "string",
                       "enum": [
                         "inbound",
                         "outbound"
+                      ]
+                    },
+                    "endedAt": {
+                      "type": [
+                        "string",
+                        "null"
                       ]
                     },
                     "durationSeconds": {
@@ -41941,10 +42763,10 @@
                   },
                   "required": [
                     "provider",
-                    "endedAt",
-                    "outcome",
                     "startedAt",
+                    "outcome",
                     "direction",
+                    "endedAt",
                     "durationSeconds",
                     "voicemailMessageId"
                   ]
@@ -42376,6 +43198,13 @@
                     "null"
                   ]
                 },
+                "origin": {
+                  "type": "string",
+                  "enum": [
+                    "backfill",
+                    "live"
+                  ]
+                },
                 "actions": {
                   "type": "array",
                   "items": {
@@ -42413,13 +43242,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "origin": {
-                  "type": "string",
-                  "enum": [
-                    "backfill",
-                    "live"
-                  ]
                 },
                 "messageId": {
                   "type": "string"
@@ -42516,9 +43338,9 @@
                 "id",
                 "isActive",
                 "priority",
+                "origin",
                 "actions",
                 "skipped",
-                "origin",
                 "messageId",
                 "feedback",
                 "applyAlways",
@@ -43137,9 +43959,6 @@
                 "id": {
                   "type": "string"
                 },
-                "size": {
-                  "type": "number"
-                },
                 "kind": {
                   "type": "string",
                   "enum": [
@@ -43151,6 +43970,9 @@
                     "sticker",
                     "video"
                   ]
+                },
+                "size": {
+                  "type": "number"
                 },
                 "thumbnailUrl": {
                   "type": [
@@ -43170,8 +43992,8 @@
                 "url",
                 "name",
                 "id",
-                "size",
                 "kind",
+                "size",
                 "thumbnailUrl",
                 "inline",
                 "mime"
@@ -43242,6 +44064,9 @@
               "pricingModel"
             ]
           },
+          "kind": {
+            "type": "string"
+          },
           "to": {
             "type": [
               "object",
@@ -43271,9 +44096,6 @@
               "string",
               "null"
             ]
-          },
-          "kind": {
-            "type": "string"
           },
           "blocks": {
             "type": [
@@ -43450,11 +44272,11 @@
                               "title": {
                                 "type": "string"
                               },
-                              "quantity": {
-                                "type": "number"
-                              },
                               "price": {
                                 "type": "string"
+                              },
+                              "quantity": {
+                                "type": "number"
                               },
                               "imageUrl": {
                                 "type": "string"
@@ -43480,8 +44302,8 @@
                             },
                             "required": [
                               "title",
-                              "quantity",
-                              "price"
+                              "price",
+                              "quantity"
                             ]
                           }
                         },
@@ -44330,9 +45152,9 @@
           "id",
           "from",
           "billing",
+          "kind",
           "to",
           "body",
-          "kind",
           "blocks",
           "htmlBody",
           "knowledge",
@@ -44353,6 +45175,9 @@
           "object": {
             "type": "string",
             "const": "conversation_orders"
+          },
+          "verified": {
+            "type": "boolean"
           },
           "customer": {
             "type": [
@@ -44434,12 +45259,6 @@
                               "null"
                             ]
                           },
-                          "title": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          },
                           "kind": {
                             "type": "string",
                             "enum": [
@@ -44450,13 +45269,19 @@
                               "other",
                               "product"
                             ]
+                          },
+                          "title": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         },
                         "required": [
                           "handle",
                           "url",
-                          "title",
-                          "kind"
+                          "kind",
+                          "title"
                         ]
                       }
                     },
@@ -44514,9 +45339,6 @@
               "totalSpent",
               "adminUrl"
             ]
-          },
-          "verified": {
-            "type": "boolean"
           },
           "orders": {
             "type": "array",
@@ -44609,12 +45431,6 @@
                                 "null"
                               ]
                             },
-                            "title": {
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
                             "kind": {
                               "type": "string",
                               "enum": [
@@ -44625,13 +45441,19 @@
                                 "other",
                                 "product"
                               ]
+                            },
+                            "title": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
                             }
                           },
                           "required": [
                             "handle",
                             "url",
-                            "title",
-                            "kind"
+                            "kind",
+                            "title"
                           ]
                         }
                       },
@@ -44690,14 +45512,14 @@
                           "null"
                         ]
                       },
-                      "quantity": {
-                        "type": "number"
-                      },
                       "price": {
                         "type": [
                           "string",
                           "null"
                         ]
+                      },
+                      "quantity": {
+                        "type": "number"
                       },
                       "sku": {
                         "type": [
@@ -44722,8 +45544,8 @@
                       "id",
                       "title",
                       "imageUrl",
-                      "quantity",
                       "price",
+                      "quantity",
                       "sku",
                       "variantTitle",
                       "fulfilledQuantity",
@@ -44880,17 +45702,17 @@
                         "items": {
                           "type": "object",
                           "properties": {
-                            "status": {
-                              "type": [
-                                "string",
-                                "null"
-                              ]
-                            },
                             "source": {
                               "type": "string",
                               "enum": [
                                 "carrier",
                                 "shopify"
+                              ]
+                            },
+                            "status": {
+                              "type": [
+                                "string",
+                                "null"
                               ]
                             },
                             "message": {
@@ -44910,8 +45732,8 @@
                             }
                           },
                           "required": [
-                            "status",
                             "source",
+                            "status",
                             "message",
                             "location",
                             "happenedAt"
@@ -45336,9 +46158,6 @@
                         "null"
                       ]
                     },
-                    "quantity": {
-                      "type": "number"
-                    },
                     "product": {
                       "type": [
                         "object",
@@ -45451,15 +46270,18 @@
                         "image"
                       ]
                     },
+                    "quantity": {
+                      "type": "number"
+                    },
                     "linePrice": {
                       "type": "string"
                     }
                   },
                   "required": [
                     "title",
-                    "quantity",
                     "product",
                     "variant",
+                    "quantity",
                     "linePrice"
                   ]
                 }
@@ -45489,8 +46311,8 @@
         },
         "required": [
           "object",
-          "customer",
           "verified",
+          "customer",
           "orders",
           "viewing",
           "viewingCollection",
@@ -45532,17 +46354,17 @@
             "type": "string",
             "const": "copilot_draft"
           },
-          "createdAt": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
           "source": {
             "type": "string",
             "enum": [
               "aide_reply",
               "copilot"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
             ]
           },
           "language": {
@@ -45656,8 +46478,8 @@
         },
         "required": [
           "object",
-          "createdAt",
           "source",
+          "createdAt",
           "language",
           "messageId",
           "text",
@@ -45975,6 +46797,9 @@
             "type": "string",
             "const": "custom_field"
           },
+          "source": {
+            "type": "string"
+          },
           "key": {
             "type": "string"
           },
@@ -46001,9 +46826,6 @@
               "string",
               "null"
             ]
-          },
-          "source": {
-            "type": "string"
           },
           "type": {
             "type": "string"
@@ -46054,13 +46876,13 @@
         },
         "required": [
           "object",
+          "source",
           "key",
           "createdAt",
           "id",
           "updatedAt",
           "position",
           "description",
-          "source",
           "type",
           "scope",
           "options",
@@ -46108,6 +46930,46 @@
           "object": {
             "type": "string",
             "const": "email_mailbox"
+          },
+          "gmail": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "active",
+                  "disconnected",
+                  "reconnect_required"
+                ]
+              },
+              "integrationId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "lastSyncedAt": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "watchExpiresAt": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "integrationId",
+              "lastSyncedAt",
+              "watchExpiresAt"
+            ]
           },
           "createdAt": {
             "type": [
@@ -46193,46 +47055,6 @@
               "records",
               "verifiedAt",
               "lastCheckedAt"
-            ]
-          },
-          "gmail": {
-            "type": [
-              "object",
-              "null"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "enum": [
-                  "active",
-                  "disconnected",
-                  "reconnect_required"
-                ]
-              },
-              "integrationId": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "lastSyncedAt": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "watchExpiresAt": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            },
-            "required": [
-              "status",
-              "integrationId",
-              "lastSyncedAt",
-              "watchExpiresAt"
             ]
           },
           "sender": {
@@ -46340,10 +47162,10 @@
         },
         "required": [
           "object",
+          "gmail",
           "createdAt",
           "id",
           "domain",
-          "gmail",
           "sender",
           "transport",
           "displayName",
@@ -46666,15 +47488,6 @@
               "null"
             ]
           },
-          "createdAt": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "id": {
-            "type": "string"
-          },
           "medium": {
             "type": [
               "string",
@@ -46689,6 +47502,15 @@
               "voice",
               null
             ]
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
           },
           "isEnabled": {
             "type": "boolean"
@@ -46715,6 +47537,9 @@
               "status"
             ]
           },
+          "kind": {
+            "type": "string"
+          },
           "address": {
             "type": [
               "string",
@@ -46726,9 +47551,6 @@
           },
           "isPulled": {
             "type": "boolean"
-          },
-          "kind": {
-            "type": "string"
           },
           "sendAs": {
             "type": [
@@ -46790,15 +47612,15 @@
         "required": [
           "object",
           "name",
+          "medium",
           "createdAt",
           "id",
-          "medium",
           "isEnabled",
           "agent",
+          "kind",
           "address",
           "isPrivate",
           "isPulled",
-          "kind",
           "sendAs",
           "health",
           "channelType",
@@ -47148,12 +47970,89 @@
           "ruleId"
         ]
       },
+      "IntegrationCatalogEntry": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "integration_catalog_entry"
+          },
+          "slug": {
+            "type": "string",
+            "enum": [
+              "arlo",
+              "email",
+              "facebook",
+              "front",
+              "gmail",
+              "gorgias",
+              "instagram",
+              "salesforce",
+              "shopify",
+              "slack",
+              "whatsapp",
+              "woocommerce",
+              "zendesk"
+            ]
+          },
+          "available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "object",
+          "slug",
+          "available"
+        ]
+      },
       "IntegrationDetail": {
         "type": "object",
         "properties": {
           "object": {
             "type": "string",
             "const": "integration"
+          },
+          "sync": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "done",
+                  "running"
+                ]
+              },
+              "updatedAt": {
+                "type": "string"
+              },
+              "orders": {
+                "type": "number"
+              },
+              "products": {
+                "type": "number"
+              },
+              "phase": {
+                "type": "string",
+                "enum": [
+                  "orders",
+                  "products"
+                ]
+              },
+              "startedAt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "status",
+              "updatedAt",
+              "orders",
+              "products",
+              "phase",
+              "startedAt"
+            ]
           },
           "name": {
             "type": "string"
@@ -47444,10 +48343,17 @@
               "string",
               "null"
             ]
+          },
+          "webPixelConnected": {
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "required": [
           "object",
+          "sync",
           "name",
           "createdAt",
           "id",
@@ -47456,7 +48362,8 @@
           "channel",
           "category",
           "needsReauth",
-          "externalAccount"
+          "externalAccount",
+          "webPixelConnected"
         ]
       },
       "IntegrationSidebar": {
@@ -48012,6 +48919,34 @@
               "title"
             ]
           },
+          "link": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "id",
+              "kind"
+            ]
+          },
           "slug": {
             "type": [
               "string",
@@ -48039,38 +48974,10 @@
           "locale": {
             "type": "string"
           },
-          "link": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "title": {
+          "kind": {
             "type": "string"
           },
-          "source": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "id": {
-                "type": "string"
-              },
-              "kind": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "id",
-              "kind"
-            ]
-          },
-          "kind": {
+          "title": {
             "type": "string"
           },
           "bodyHtml": {
@@ -48129,16 +49036,16 @@
           "object",
           "index",
           "collection",
+          "link",
+          "source",
           "slug",
           "createdAt",
           "id",
           "status",
           "updatedAt",
           "locale",
-          "link",
-          "title",
-          "source",
           "kind",
+          "title",
           "bodyHtml",
           "canonicalUrl",
           "document",
@@ -48159,6 +49066,12 @@
           "object": {
             "type": "string",
             "const": "knowledge_document"
+          },
+          "link": {
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "slug": {
             "type": [
@@ -48187,16 +49100,10 @@
           "sourceId": {
             "type": "string"
           },
-          "link": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "title": {
+          "kind": {
             "type": "string"
           },
-          "kind": {
+          "title": {
             "type": "string"
           },
           "collectionId": {
@@ -48243,15 +49150,15 @@
         },
         "required": [
           "object",
+          "link",
           "slug",
           "createdAt",
           "id",
           "status",
           "updatedAt",
           "sourceId",
-          "link",
-          "title",
           "kind",
+          "title",
           "collectionId",
           "excerpt",
           "helpfulCount",
@@ -48329,22 +49236,22 @@
             "type": "string",
             "const": "knowledge_search_result"
           },
-          "id": {
-            "type": "string"
-          },
-          "sourceId": {
-            "type": "string"
-          },
           "link": {
             "type": [
               "string",
               "null"
             ]
           },
-          "title": {
+          "id": {
+            "type": "string"
+          },
+          "sourceId": {
             "type": "string"
           },
           "kind": {
+            "type": "string"
+          },
+          "title": {
             "type": "string"
           },
           "excerpt": {
@@ -48356,11 +49263,11 @@
         },
         "required": [
           "object",
+          "link",
           "id",
           "sourceId",
-          "link",
-          "title",
           "kind",
+          "title",
           "excerpt",
           "score"
         ]
@@ -48419,6 +49326,12 @@
           },
           "timesUsed": {
             "type": "number"
+          },
+          "excludePaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "importMethod": {
             "type": [
@@ -48484,6 +49397,7 @@
           "error",
           "vendor",
           "timesUsed",
+          "excludePaths",
           "importMethod",
           "lastImportedAt",
           "progress",
@@ -48580,7 +49494,7 @@
                   ]
                 }
               },
-              "aide": {
+              "gorgias": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -48616,7 +49530,7 @@
                   ]
                 }
               },
-              "gorgias": {
+              "aide": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -48637,16 +49551,31 @@
             },
             "required": [
               "front",
-              "aide",
+              "gorgias",
               "zendesk",
-              "gorgias"
+              "aide"
             ]
           },
           "runCount": {
             "type": "number"
           },
+          "useInDrafts": {
+            "type": "boolean"
+          },
+          "exampleCount": {
+            "type": "number"
+          },
+          "recentUseCount": {
+            "type": "number"
+          },
           "syncedFromHelpdesk": {
             "type": "boolean"
+          },
+          "draftingCondition": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -48661,7 +49590,11 @@
           "externalId",
           "actions",
           "runCount",
-          "syncedFromHelpdesk"
+          "useInDrafts",
+          "exampleCount",
+          "recentUseCount",
+          "syncedFromHelpdesk",
+          "draftingCondition"
         ]
       },
       "MacroActionOption": {
@@ -48770,6 +49703,12 @@
           "runCount": {
             "type": "number"
           },
+          "useInDrafts": {
+            "type": "boolean"
+          },
+          "exampleCount": {
+            "type": "number"
+          },
           "actionCount": {
             "type": "number"
           },
@@ -48785,8 +49724,23 @@
               ]
             }
           },
+          "recentUseCount": {
+            "type": "number"
+          },
+          "replyFirstLine": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "syncedFromHelpdesk": {
             "type": "boolean"
+          },
+          "draftingCondition": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -48798,9 +49752,14 @@
           "description",
           "externalId",
           "runCount",
+          "useInDrafts",
+          "exampleCount",
           "actionCount",
           "targets",
-          "syncedFromHelpdesk"
+          "recentUseCount",
+          "replyFirstLine",
+          "syncedFromHelpdesk",
+          "draftingCondition"
         ]
       },
       "Me": {
@@ -48858,6 +49817,53 @@
               "onboarding": {
                 "type": "object",
                 "properties": {
+                  "signupContext": {
+                    "type": "object",
+                    "properties": {
+                      "plan": {
+                        "type": "string",
+                        "enum": [
+                          "pro",
+                          "scale",
+                          "starter"
+                        ]
+                      },
+                      "stack": {
+                        "type": "string",
+                        "enum": [
+                          "chat_agent",
+                          "email_agent",
+                          "front",
+                          "gmail",
+                          "gorgias",
+                          "helpdesk",
+                          "human_copilot",
+                          "salesforce",
+                          "shopify",
+                          "woocommerce",
+                          "zendesk"
+                        ]
+                      },
+                      "utmSource": {
+                        "type": "string"
+                      },
+                      "utmMedium": {
+                        "type": "string"
+                      },
+                      "utmCampaign": {
+                        "type": "string"
+                      },
+                      "utmContent": {
+                        "type": "string"
+                      },
+                      "utmTerm": {
+                        "type": "string"
+                      },
+                      "ref": {
+                        "type": "string"
+                      }
+                    }
+                  },
                   "show": {
                     "type": "boolean"
                   },
@@ -49030,6 +50036,9 @@
               "hasTickets": {
                 "type": "boolean"
               },
+              "hasPreviewed": {
+                "type": "boolean"
+              },
               "hasTopics": {
                 "type": "boolean"
               },
@@ -49044,6 +50053,83 @@
               },
               "hasHelpdeskIntegration": {
                 "type": "boolean"
+              },
+              "hasChannel": {
+                "type": "boolean"
+              },
+              "widgetFirstSeenAt": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "widgetFirstSeenOrigin": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "widgetBlockedOrigin": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "lastSeenAt": {
+                    "type": "string"
+                  },
+                  "origin": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "lastSeenAt",
+                  "origin"
+                ]
+              },
+              "firstAiOutput": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "at": {
+                    "type": "string"
+                  },
+                  "conversationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "draft",
+                      "reply"
+                    ]
+                  },
+                  "helpdeskUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "at",
+                  "conversationId",
+                  "kind",
+                  "helpdeskUrl"
+                ]
+              },
+              "emailForwarding": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "pending",
+                  "verified"
+                ]
               },
               "billing": {
                 "type": "object",
@@ -49122,11 +50208,18 @@
             },
             "required": [
               "hasTickets",
+              "hasPreviewed",
               "hasTopics",
               "hasWorkflows",
               "hasKnowledge",
               "hasAgent",
               "hasHelpdeskIntegration",
+              "hasChannel",
+              "widgetFirstSeenAt",
+              "widgetFirstSeenOrigin",
+              "widgetBlockedOrigin",
+              "firstAiOutput",
+              "emailForwarding",
               "billing"
             ]
           }
@@ -49321,6 +50414,9 @@
           "id": {
             "type": "string"
           },
+          "conversationId": {
+            "type": "string"
+          },
           "event": {
             "type": "string"
           },
@@ -49339,9 +50435,6 @@
           "title": {
             "type": "string"
           },
-          "conversationId": {
-            "type": "string"
-          },
           "read": {
             "type": "boolean"
           }
@@ -49350,11 +50443,11 @@
           "object",
           "createdAt",
           "id",
+          "conversationId",
           "event",
           "body",
           "readAt",
           "title",
-          "conversationId",
           "read"
         ]
       },
@@ -49738,6 +50831,79 @@
           "digest"
         ]
       },
+      "OauthAuthorization": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "const": "oauth_authorization"
+          },
+          "id": {
+            "type": "string"
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "uri": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "uri"
+            ]
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "aide:read",
+                "aide:write"
+              ]
+            }
+          },
+          "workspace": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "id"
+            ]
+          },
+          "loopback": {
+            "type": "boolean"
+          },
+          "redirectHost": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "object",
+          "id",
+          "client",
+          "scopes",
+          "workspace",
+          "loopback",
+          "redirectHost"
+        ]
+      },
       "Order": {
         "type": "object",
         "properties": {
@@ -49827,12 +50993,6 @@
                           "null"
                         ]
                       },
-                      "title": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
                       "kind": {
                         "type": "string",
                         "enum": [
@@ -49843,13 +51003,19 @@
                           "other",
                           "product"
                         ]
+                      },
+                      "title": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       }
                     },
                     "required": [
                       "handle",
                       "url",
-                      "title",
-                      "kind"
+                      "kind",
+                      "title"
                     ]
                   }
                 },
@@ -49908,14 +51074,14 @@
                     "null"
                   ]
                 },
-                "quantity": {
-                  "type": "number"
-                },
                 "price": {
                   "type": [
                     "string",
                     "null"
                   ]
+                },
+                "quantity": {
+                  "type": "number"
                 },
                 "sku": {
                   "type": [
@@ -49940,8 +51106,8 @@
                 "id",
                 "title",
                 "imageUrl",
-                "quantity",
                 "price",
+                "quantity",
                 "sku",
                 "variantTitle",
                 "fulfilledQuantity",
@@ -50095,17 +51261,17 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "status": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
                       "source": {
                         "type": "string",
                         "enum": [
                           "carrier",
                           "shopify"
+                        ]
+                      },
+                      "status": {
+                        "type": [
+                          "string",
+                          "null"
                         ]
                       },
                       "message": {
@@ -50125,8 +51291,8 @@
                       }
                     },
                     "required": [
-                      "status",
                       "source",
+                      "status",
                       "message",
                       "location",
                       "happenedAt"
@@ -50793,12 +51959,6 @@
                           "null"
                         ]
                       },
-                      "title": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
-                      },
                       "kind": {
                         "type": "string",
                         "enum": [
@@ -50809,13 +51969,19 @@
                           "other",
                           "product"
                         ]
+                      },
+                      "title": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       }
                     },
                     "required": [
                       "handle",
                       "url",
-                      "title",
-                      "kind"
+                      "kind",
+                      "title"
                     ]
                   }
                 },
@@ -51324,9 +52490,6 @@
           "subject": {
             "type": "string"
           },
-          "title": {
-            "type": "string"
-          },
           "kind": {
             "type": "string",
             "enum": [
@@ -51348,6 +52511,9 @@
               "topic_split",
               "view_create"
             ]
+          },
+          "title": {
+            "type": "string"
           },
           "verifiedAt": {
             "type": [
@@ -51490,8 +52656,8 @@
           "status",
           "lastSeenAt",
           "subject",
-          "title",
           "kind",
+          "title",
           "verifiedAt",
           "conversationCount",
           "decidedAt",
@@ -51580,17 +52746,17 @@
               "null"
             ],
             "properties": {
-              "market": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
               "source": {
                 "type": "string",
                 "enum": [
                   "settings",
                   "shopify"
+                ]
+              },
+              "market": {
+                "type": [
+                  "string",
+                  "null"
                 ]
               },
               "windowDays": {
@@ -51614,8 +52780,8 @@
               }
             },
             "required": [
-              "market",
               "source",
+              "market",
               "windowDays",
               "acceptsReturns",
               "startsFrom",
@@ -51632,9 +52798,6 @@
                 },
                 "title": {
                   "type": "string"
-                },
-                "quantity": {
-                  "type": "number"
                 },
                 "reasons": {
                   "type": "array",
@@ -51665,6 +52828,9 @@
                     null
                   ]
                 },
+                "quantity": {
+                  "type": "number"
+                },
                 "variantTitle": {
                   "type": [
                     "string",
@@ -51675,9 +52841,9 @@
               "required": [
                 "id",
                 "title",
-                "quantity",
                 "reasons",
                 "blocked",
+                "quantity",
                 "variantTitle"
               ]
             }
@@ -51726,17 +52892,17 @@
               "null"
             ],
             "properties": {
-              "market": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
               "source": {
                 "type": "string",
                 "enum": [
                   "settings",
                   "shopify"
+                ]
+              },
+              "market": {
+                "type": [
+                  "string",
+                  "null"
                 ]
               },
               "windowDays": {
@@ -51760,8 +52926,8 @@
               }
             },
             "required": [
-              "market",
               "source",
+              "market",
               "windowDays",
               "acceptsReturns",
               "startsFrom",
@@ -51800,6 +52966,9 @@
           "name": {
             "type": "string"
           },
+          "match": {
+            "type": "string"
+          },
           "createdAt": {
             "type": [
               "string",
@@ -51817,9 +52986,6 @@
           },
           "position": {
             "type": "number"
-          },
-          "match": {
-            "type": "string"
           },
           "actions": {
             "type": "array",
@@ -52285,11 +53451,11 @@
         "required": [
           "object",
           "name",
+          "match",
           "createdAt",
           "id",
           "updatedAt",
           "position",
-          "match",
           "actions",
           "enabled",
           "conditions",
@@ -52867,6 +54033,12 @@
               "null"
             ]
           },
+          "startedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "filters": {
             "type": "object",
             "properties": {
@@ -52963,12 +54135,6 @@
               "null"
             ]
           },
-          "startedAt": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
           "requestedBy": {
             "type": [
               "object",
@@ -53022,10 +54188,10 @@
           "status",
           "expired",
           "error",
+          "startedAt",
           "filters",
           "finishedAt",
           "previewedAt",
-          "startedAt",
           "requestedBy",
           "scenarioId",
           "result"
@@ -53468,6 +54634,13 @@
           "name": {
             "type": "string"
           },
+          "match": {
+            "type": "string",
+            "enum": [
+              "all",
+              "any"
+            ]
+          },
           "createdAt": {
             "type": [
               "string",
@@ -53485,13 +54658,6 @@
           },
           "position": {
             "type": "number"
-          },
-          "match": {
-            "type": "string",
-            "enum": [
-              "all",
-              "any"
-            ]
           },
           "enabled": {
             "type": "boolean"
@@ -54199,11 +55365,11 @@
         "required": [
           "object",
           "name",
+          "match",
           "createdAt",
           "id",
           "updatedAt",
           "position",
-          "match",
           "enabled",
           "outcome",
           "conditions",
@@ -55131,6 +56297,23 @@
               "unknown"
             ]
           },
+          "statusSource": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "shopify_admin",
+              "theme",
+              null
+            ]
+          },
+          "statusCheckedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "themeName": {
             "type": [
               "string",
@@ -55142,13 +56325,33 @@
               "string",
               "null"
             ]
+          },
+          "seenOnStoreAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "seenOnStoreOrigin": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "storefrontUrl": {
+            "type": "string"
           }
         },
         "required": [
           "object",
           "status",
+          "statusSource",
+          "statusCheckedAt",
           "themeName",
-          "editorUrl"
+          "editorUrl",
+          "seenOnStoreAt",
+          "seenOnStoreOrigin",
+          "storefrontUrl"
         ]
       },
       "Team": {
@@ -55415,6 +56618,9 @@
             "type": "string",
             "const": "topic_example"
           },
+          "source": {
+            "type": "string"
+          },
           "createdAt": {
             "type": [
               "string",
@@ -55429,9 +56635,6 @@
               "string",
               "null"
             ]
-          },
-          "source": {
-            "type": "string"
           },
           "compatibilityReasoning": {
             "type": [
@@ -55472,10 +56675,10 @@
         },
         "required": [
           "object",
+          "source",
           "createdAt",
           "id",
           "updatedAt",
-          "source",
           "compatibilityReasoning",
           "couldBeDropped",
           "isPositive",
@@ -55634,6 +56837,12 @@
           "id": {
             "type": "string"
           },
+          "conversationId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "kind": {
             "type": "string",
             "enum": [
@@ -55655,12 +56864,6 @@
               "gmail",
               "gorgias",
               "zendesk"
-            ]
-          },
-          "conversationId": {
-            "type": [
-              "string",
-              "null"
             ]
           },
           "billable": {
@@ -55686,9 +56889,9 @@
           "object",
           "createdAt",
           "id",
+          "conversationId",
           "kind",
           "channel",
-          "conversationId",
           "billable",
           "excludedReason"
         ]
@@ -56022,6 +57225,9 @@
               "null"
             ]
           },
+          "allowAnyOrigin": {
+            "type": "boolean"
+          },
           "allowedOrigins": {
             "type": "array",
             "items": {
@@ -56056,6 +57262,24 @@
               "transcriptsByEmail"
             ]
           },
+          "blockedOrigins": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "lastSeenAt": {
+                  "type": "string"
+                },
+                "origin": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "lastSeenAt",
+                "origin"
+              ]
+            }
+          },
           "config": {
             "type": "object",
             "additionalProperties": {}
@@ -56082,8 +57306,10 @@
           "updatedAt",
           "scheduleId",
           "agentId",
+          "allowAnyOrigin",
           "allowedOrigins",
           "behaviour",
+          "blockedOrigins",
           "config",
           "isEnabled",
           "inbox"

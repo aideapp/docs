@@ -51,6 +51,8 @@ Any element with the `data-aide-open` attribute opens Aide Chat when clicked, wi
 <button data-aide-open>Chat with us</button>
 ```
 
+To show only your own button instead of the default bubble, hide the launcher with `Aide('config', { hideLauncher: true })`.
+
 ## Restrict which sites can load it
 
 By default the widget loads on any site that has your snippet. Developers can restrict it to a list of allowed origins (for example `https://shop.example.com`, up to 50) with Aide's API, by updating the widget's `allowedOrigins`. Requests from other origins are refused.
