@@ -22,8 +22,9 @@ https://app-api.aide.app/mcp
 | Claude (web, desktop and mobile) | Sign in with your Aide account |
 | ChatGPT (web) | Sign in with your Aide account |
 | Claude Code, Codex, Gemini CLI | Sign in with your Aide account, or use an API key |
-| Cursor desktop app | Sign in with your Aide account, or use an API key |
-| Cursor on the web and Cloud Agents, VS Code | API key for now; sign-in is coming |
+| Cursor, VS Code | Sign in with your Aide account, or use an API key |
+| Perplexity | Sign in with your Aide account |
+| Devin, Gemini Enterprise | An admin adds Aide, then you sign in with your Aide account |
 
 Signing in connects the app as you: it sees what you can see in Aide and its actions are recorded as yours. An API key connects as the workspace and can only read knowledge, products, topics, macros, orders and analytics, never conversations.
 
@@ -110,7 +111,7 @@ Google's steps: [MCP servers with the Gemini CLI](https://geminicli.com/docs/too
 
 ## Connect Cursor
 
-In the Cursor desktop app, add this to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project):
+Add this to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project):
 
 ```
 {
@@ -124,7 +125,9 @@ In the Cursor desktop app, add this to `~/.cursor/mcp.json` (or `.cursor/mcp.jso
 
 Then open Customize in Cursor's sidebar, find aide and sign in to Aide in the browser window that opens.
 
-Cursor on the web and Cursor's Cloud Agents can't sign in to Aide yet; use an API key there. Create a read-only key (see [API keys and webhooks](/developers/api-keys-webhooks)), set it as `AIDE_API_KEY` in your environment, and add the header to the server:
+For Cloud Agents, a team admin adds Aide as a Team MCP server under Dashboard > Plugins & MCPs in Cursor, with the same address.
+
+To use an API key instead, create a read-only key (see [API keys and webhooks](/developers/api-keys-webhooks)), set it as `AIDE_API_KEY` in your environment, and add the header to the server:
 
 ```
 {
@@ -141,7 +144,13 @@ Cursor's steps: [Model Context Protocol (MCP)](https://cursor.com/docs/context/m
 
 ## Connect VS Code
 
-VS Code connects with an API key for now. Create a read-only key (see [API keys and webhooks](/developers/api-keys-webhooks)) and add this to `.vscode/mcp.json` in your workspace; VS Code asks for the key the first time the server starts and stores it securely:
+1. Open the Command Palette and run "MCP: Add Server".
+2. Choose "HTTP (HTTP or Server-Sent Events)" and enter `https://app-api.aide.app/mcp`.
+3. Enter a server ID, such as aide.
+4. For a personal setup, select "Global", then "Copilot Global".
+5. When VS Code asks you to sign in, sign in to Aide in your browser, check the workspace and the permissions, and select "Approve".
+
+To use an API key instead, create a read-only key (see [API keys and webhooks](/developers/api-keys-webhooks)) and add this to `.vscode/mcp.json` in your workspace; VS Code asks for the key the first time the server starts and stores it securely:
 
 ```
 {
@@ -161,6 +170,27 @@ VS Code connects with an API key for now. Create a read-only key (see [API keys 
 VS Code doesn't pass servers that ask for a value like this to its Copilot harness sessions, so use Aide from a Local session.
 
 Microsoft's steps: [Add MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) and the [MCP configuration reference](https://code.visualstudio.com/docs/copilot/reference/mcp-configuration).
+
+## Connect Perplexity
+
+Perplexity offers custom remote connectors to Enterprise organizations. Members can add one when an admin allows it, and admins can add one for the whole organization.
+
+1. For your own account, open Plugins in the sidebar (or Customize > Connectors if you don't see Plugins), then Add custom > Connector > Add MCP connector. To add it for the organization, an admin goes to Enterprise settings > Permissions > Connectors permissions and clicks "+ Custom connector".
+2. In the pop-up, select Remote.
+3. Name it Aide and enter `https://app-api.aide.app/mcp` as the MCP Server URL.
+4. Set Authentication to OAuth and Transport to Streamable HTTP.
+5. Check the acknowledgement box and click "Add".
+6. Click the connector card to sign in. When Aide opens, sign in, check the workspace and the permissions, and select "Approve".
+
+If an admin adds Aide for the organization, have each member sign in on their own rather than signing in once for everyone: Aide acts as whoever signed in. The admin then shares the connector from the Permissions screen in Enterprise settings.
+
+Perplexity's steps: [Adding Custom Remote Connectors](https://www.perplexity.ai/help-center/en/articles/13915507-adding-custom-remote-connectors).
+
+## Connect Devin and Gemini Enterprise
+
+Devin (app.devin.ai): an organization admin adds Aide under Customize > MCPs > Add MCP > Add custom MCP, with transport HTTP, Server URL `https://app-api.aide.app/mcp`, authentication OAuth and Access set to Personal, so each teammate selects Connect and signs in as themselves. Devin's steps: [MCP servers and marketplace](https://docs.devin.ai/work-with-devin/mcp).
+
+Gemini Enterprise: a Google Cloud admin adds Aide as a Custom MCP Server data store with OAuth 2.0 (authorization URL `https://app-api.aide.app/oauth/authorize`, token URL `https://app-api.aide.app/oauth/token`, scopes `aide:read aide:write`, Enable PKCE Support ticked), using a client ID and secret created once by registering at `https://app-api.aide.app/oauth/register` with `token_endpoint_auth_method` set to `client_secret_post` and the redirect URI `https://vertexaisearch.cloud.google.com/oauth-redirect`. Google's steps: [Set up your custom MCP server data store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/custom-mcp-server/set-up-custom-mcp-server).
 
 ## Signing in and permissions
 
@@ -217,7 +247,7 @@ An app is shown only the tools its sign-in or key can use. Tools that send a mes
 
 ## Your data
 
-- Aide sends the app only the results of the tools it calls. The assistant's provider (Anthropic, OpenAI, Google, Cursor, Microsoft) handles those results under its own terms and your settings with it.
+- Aide sends the app only the results of the tools it calls. The assistant's provider (Anthropic, OpenAI, Google, Cursor, Microsoft, Perplexity, Cognition for Devin) handles those results under its own terms and your settings with it.
 - Aide doesn't receive or keep your chats with the assistant. Notes, replies, updates and order requests made through the app are saved in Aide like any other, recorded as you.
 - Sign-in tokens last an hour and renew for up to 30 days; Aide stores them only in hashed form. Disconnecting deletes them straight away.
 
@@ -235,7 +265,6 @@ Owners and admins revoke API keys from their row under Settings > Developers.
 - **Analytics tools are missing:** analytics are for owners and admins.
 - **Claude can't finish connecting:** remove the connector and add it again with OAuth client set to "Register automatically".
 - **ChatGPT shows old or missing tools:** ChatGPT keeps the tool list from when Aide was added. Refresh the app from its settings page (on Business and Enterprise, an admin refreshes it in workspace settings).
-- **"redirect_uri" or "client" errors in VS Code or Cursor:** sign-in isn't available for VS Code or Cursor on the web yet. Use an API key.
 - **A refund or cancellation is refused on Free:** order actions need Starter or above. Lookups still work.
 - **A refund didn't happen:** it is waiting for approval because it is above your limits. An admin can approve it in Aide, or through `approve_order_action`.
 - **"Too many requests":** wait the number of seconds the app reports.
