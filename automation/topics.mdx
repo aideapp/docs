@@ -1,0 +1,60 @@
+---
+title: "Topics and how Aide tags conversations"
+description: "Topics describe what a customer message is about: \"Where is my order\", \"Return request\", \"Discount code not working\"."
+---
+
+{/* Generated from the Aide help center article "topics" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Topics describe what a customer message is about: "Where is my order", "Return request", "Discount code not working". Aide tags every incoming customer message with a topic, on chat and email, including chats your team handles. Scenarios, routing rules, analytics and the AI Agent all use them.
+
+## How topics are organised
+
+Topics live in a three-level taxonomy on the **Topics** page:
+
+- a **category** is the top level, such as "Orders & shipping"
+- a **sub-category** groups related topics, such as "Order status & tracking"
+- a **topic** sits in a sub-category, such as "Late delivery"
+
+Deleting a category or sub-category deletes what's inside it, and scenarios using those topics stop matching.
+
+## Create a topic
+
+1. Open **Topics**. If you have none yet, start with **Create a category**, then add a sub-category to it.
+2. Use **+** on a sub-category to add a topic.
+3. Give it a descriptive name and fill in **When to use this topic**: Aide reads it to decide which messages belong to the topic. The more specific, the better the match.
+4. Add a couple of examples.
+
+## Suggested topics
+
+You don't have to write your topics up front. When none of your topics fits a customer message, the message shows a dashed **Suggested** chip with a topic Aide proposes. Open it to check the name, description and group, then choose **Add topic**. Adding it tags every message Aide suggested it for and keeps them as training examples. Messages that ask the same thing share one suggestion, and dismissed suggestions aren't proposed again.
+
+Suggested topics don't trigger scenarios or routing until you add them.
+
+## Teach Aide with examples
+
+Each topic has **Examples**. Positive examples are messages that belong to the topic; negative examples look similar but should not be detected as it. A handful of real customer messages is the fastest way to fix a topic that is detected too often or too rarely.
+
+- Add an example by hand from the topic, or use **Add topic** on a message in a conversation.
+- Turn an example positive or negative, or move it to another topic.
+- Aide flags examples to review: a message that may belong to the topic but has to be accepted, an outlier that sits apart from the others, or one it thinks belongs to another topic.
+
+## Correcting a topic
+
+Each customer message in a conversation shows its topic as a chip. Open it to see how sure Aide was, and mark it **Right topic** or **Wrong topic**: your answer trains Aide. Your team can also mark topics right or wrong from the Aide panel in Zendesk and Front (see [The Aide panel in Zendesk and Front](/integrations/aide-panel-zendesk-front)).
+
+## Confidence
+
+Aide records how confident it is about each topic. Scenarios can use that with a **topic confidence** condition.
+
+## Topics in your helpdesk
+
+Aide can write the topic back to the ticket in Zendesk, Gorgias or Front, so your views, reports and rules can use it. In the integration's inbox settings, under **Topics**:
+
+- **Write topics as tags** adds the topic as a tag, with the **Tag prefix** you choose (for example `aide-refunds`).
+- **Topic field** (Zendesk and Gorgias) fills one of your ticket fields, such as a "Reason" dropdown. A dropdown gets the option you map each topic to, otherwise the option named like the topic. A value set by a person is never overwritten.
+
+An inbox in shadow writes nothing to your helpdesk. Front tickets get topics as tags only.
+
+## What each topic shows
+
+A topic's page shows its **AI replies** level, how many conversations it has (select it to open them), when it was **Last seen**, and whether it's **Automatable**. See [Control what Aide is allowed to do for each topic](/aide-ai-agent/topic-ai-levels) for what each level does.

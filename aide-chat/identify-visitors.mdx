@@ -1,0 +1,52 @@
+---
+title: "Identify logged-in customers securely"
+description: "When a customer is signed in to your site, Aide Chat can know who they are."
+---
+
+{/* Generated from the Aide help center article "identify-visitors" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+When a customer is signed in to your site, Aide Chat can know who they are. They then don't have to type their email, their past conversations follow them across devices, and the AI Agent can look up their orders.
+
+## On Shopify: automatic
+
+On a Shopify store with the Aide chat app embed on, a shopper who is logged in to their store account is recognised automatically. Their name and email come from the store, and Aide can look up and act on their orders straight away. When they log out, the chat is signed out too. You don't need to write any code.
+
+An email the shopper types in the chat can't unlock someone else's orders: the store account decides whose orders Aide sees.
+
+Automatic recognition needs the app's default storefront path, `/apps/aide`.
+
+## On other sites: call identify
+
+```js
+Aide('identify', {
+  userId: 'customer-1234',
+  email: 'jane@example.com',
+  name: 'Jane',
+  hash: '<computed on your server>',
+  attributes: { plan: 'gold' },
+})
+```
+
+## Signed and unsigned identify
+
+Anyone can run JavaScript on your page, so Aide only trusts an identity that your server has signed.
+
+- **Signed** (with `hash`): the visitor is verified. Conversations from the same `userId` on other devices are merged and the customer sees their history.
+- **Unsigned** (no `hash`, or a wrong one): Aide uses the name and email as display information only. The visitor stays unverified, nothing is merged, and they only see conversations from this browser.
+
+If a customer's past chats don't show up when they switch devices, check that your site calls `identify` with a valid `hash`.
+
+## Compute the hash
+
+The hash is an HMAC-SHA256 of the `userId`, using your workspace secret as the key, written as hexadecimal. Compute it on your server, never in the browser:
+
+```js
+import { createHmac } from 'node:crypto'
+const hash = createHmac('sha256', process.env.AIDE_WORKSPACE_SECRET).update(userId).digest('hex')
+```
+
+Developers get the workspace secret by rotating it with Aide's API (`POST /v1/widgets/{id}/secret`, with an API key; see [API keys and webhooks](/developers/api-keys-webhooks)), which returns the new secret once. Rotating it invalidates old hashes, so deploy the new secret to your server at the same time.
+
+## When the customer signs out
+
+Call `Aide('logout')` so the next person on the same computer doesn't see their conversations. By default a chat in progress is allowed to finish; pass `{ endActiveChat: true }` to end it.

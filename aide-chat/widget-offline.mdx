@@ -1,0 +1,35 @@
+---
+title: "What Aide Chat does when your team is offline"
+description: "Aide Chat uses your business hours to show visitors whether a person is around and to decide what Aide does when your team is offline."
+---
+
+{/* Generated from the Aide help center article "widget-offline" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide Chat uses your business hours to show visitors whether a person is around and to decide what Aide does when your team is offline. Set it up in Aide Chat > Behaviour.
+
+## Business hours
+
+Under **Business hours**, choose the **Source**: your default schedule or another schedule you created. See [Business hours and holidays](/aide-helpdesk/business-hours) to set up schedules.
+
+## When no one is online
+
+Pick what Aide does outside business hours:
+
+- **Aide keeps handling**: Aide answers as it does during hours. If it hands off, it posts the outside-hours message and asks for an email.
+- **Aide acknowledges, collects an email and pauses**: Aide posts the outside-hours handoff message, asks for an email and stops. Your team picks it up when you open.
+
+The outside-hours message is set in Aide AI Agent > Handoff, where `{{reply_time}}` becomes your next opening time.
+
+## Asking for an email
+
+Under **Ask for an email**, choose when visitors are asked:
+
+- **In the chat, after Aide first replies**: asked once, and the visitor can skip it.
+- **Before the first message**: required to start chatting, which guarantees you can follow up by email.
+- **Off**: never asks on its own. A handoff still asks if your Handoff settings say to.
+
+How your team's replies reach a visitor who left is covered in [Follow up by email when a visitor leaves the chat](/aide-chat/chat-email-follow-up).
+
+## Transcripts by email
+
+Turn on **Offer transcripts by email** to let visitors have a copy of the conversation sent to them when it ends. It asks for an email if the visitor hasn't given one.

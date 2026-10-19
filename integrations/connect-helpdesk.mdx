@@ -1,0 +1,81 @@
+---
+title: "Connect Zendesk, Front, Gorgias or Gmail"
+description: "Aide can work inside the helpdesk your team already uses."
+---
+
+{/* Generated from the Aide help center article "connect-helpdesk" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide can work inside the helpdesk your team already uses. It reads your tickets, drafts replies for your team, answers on its own where you allow it, and writes its tags, fields, notes and assignments back to the helpdesk.
+
+## What each helpdesk brings
+
+| Helpdesk | What Aide reads                                                                 | What becomes an inbox in Aide                                 |
+| -------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Zendesk  | Tickets and comments, macros, help centre articles, end users and organisations | Each active brand                                             |
+| Front    | Conversations and comments, tags, message templates, teammates                  | Each shared inbox (private inboxes aren't read)               |
+| Gorgias  | Tickets and messages, tags, macros, customers                                   | Each chat, email, SMS, messaging and contact form integration |
+
+Connecting Zendesk, Front or Gorgias needs the Pro plan or above. Gmail works on every plan.
+
+## Connect a helpdesk
+
+1. Open **Integrations** and pick the helpdesk.
+2. For Zendesk, enter your subdomain (the part before `.zendesk.com`). For Gorgias, enter your account (the part before `.gorgias.com`).
+3. Select **Connect**, sign in to the helpdesk and approve access. You're returned to Aide when it's done.
+4. Open **Inboxes** on the integration page and choose which inboxes Aide reads and where it answers.
+
+Zendesk, Front and Gorgias import the last 90 days of tickets when you connect. Aide never answers those. New brands, inboxes or integrations you add in your helpdesk show up at the next sync, or select **Sync now**.
+
+For a new workspace, Aide also reads how your team answered those tickets and writes your agent's style guide from them; see [How Aide learns your team's writing style](/aide-ai-agent/agent-style-guide).
+
+### Setting up Gorgias
+
+If you choose Gorgias when you sign up, or install Aide from the Gorgias App Store, a setup page takes you through the Pro trial, connecting Gorgias, importing your website and choosing where drafts appear: an internal note on every new ticket, the Aide card in the Gorgias sidebar, or both.
+
+## Start in shadow, then go live
+
+A new connection only watches. Aide decides what it would do and drafts it, and shows it in the integration's **Activity**, without writing anything to your helpdesk. When you're ready, open an inbox's settings and change its **Rollout**:
+
+- **Shadow: draft only, never send**
+- **Test senders only**
+- **A share of conversations**
+- **Everyone**
+
+Set defaults for every inbox under **Connection defaults**, or change one inbox at a time.
+
+## Inbox settings
+
+Each inbox's settings decide:
+
+- **What Aide handles**: which media, and conversations with or without certain tags.
+- **Who handles conversations**: **Aide drafts for your team** (your team keeps every conversation) or **Aide answers and hands back** (conversations assigned to Aide are its own, and it hands the rest back with a summary, a draft and an assignment).
+- **Handoffs**: who Aide hands back to, a hand-back tag, and teammates to mention in the handoff note.
+- **Replies**: **Send replies** (off means Aide only drafts), **Where drafts go**, and **Draft on handoff**. For a draft on every customer message, see [Always draft a reply on every helpdesk conversation](/copilot/always-draft).
+- **Reply identity**: who Aide replies as, the from address and the sender name.
+- **After Aide replies**: the status to set, such as keeping the ticket open or closing it.
+- **Topics**: write Aide's topics back as tags or into a ticket field.
+- **What Aide did**: tag what Aide did (drafted, replied or handed off), or write it into a field.
+
+## How Aide works in each helpdesk
+
+**Zendesk:** drafts are internal notes. With a brand live and **Send replies** on, Aide answers email tickets itself, from the brand's support address; on messaging, chat and SMS tickets it drafts. Your ticket fields appear in Aide as conversation fields, and your macros come in read-only.
+
+**Front:** drafts are shared Front drafts that update as the customer writes again, and never overwrite a teammate's edits. Choose **Internal note** under **Where drafts go** to get comments instead. With an inbox live, Aide answers email itself. Aide can also join Front as a teammate that conversations are assigned to; see [Add Aide to Front as an AI teammate](/integrations/front-ai-teammate).
+
+**Gorgias:** with an inbox live, Aide answers live chat and email itself and leaves internal notes everywhere else. It steps aside once a teammate replies, and leaves tickets that Gorgias's AI Agent is handling to it. Choose how the two share tickets on the integration page.
+
+Your team can also see Aide's drafts beside each ticket: see [The Aide panel in Zendesk and Front](/integrations/aide-panel-zendesk-front) and [The Aide card and insert-draft macro in Gorgias](/integrations/gorgias-aide-card).
+
+## Reply from Aide
+
+Once a helpdesk is connected, your team can also answer its tickets from Aide's conversation view. A reply goes to the customer through the helpdesk, posted as you, and an internal note becomes a note on the ticket. Aide finds you in the helpdesk by your email address. See [Reply to Gorgias, Front and Zendesk tickets from Aide](/aide-helpdesk/reply-on-helpdesk-tickets).
+
+## Gmail
+
+Gmail is your support inbox inside Aide Helpdesk rather than an outside helpdesk. Sign in with Google in Email settings (or from **Integrations > Gmail**) and Aide reads your inbox directly, with no forwarding to set up. Replies go out from your own Gmail address, in the customer's thread. Each workspace can connect one Gmail inbox. See [Connect a Gmail inbox](/channels/gmail-inbox).
+
+## Reconnect and disconnect
+
+If the helpdesk stops accepting Aide's access, the integration asks you to reconnect. Reconnecting the same account keeps your settings.
+
+**Disconnect** on the integration page (select it twice to confirm) removes what Aide added to your helpdesk and stops syncing. Conversations already in Aide stay, so your reports keep their history.

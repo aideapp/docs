@@ -1,0 +1,24 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Aide production API server",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.servers",
+      "remove": true
+    },
+    {
+      "target": "$",
+      "update": {
+        "servers": [
+          {
+            "url": "https://app-api.aide.app",
+            "description": "Aide API"
+          }
+        ]
+      }
+    }
+  ]
+}

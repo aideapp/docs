@@ -1,0 +1,53 @@
+---
+title: "Copilot drafts for your team"
+description: "Copilot writes reply drafts for your teammates, from the same knowledge the AI Agent uses."
+---
+
+{/* Generated from the Aide help center article "copilot" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Copilot writes reply drafts for your teammates, from the same knowledge the AI Agent uses. Your team reviews, edits and sends. Copilot is part of the Starter plan and above.
+
+## Drafts in the reply box
+
+When a customer is waiting on a reply, Copilot writes a draft in their language and shows it in the empty reply box. Press **Tab** or **Insert draft** to use it.
+
+Copilot writes one draft per customer message, and every teammate who opens the conversation sees that same draft. Once someone uses it, it shows as used for everyone, so nobody sends it twice. A new customer message brings a fresh draft.
+
+You can attach photos and files to the reply as well; see [Photos and files in conversations](/aide-helpdesk/conversation-files).
+
+## The AI menu
+
+The AI menu in the reply box offers:
+
+- **Draft a reply**: writes a fresh reply on demand. With text already in the box, the draft goes in at the cursor.
+- **Rewrite**: **Improve writing**, **Make shorter**, **Make longer**, **Friendlier**, **More formal** and **Fix grammar**. These appear when tone tools are on.
+- **Summarise the conversation into a note** and **Summarise the issue into a note**: the summary goes in an internal note, never in a reply.
+
+## Settings
+
+Configure Copilot in **Settings > Copilot**. Under **In Aide**:
+
+- **Draft a reply for every conversation a person opens**: the draft waits in the composer; Tab accepts it, Escape clears it.
+- **When to write the draft**: **On first open** (the default) writes it when someone first opens the conversation, so conversations nobody opens cost nothing. **In the background** writes it as soon as a conversation starts waiting on a teammate, so it's ready before anyone opens it; conversations nobody opens still count.
+- **Insert the draft automatically**: puts the draft straight into the composer instead of offering it. Off by default, so people read before they send.
+- **Tone tools in the composer**: the rewrite options above.
+- **Knowledge Copilot may cite**: all sources, or only the ones you pick.
+
+## Inside Zendesk, Front and Gorgias
+
+If your team works in another helpdesk, Copilot comes to them: the Aide panel sits beside each ticket in Zendesk and Front, and the Aide card sits in the Gorgias ticket sidebar. Under **In your helpdesk** in Copilot settings, choose what the panel shows:
+
+- **AI drafts**: a suggested reply your team can edit before sending.
+- **Topic feedback**: agents mark a detected topic as right or wrong.
+- **Draft feedback**: agents rate each draft. This is what improves the answers over time.
+- **Macro suggestions**: the macro that usually follows this kind of conversation.
+
+To install them, see [The Aide panel in Zendesk and Front](/integrations/aide-panel-zendesk-front) and [The Aide card and insert-draft macro in Gorgias](/integrations/gorgias-aide-card).
+
+Where a fact is missing, Aide's drafts in your helpdesk leave a short blank for your teammate to fill in; see [Drafts leave blanks for your team to fill in](/copilot/draft-blanks). In a helpdesk inbox where Aide only drafts, Always draft gives every customer message a draft, even ones Aide would otherwise hand to your team; see [Always draft a reply on every helpdesk conversation](/copilot/always-draft).
+
+Your team can also answer Gorgias, Front and Zendesk tickets from Aide's own conversation view, and the reply goes out through your helpdesk as you; see [Reply to Gorgias, Front and Zendesk tickets from Aide](/aide-helpdesk/reply-on-helpdesk-tickets).
+
+## Usage
+
+Every draft, rewrite or summary Copilot writes counts as one AI reply in your usage, including drafts written on open and ones you don't send. A shared draft counts once, however many teammates open the conversation. Each teammate can make 30 Copilot requests a minute.

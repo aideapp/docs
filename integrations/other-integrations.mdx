@@ -1,0 +1,42 @@
+---
+title: "WooCommerce, Arlo and Salesforce"
+description: "Besides Shopify and the helpdesks, Aide connects to Salesforce, WooCommerce and Arlo."
+---
+
+{/* Generated from the Aide help center article "other-integrations" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Besides Shopify and the helpdesks, Aide connects to Salesforce, WooCommerce and Arlo. Find them all under **Integrations**.
+
+## Salesforce
+
+Connect Salesforce and Aide shows who the customer is beside every conversation, and its AI can read the fields you choose, so replies can take account of a customer's plan, tier or language without anyone looking them up. Aide never writes to Salesforce.
+
+### Connect Salesforce
+
+1. Open **Integrations > Salesforce**.
+2. Enter your Salesforce domain, the part before `.my.salesforce.com`. For a sandbox, enter its domain with the sandbox name, like `your-company--uat.sandbox`.
+3. Select **Connect** and approve Aide.
+
+Connect with a Salesforce admin account. Aide reads the records that user can see, and the page tells you when that's not every record.
+
+### Choose what syncs
+
+- **Contacts** sync by default, with fields from their account. Switch on **Leads** for prospects not converted yet, and **Accounts** for customers who are business accounts.
+- Pick the fields to sync for each object, and drag them into the order you want. Name, email and phone always sync, since they're how Aide finds the customer.
+- Each picked field has its own **AI can read it** switch. The AI reads the first 20 switched-on fields that have a value, in your order.
+
+Records refresh every 5 minutes. Admins change what syncs; teammates can see the settings.
+
+### How Aide matches the customer
+
+Aide matches a conversation by its helpdesk or email sender, a signed-in widget visitor's user ID, a WhatsApp number, or email. An email a website visitor typed without signing in is shown to your team marked "Unverified", and the AI doesn't read it. When several contacts share the customer's email, your team sees up to three of them and the AI reads none.
+
+Every synced field can also be a scenario condition, listed under "salesforce" in the condition picker.
+
+## WooCommerce
+
+To connect a store, open **Integrations > WooCommerce**, enter your store URL (for example `https://yourstore.com`) and select **Connect**. WooCommerce asks you to approve access, then sends you back to Aide. You can connect more than one store.
+
+## Arlo
+
+To connect Arlo, open **Integrations > Arlo**, enter your Arlo platform name (the part before `.arlo.co`) and select **Connect**, then approve access in Arlo.

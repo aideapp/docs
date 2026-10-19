@@ -1,0 +1,41 @@
+---
+title: "Reply templates"
+description: "Reply templates, also called canned responses, are saved replies your team can insert while typing a reply."
+---
+
+{/* Generated from the Aide help center article "reply-templates" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Reply templates, also called canned responses, are saved replies your team can insert while typing a reply. Type `/` in the reply box to search them, or type a template's shortcut. Manage them in Settings > Helpdesk > Reply templates.
+
+## Create a template
+
+Give it a name, an optional folder and shortcut, and write the body. **Insert variable** adds a variable that's filled in when the template is used.
+
+## Variables
+
+| Group          | Examples                                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Customer       | `customer.first_name`, `customer.email`, `customer.orders_count`, `customer.total_spent`                          |
+| Conversation   | `conversation.subject`, `conversation.status`, `conversation.assignee.first_name`                                 |
+| Agent and team | `agent.first_name`, `agent.signature`, `team.name`                                                                |
+| Workspace      | `workspace.name`, `workspace.hours.next_open`                                                                     |
+| Order          | `order.name`, `order.status`, `order.total`, `order.tracking.carrier`, `order.tracking.url`, `order.tracking.eta` |
+| Store          | `store.name`, `store.domain`, `store.support_email`                                                               |
+
+Write a variable in double braces, for example "Your order \{\{ order.name \}\} shipped with \{\{ order.tracking.carrier \}\}".
+
+Order variables come from your connected store: the order the conversation is about when Aide recorded one, otherwise the customer's latest. They fill in only when the customer's identity is verified, so a visitor who only typed an email address never sees someone else's orders.
+
+To check a template, preview it against a recent conversation to see its real values.
+
+## Personal and shared templates
+
+Personal templates are only yours; shared templates are available to the whole team. Filter the list by All, Shared or Personal.
+
+## Templates in Zendesk or Front
+
+Reply templates work in Aide's reply box. If your team replies inside Zendesk or Front, keep your canned responses there as Zendesk macros or Front message templates; Aide can also learn your usual answers from them as a knowledge source.
+
+## Can a template change the status or priority?
+
+No, templates are text only. To also change the conversation when you reply, such as closing it, setting the priority, assigning a team or adding a tag, use a macro: pick it from the **Macros** button in the reply box (see [Macros for Aide, Zendesk and Front](/automation/macros)).

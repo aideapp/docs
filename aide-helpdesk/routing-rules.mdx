@@ -1,0 +1,52 @@
+---
+title: "Routing rules"
+description: "Routing rules are deterministic rules that assign and prioritise conversations before Aide decides anything."
+---
+
+{/* Generated from the Aide help center article "routing-rules" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Routing rules are deterministic rules that assign and prioritise conversations before Aide decides anything. Manage them in Settings > Helpdesk > Rules.
+
+## When a rule runs
+
+Each rule has one trigger, under **When**:
+
+- a conversation is created
+- a message arrives
+- Aide asks for a person
+- the status changes
+- an SLA is about to breach
+- an SLA breaches
+
+## Conditions
+
+Under **If**, a rule matches when all of its conditions are true, or any of them, as you choose. With no conditions, the rule runs on every trigger. Conditions can check:
+
+- **Channel**: Aide Chat, Email, Zendesk, Front, Gorgias, WhatsApp, Messenger or Instagram
+- **Topic** and **Topic confidence**
+- **Priority** and **Handoff reason**
+- **Business hours**: inside or outside
+- **Subject or body** (contains or matches) and **Sender domain**
+- **Customer orders**, **Customer total spent**, **Order value** and **Order status**
+
+## Actions
+
+Under **Then**, add at least one action: Assign to team, Assign to teammate, Set priority, Apply SLA, Set status, Notify, Hand to Aide or Mark as spam.
+
+Turn on **Stop processing further rules** so that a match ends the pass and later rules are skipped.
+
+## Order matters
+
+Rules run top to bottom. Drag them to change the order.
+
+## Starting points
+
+With no rules yet, you can start from a preset, such as "Handoffs during hours to Support" or "VIP customers to the VIP team". New rules start switched off.
+
+## Test a rule
+
+Click **Run against the last 100 conversations** to see how many the rule would have matched, and which. It tests the saved version of the rule.
+
+## Handoffs
+
+To send handoffs to a specific team, add a rule with the trigger "Aide asks for a person" and the action Assign to team. With no matching rule, handoffs land in Unassigned.

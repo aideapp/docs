@@ -1,0 +1,40 @@
+---
+title: "Connect a Gmail inbox"
+description: "If your support inbox is a Gmail or Google Workspace account, sign in with Google and Aide reads it directly, with no forwarding to set up."
+---
+
+{/* Generated from the Aide help center article "gmail-inbox" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+If your support inbox is a Gmail or Google Workspace account, sign in with Google and Aide reads it directly, with no forwarding to set up. Replies from your team and from Aide go out from your own Gmail address, in the customer's thread, and show in your Sent folder.
+
+## Connect
+
+1. Go to Channels > Email and choose "Sign in with Google" (or "Add address" if you already have one).
+2. Sign in as the support inbox. Google shows a screen saying the app isn't verified: choose "Advanced", then "Go to Aide".
+3. On Google Workspace, an admin may need to allow Aide first.
+
+Aide reads and sends mail for that inbox only. Each workspace can connect one Gmail inbox. On the Channels page, Gmail shows as connected; in the inbox, its conversations are under Email.
+
+If you already forward that address to Aide, signing in with Google switches it to Gmail and keeps its conversations, settings and agent. A new address starts with no agent answering.
+
+## What comes in
+
+- New mail arrives as it lands. If a notice from Gmail goes missing, Aide still picks the mail up within the hour.
+- Only mail from the moment you connect is imported, so Aide never answers older messages.
+- Sender rules, automated-mail detection, bounce and auto-reply filtering and threading work as for forwarded mail. Mail in Gmail's Spam or Trash, drafts and chats aren't imported.
+
+## Replying
+
+- Teammate and AI replies are sent through your Gmail account, in the customer's thread. Attachments can be up to 25 MB per reply.
+- When a teammate replies to a customer in Gmail itself, on a conversation Aide already has, the reply shows in Aide under their name and Aide stops replying to that conversation.
+- If a reply can't be sent, the conversation says why, for example "Gmail access was removed. Reconnect Gmail and resend." or "Gmail's daily sending limit was reached." Brief Gmail outages are retried automatically.
+
+## If access is removed
+
+If Aide's access is revoked in your Google account, the connection shows it needs attention within the hour and owners and admins are notified. Select "Reconnect Gmail" in Channels > Email. Mail that arrives meanwhile comes in after you reconnect.
+
+## Switch back to forwarding
+
+Select "Switch to forwarding" in Channels > Email, or disconnect Gmail on the Integrations page. The inbox becomes a forwarded address again, keeping its conversations and its forwarding address.
+
+Chat follow-up emails to visitors who left the widget aren't sent through Gmail.

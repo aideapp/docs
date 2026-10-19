@@ -2,14 +2,14 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "aspen",
   "name": "Aide docs",
+  "description": "Aide is an AI helpdesk for support teams getting started with AI. Start free with Aide's own inbox and Aide Chat; connect Gmail from Starter, or run Aide inside Zendesk, Front or Gorgias on Pro. It drafts first, and you turn on automatic replies topic by topic. Aide works inside Claude and ChatGPT through its MCP server. No seat fees.",
   "colors": {
     "primary": "#3b3b3b",
     "light": "#fafafa",
     "dark": "#3b3b3b"
-  
   },
   "background": {
-    "light":"#fafafa",
+    "light": "#fafafa",
     "dark": "#fafafa"
   },
   "favicon": "/favicon.ico",
@@ -19,58 +19,170 @@
         "tab": "Documentation",
         "groups": [
           {
+            "group": "Overview",
+            "pages": [
+              "index"
+            ]
+          },
+          {
             "group": "Getting started",
             "pages": [
-              "index",
-              "integrations/index"
+              "getting-started/what-is-aide",
+              "getting-started/create-workspace"
             ]
           },
           {
-            "group": "Products",
+            "group": "Aide AI Agent",
             "pages": [
-              "products/ai-agent",
-              "products/agent-panel"
+              "aide-ai-agent/ai-agent-setup",
+              "aide-ai-agent/test-agent",
+              "aide-ai-agent/customer-photos",
+              "aide-ai-agent/topic-ai-levels",
+              "aide-ai-agent/handoff",
+              "aide-ai-agent/agent-style-guide",
+              "aide-ai-agent/how-ai-replies"
             ]
           },
           {
-            "group": "Dashboard",
+            "group": "Aide Chat",
             "pages": [
-              "dashboard/topics",
-              "dashboard/scenarios",
-              "dashboard/knowledge",
-              "dashboard/bots"
+              "aide-chat/install-widget",
+              "aide-chat/widget-languages",
+              "aide-chat/widget-javascript-api",
+              "aide-chat/widget-appearance",
+              "aide-chat/chat-email-follow-up",
+              "aide-chat/identify-visitors",
+              "aide-chat/proactive-messages",
+              "aide-chat/widget-offline"
             ]
           },
           {
-            "group": "Review",
+            "group": "Channels",
             "pages": [
-              "dashboard/reports",
-              "dashboard/conversations"
+              "channels/meta-rich-replies",
+              "channels/email-delivery-status",
+              "channels/gmail-inbox",
+              "channels/whatsapp-messenger-instagram",
+              "channels/email-forwarding",
+              "channels/aide-answers-email"
             ]
           },
           {
-            "group": "Test",
+            "group": "Aide Helpdesk",
             "pages": [
-               "dashboard/simulator"
+              "aide-helpdesk/spam-blocking",
+              "aide-helpdesk/business-hours",
+              "aide-helpdesk/inbox-statuses",
+              "aide-helpdesk/custom-fields",
+              "aide-helpdesk/csat-surveys",
+              "aide-helpdesk/conversation-files",
+              "aide-helpdesk/reply-templates",
+              "aide-helpdesk/reply-on-helpdesk-tickets",
+              "aide-helpdesk/routing-rules",
+              "aide-helpdesk/saved-views",
+              "aide-helpdesk/sla-policies",
+              "aide-helpdesk/teams-assignment"
+            ]
+          },
+          {
+            "group": "Automation",
+            "pages": [
+              "automation/topics",
+              "automation/scenarios",
+              "automation/macros"
+            ]
+          },
+          {
+            "group": "Knowledge",
+            "pages": [
+              "knowledge/knowledge-sources",
+              "knowledge/business-information",
+              "knowledge/knowledge-gaps",
+              "knowledge/starred-articles",
+              "knowledge/articles-collections"
+            ]
+          },
+          {
+            "group": "Shopify",
+            "pages": [
+              "shopify/shopify-admin-app",
+              "shopify/shopify-sidekick",
+              "shopify/shopify-flow",
+              "shopify/shopify-order-actions",
+              "shopify/shopify-checkout-chat",
+              "shopify/product-pairings",
+              "shopify/order-verification",
+              "shopify/aide-order-actions",
+              "shopify/sales-from-chats",
+              "shopify/order-tracking-cards",
+              "shopify/product-recommendations",
+              "shopify/shopify-returns",
+              "shopify/shopper-page-and-cart",
+              "shopify/shopify-data-requests",
+              "shopify/orders-in-conversations"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/connect-helpdesk",
+              "integrations/connect-shopify",
+              "integrations/front-ai-teammate",
+              "integrations/slack-notifications",
+              "integrations/gorgias-aide-card",
+              "integrations/aide-panel-zendesk-front",
+              "integrations/other-integrations"
+            ]
+          },
+          {
+            "group": "Copilot",
+            "pages": [
+              "copilot/copilot",
+              "copilot/always-draft",
+              "copilot/draft-blanks"
+            ]
+          },
+          {
+            "group": "Analytics",
+            "pages": [
+              "analytics/analytics"
+            ]
+          },
+          {
+            "group": "Billing",
+            "pages": [
+              "billing/plans-pricing",
+              "billing/shopify-billing",
+              "billing/billable-replies"
+            ]
+          },
+          {
+            "group": "Developers",
+            "pages": [
+              "developers/api-keys-webhooks",
+              "developers/mcp-server"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "account/teammates-roles",
+              "account/notifications"
             ]
           }
         ]
       },
       {
-        "tab": "Developers",
-        "groups": [
-          {
-            "group": "Integrating Aide",
-            "pages": [
-                "developers/custom-integration"
-            ]
-          }
-        ]
+        "tab": "API reference",
+        "openapi": {
+          "source": "api-reference/openapi.json",
+          "overlays": [
+            "api-reference/production-server.overlay.json"
+          ]
+        }
       }
     ],
-    "global": {
-
-    }
+    "global": {}
   },
   "logo": {
     "light": "/logo/aide-logo-white-bg-docs.svg",
@@ -79,28 +191,86 @@
   "navbar": {
     "links": [
       {
+        "label": "aide.app",
+        "href": "https://aide.app"
+      },
+      {
         "label": "Support",
         "href": "mailto:support@aide.app"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
+      "label": "Sign in",
       "href": "https://my.aide.app"
     }
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
+  "redirects": [
+    {
+      "source": "/integrations",
+      "destination": "/integrations/connect-helpdesk"
+    },
+    {
+      "source": "/integrations/index",
+      "destination": "/integrations/connect-helpdesk"
+    },
+    {
+      "source": "/products/ai-agent",
+      "destination": "/aide-ai-agent/ai-agent-setup"
+    },
+    {
+      "source": "/products/agent-panel",
+      "destination": "/integrations/aide-panel-zendesk-front"
+    },
+    {
+      "source": "/dashboard/topics",
+      "destination": "/automation/topics"
+    },
+    {
+      "source": "/dashboard/scenarios",
+      "destination": "/automation/scenarios"
+    },
+    {
+      "source": "/dashboard/knowledge",
+      "destination": "/knowledge/knowledge-sources"
+    },
+    {
+      "source": "/dashboard/bots",
+      "destination": "/aide-ai-agent/ai-agent-setup"
+    },
+    {
+      "source": "/dashboard/reports",
+      "destination": "/analytics/analytics"
+    },
+    {
+      "source": "/dashboard/conversations",
+      "destination": "/aide-helpdesk/saved-views"
+    },
+    {
+      "source": "/dashboard/simulator",
+      "destination": "/aide-ai-agent/test-agent"
+    },
+    {
+      "source": "/developers/custom-integration",
+      "destination": "/developers/api-keys-webhooks"
+    },
+    {
+      "source": "/hc/:slug*",
+      "destination": "/"
+    }
+  ],
   "footer": {
     "socials": {
       "x": "https://x.com/aidesupport",

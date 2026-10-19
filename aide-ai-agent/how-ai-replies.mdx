@@ -1,0 +1,48 @@
+---
+title: "How Aide writes and checks a reply"
+description: "Every AI reply goes through the same steps."
+---
+
+{/* Generated from the Aide help center article "how-ai-replies" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Every AI reply goes through the same steps. Knowing them helps you understand why Aide answered the way it did, or why it brought in your team.
+
+## 1. Understand the message
+
+Aide detects the customer's language and the topics of the message. It answers in the customer's language even when your knowledge is written in English.
+
+## 2. Find the right knowledge
+
+Aide searches your published knowledge starting from the customer's newest message. In long email threads, quoted earlier emails and signatures are left out, so they can't push the new question aside.
+
+The search combines two methods: meaning-based search, which finds passages that say the same thing in different words, and keyword search, which catches exact terms such as product names or order numbers. Aide then reads the best candidates and keeps the ones that answer the question. Starred documents win a tie against an equally good match (see [Star the articles Aide should prefer](/knowledge/starred-articles)).
+
+Privacy policies, terms of service, blog posts and pages that only list other articles are not used to write replies. Your return, refund and shipping policies are.
+
+## 3. Draft the reply
+
+The reply is drafted from those passages, your agent's instructions, order data from your store and the conversation so far. Aide also uses:
+
+- **Your business information**, such as your phone number or social profiles, word for word (see [Add your business information](/knowledge/business-information)).
+- **Products your articles name.** When an article mentions one of your store's products by its title, Aide reads that product too, so it can give current stock, sizes and price.
+- **Photos the customer sent**, such as a damaged item or a fit check (see [Aide looks at the photos customers send](/aide-ai-agent/customer-photos)).
+
+## 4. Check before sending
+
+A second check reads the draft against its sources. If the draft passes, it's sent, with links to the articles it used. On chat, the customer may be asked whether their question was solved. If something needs fixing, Aide fixes that part and checks again.
+
+## When Aide doesn't have the answer
+
+If your knowledge doesn't answer a reasonable question, Aide says so and offers to bring in your team rather than guessing. If only part of the answer is missing, it gives what it knows and is clear about the rest. In chat, if the customer accepts, the conversation goes to your team. By email, Aide says what it doesn't have and adds your handoff line in the same email.
+
+A draft written for your team works differently: instead of telling the customer what's missing, it leaves a short blank for your teammate to fill in. See [Drafts leave blanks for your team to fill in](/copilot/draft-blanks).
+
+If Aide can't write a reply it's confident in, the conversation goes to your team. See [How Aide hands a conversation to your team](/aide-ai-agent/handoff).
+
+## Last check before sending
+
+If a teammate takes over the conversation, or the customer sends a newer message, while Aide is still working, Aide drops its reply so the customer never gets two answers.
+
+## Why an answer can be missing
+
+Aide only uses published knowledge; drafts are ignored. If customers ask something your knowledge doesn't cover, add an article and Aide uses it on the next message. Knowledge > Gaps lists these questions every week with suggested text; see [Find and fix gaps in your knowledge](/knowledge/knowledge-gaps).

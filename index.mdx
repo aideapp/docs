@@ -1,17 +1,66 @@
 ---
 title: "Introduction"
-description: "Welcome to the Aide documentation"
+description: "Aide is an AI helpdesk for support teams getting started with AI. Start free with Aide's own inbox and Aide Chat; connect Gmail from Starter, or run Aide inside Zendesk, Front or Gorgias on Pro. It drafts first, and you turn on automatic replies topic by topic. Aide works inside Claude and ChatGPT through its MCP server. No seat fees."
 ---
 
-These docs detail the features offered in the dashboard and how to use them. For more advanced tips and recommendations, reach out to the Aide team for guidance specific to your use-case or industry.
+Aide reads every incoming conversation, works out what the customer wants, and either answers it, prepares an answer for a teammate, or routes it to the right person.
 
-**Aide features that work out the box:**
+## The parts of Aide
 
-- **One click integrations**- for popular support and eCommerce and CRM platforms — Zendesk, Gorgias, Front, Shopify, WooCommerce, and Salesforce, with the ability to integrate with custom APIs as needed. See the next page for information on integrations.
-- **Customer identification** - automatic retrieval of customer information from your CRM or eCommerce platform based on their email, phone number, order ID, or any other unique identifier.
-- **Knowledge based drafts** - based on previous conversations, existing macros and canned templates, and your help center, enriched with real customer data from your CRM or eCommerce platform.
-- **Topic suggestions** - Aide suggests a set of topics to help you get started. Topics categorize incoming messages for reporting and creating action-based automated scenarios as opposed to relying solely on your help center and response templates.
+- **Aide AI Agent** answers customers on chat, email, messaging and in your helpdesk, using your knowledge, your products and your order data. When it can't answer, it says so and offers to bring in your team.
+- **Aide Chat** is the chat widget you add to your website or Shopify store. Customers can chat with the AI Agent or your team, browse help articles and send a contact form.
+- **Aide Helpdesk** is a shared inbox for chat, email, WhatsApp, Facebook Messenger and Instagram, with views, assignment, SLAs, reply templates and satisfaction surveys. Use it on its own or keep your existing helpdesk.
+- **Copilot** drafts replies for your teammates inside Aide, and inside Zendesk, Front and Gorgias.
+- **Topics** tag every conversation with what it is about, so automation and reports can use it.
+- **Scenarios** are rules that decide what Aide does in a given situation: answer, add a tag, apply a macro, assign, close and more.
+- **Analytics** shows how much Aide handled and resolved, how your knowledge is used and how customers rate you.
 
-For use cases where customers want to simply get AI drafts, they can rely on knowledge articles.
+Aide connects to Zendesk, Front, Gorgias and Gmail for conversations, to WhatsApp, Facebook Messenger and Instagram for messaging, to Shopify for orders and products, and to Salesforce for customer details. If you already run a helpdesk, Aide works inside it; if you don't, Aide Helpdesk gives you one.
 
-For cases where accuracy is paramount and automation pathways and workflows can be defined, a structured approach using topics and scenarios is recommended.
+Your team can also use Aide inside Claude, ChatGPT and other AI tools through Aide's MCP server: see [Connect Aide to Claude, ChatGPT and other AI tools](/developers/mcp-server).
+
+## Where to start
+
+Sign in to the Aide dashboard at [my.aide.app](https://my.aide.app). Most teams start by connecting their store, adding their help center as knowledge, and trying the AI Agent in its preview chat before switching it on for customers.
+
+<CardGroup cols={2}>
+  <Card title="Getting started" icon="rocket" href="/getting-started/create-workspace">
+    Create your workspace and finish onboarding.
+  </Card>
+  <Card title="Aide AI Agent" icon="robot" href="/aide-ai-agent/ai-agent-setup">
+    Set up the agent, test it, and choose what it may do.
+  </Card>
+  <Card title="Aide Chat" icon="comments" href="/aide-chat/install-widget">
+    Add the chat widget to your website or Shopify store.
+  </Card>
+  <Card title="Channels" icon="envelope" href="/channels/email-forwarding">
+    Bring in support email, Gmail, WhatsApp, Messenger and Instagram.
+  </Card>
+  <Card title="Aide Helpdesk" icon="inbox" href="/aide-helpdesk/inbox-statuses">
+    Work conversations with statuses, views, teams and SLAs.
+  </Card>
+  <Card title="Automation" icon="bolt" href="/automation/topics">
+    Tag conversations with topics and act on them with scenarios and macros.
+  </Card>
+  <Card title="Knowledge" icon="book" href="/knowledge/knowledge-sources">
+    Add the help center, website pages and articles Aide answers from.
+  </Card>
+  <Card title="Shopify" icon="bag-shopping" href="/integrations/connect-shopify">
+    Orders, returns, product recommendations and Aide in your Shopify admin.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/integrations/connect-helpdesk">
+    Connect Zendesk, Front, Gorgias, Gmail, Slack and more.
+  </Card>
+  <Card title="Copilot" icon="pen-to-square" href="/copilot/copilot">
+    Reply drafts for your team in Aide and in your helpdesk.
+  </Card>
+  <Card title="Analytics" icon="chart-line" href="/analytics/analytics">
+    See what Aide handled, how knowledge is used and how customers rate you.
+  </Card>
+  <Card title="Developers" icon="code" href="/developers/api-keys-webhooks">
+    API keys, webhooks and the public API.
+  </Card>
+  <Card title="Use Aide in Claude and ChatGPT" icon="sparkles" href="/developers/mcp-server">
+    Connect Claude, ChatGPT, Cursor and other AI tools to Aide's MCP server.
+  </Card>
+</CardGroup>

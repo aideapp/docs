@@ -1,0 +1,41 @@
+---
+title: "Add Aide to Front as an AI teammate"
+description: "Add Aide to Front as an AI teammate, and Front can assign conversations to it like to anyone on your team."
+---
+
+{/* Generated from the Aide help center article "front-ai-teammate" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Add Aide to Front as an AI teammate, and Front can assign conversations to it like to anyone on your team. Aide answers what you let it answer and hands the rest back with a summary, a draft and an assignment. This is in beta.
+
+## Set it up
+
+On the Front integration page, an owner or admin selects "Add Aide as a teammate" and follows four steps:
+
+1. What to enter in Front: the teammate's name, handle, webhook address and permissions.
+2. Paste the agent's credentials from Front, and your Front plan's AI operations.
+3. Aide checks the link: which teammate Front knows and which inboxes it can reach, or what Front refused and how to fix it.
+4. A test assignment, which Aide hands straight back.
+
+Front rules can't be created for you; each inbox's settings show the rule to add, for example "When a new conversation arrives in Returns, assign to Aide".
+
+## Choose how Aide works in each inbox
+
+- **Aide drafts for your team** (default): your team keeps every conversation. Aide drafts, and sends only where you allow it.
+- **Aide answers and hands back:** conversations assigned to Aide are its own. It answers the customer's newest unanswered message and hands back what it shouldn't send. This needs a working teammate link and a rollout past shadow.
+
+## Handing back
+
+When a topic isn't fully automated, sending is off, or the customer needs a person, Aide leaves a shared draft and an internal comment with a summary and why it didn't send. It adds your hand-back tag if you set one, and assigns the conversation to nobody, the previous assignee or a specific teammate, as you chose. Teammates you chose to mention are @mentioned in that comment, so Front notifies them.
+
+Taking a conversation off Aide in Front cancels anything it hadn't written yet. In a test-senders or share-of-conversations rollout, conversations outside the rollout are handed back at once.
+
+## Mention Aide for a draft
+
+In any conversation, mention the Aide teammate in a comment with an instruction, such as "@aide offer a replacement instead of a refund". Aide drafts a reply that follows it and comments that the draft is ready. A mention never sends, and the instruction never overrides what Aide may do.
+
+## Good to know
+
+- Aide doesn't draft or answer in a conversation assigned to another AI teammate. When that AI hands it to Aide, Aide answers the customer's newest message.
+- If Front stops accepting the link, or you pause it, inboxes set to answer and hand back draft for your team until it works again. Removing the link gives back the conversations Aide held.
+- The integration's Activity has a "Sent as" column showing whether each write went out as the Aide teammate or through the Front connection.
+- Aide paces its work within the AI operations your Front plan includes.

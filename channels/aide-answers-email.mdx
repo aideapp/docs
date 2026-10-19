@@ -1,0 +1,46 @@
+---
+title: "Let Aide answer your support email"
+description: "Your AI agent can answer the support email you bring into Aide, not just draft replies for your team."
+---
+
+{/* Generated from the Aide help center article "aide-answers-email" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Your AI agent can answer the support email you bring into Aide, not just draft replies for your team. It uses the same knowledge, order tools and handoff rules as chat.
+
+## Turn it on
+
+1. Connect your support address in Channels > Email, by forwarding or with Gmail.
+2. In Aide AI Agent, open "Where it answers" and switch the support address on.
+3. Once the agent is deployed, Aide answers new customer emails nobody on your team has taken.
+
+One agent can answer chat, email and your helpdesk at once. Each address has one agent; switching on an address another agent answers moves it to this one. A newly added address starts with no agent. Without an agent, emails go to your team with a Copilot draft.
+
+## Try it first
+
+In Channels > Email, "How Aide answers" sets who gets Aide's replies on each address:
+
+- **Shadow: draft only, never send:** Aide writes each reply as a private note and sends nothing, so your team can compare.
+- **Test senders only:** only the addresses you list (or `@domain` for everyone at a domain) get replies.
+- **A share of conversations:** a percentage of conversations get replies.
+- **Everyone** (the default).
+
+Outside the rollout, emails get a private draft instead.
+
+"Quiet period (seconds)" makes Aide wait after a customer's email (30 seconds by default, up to 600), so two emails in a row get one reply that answers both.
+
+## What the reply looks like
+
+It opens with the customer's first name when Aide knows it, answers in full paragraphs, and ends with the agent's signature, set in Aide AI Agent > Email (your team name when it's empty). Products, orders and tracking appear as text and links.
+
+## Orders by email
+
+Aide acts only on orders placed with the address the email came from. Order actions it offers ask the customer to reply to confirm.
+
+## When Aide steps back
+
+- When Aide hands off, the customer gets one email with your handoff message and the conversation goes to your team.
+- Once a teammate is assigned or takes over, Aide stops replying on that thread.
+- Aide never answers bounces, auto-replies, mailing-list and bulk mail, no-reply senders, or mail from your own support address.
+- If a thread gets three AI replies within an hour, Aide hands it to your team with an internal note.
+
+Each email Aide sends counts as one AI reply, shown as "Aide Email" in usage.

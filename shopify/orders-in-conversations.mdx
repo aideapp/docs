@@ -1,0 +1,46 @@
+---
+title: "Shopify orders, shipments and tracking in a conversation"
+description: "Every conversation shows the customer's Shopify orders in the Orders section on the right, so your team can answer \"where is my order?\" without opening Shopify or the carrier's site."
+---
+
+{/* Generated from the Aide help center article "orders-in-conversations" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Every conversation shows the customer's Shopify orders in the Orders section on the right, so your team can answer "where is my order?" without opening Shopify or the carrier's site.
+
+## Which orders appear
+
+- **Email, helpdesk and social conversations:** the sender's address finds the store customer, and their 10 most recent orders show, newest first.
+- **Chats from a verified shopper:** the same, and Aide's replies can use their orders.
+- **Chats where the visitor only typed an email:** your team sees the matching orders, marked "Unverified". Aide's replies never use them.
+- **Several stores:** orders from every connected Shopify store are included. Orders from a store you disconnected are not.
+
+## Reading an order
+
+The newest order is open; older ones fold to one row with the number, total, status and date. An order with a refund waiting for approval, or whose last action failed, opens on its own.
+
+- **Items:** photo, variant, quantity and line total. Removed items are crossed out.
+- **Totals:** the current total after removed items and returns, followed by how much has been refunded. A cancelled order's original total is crossed out.
+- **Details:** shipping address (with an Edit shortcut until it ships), the order note, tags and store details.
+- **History:** earlier refunds, cancellations, address changes and notes, one line each with who asked and when.
+
+## Shipments and split orders
+
+Each shipment has its own line with carrier, status and a Track link. When an order ships in several packages, each line says what was in it, and a partly shipped item shows "1 of 2 shipped".
+
+## Live tracking
+
+Each shipment shows its latest status ("In transit", "Out for delivery", "Delivered"), the expected delivery date, and the latest tracking update. Expand the tracking updates to see the full timeline with places and times.
+
+- Tracking events Shopify receives appear as they arrive.
+- For UPS, FedEx and USPS, Aide also checks the carrier directly: when the conversation's orders are opened, and regularly in the background for shipments from the last 30 days. Delivered shipments aren't checked again.
+- Other carriers show what Shopify reports.
+- A package returned to the sender, or undeliverable at the address, shows as failed rather than delivered.
+- If a carrier doesn't answer, the last known tracking stays and Aide tries again later.
+
+## What Aide knows in replies
+
+For a verified shopper, Aide sees the same detail: each shipment's contents, carrier, status, expected delivery and latest update, partly shipped items, the current total and refunds. While a shipment only has a label and no carrier scan yet, Aide says it hasn't been picked up rather than promising a date.
+
+## No orders showing?
+
+If the Orders section says no store customer matches, check that the customer's email or phone matches the one on their Shopify order.

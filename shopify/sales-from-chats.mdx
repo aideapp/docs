@@ -1,0 +1,38 @@
+---
+title: "Measure the sales your chats bring in"
+description: "Aide counts the Shopify orders that come from its chats, so you can see what the chat earns as well as what it resolves."
+---
+
+{/* Generated from the Aide help center article "sales-from-chats" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide counts the Shopify orders that come from its chats, so you can see what the chat earns as well as what it resolves.
+
+## Where to find it
+
+- **Analytics > AI Agent > Sales from Aide chats:** orders and revenue for the date range, with the change against the previous period. The section appears once there is an order to show.
+- **In a conversation:** an order placed with the cart from that chat shows a "Bought after this chat" badge in the Orders section. It's listed even when the shopper wasn't matched to a store customer, for example a guest who checked out with another email.
+- **In your Shopify admin:** the Aide app's home shows sales from Aide chats and sales after a chat for the last 30 days.
+
+## What counts
+
+There are two kinds of order:
+
+- **From Aide's cart:** the shopper added products using Aide's product cards and checked out within 30 days of the chat. These are the Orders and Revenue numbers.
+- **After a chat:** the shopper chatted and then bought within 30 days, without using Aide's cart. These show separately as "Orders after a chat", with their revenue. They only include shoppers who accepted analytics cookies.
+
+An order is only ever counted once, and an order from Aide's cart always counts as that. Both kinds:
+
+- are counted on the day the order was placed, not the day of the chat,
+- use the order total as placed, and leave out cancelled orders,
+- are shown per currency, never converted,
+- follow the channel and topic filters of the chat they came from.
+
+## The Aide attribution pixel
+
+Orders after a chat are found by a Shopify customer events pixel, listed as "Aide attribution" under Settings > Customer events in Shopify. It respects your store's cookie banner: it only runs for shoppers who accepted analytics. It sends only the store, the order number and an anonymous chat visitor ID; no names, emails, cart contents or prices.
+
+The pixel is switched on when the store connects to Aide. Stores connected earlier must approve Aide's customer events permissions in Shopify first.
+
+## Good to know
+
+Aide doesn't use "Bought after this chat" orders in its replies; it only discusses orders of a shopper it has verified.

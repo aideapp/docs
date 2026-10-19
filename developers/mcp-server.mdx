@@ -1,0 +1,270 @@
+---
+title: "Connect Aide to Claude, ChatGPT and other AI tools"
+description: "Aide's MCP server lets AI assistants such as Claude and ChatGPT work in your Aide workspace: search your knowledge, look up Shopify orders, read and reply to conversations, and ask for refunds, all as you and within your role."
+---
+
+{/* Generated from the Aide help center article "mcp-server" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide's MCP server lets AI assistants such as Claude and ChatGPT work in your Aide workspace: search your knowledge, look up Shopify orders, read and reply to conversations, and ask for refunds, all as you and within your role.
+
+MCP (Model Context Protocol) is the open standard AI assistants use to connect to other tools. Every action an assistant takes through Aide is a call to the Aide API, with the same permissions, approval rules and limits as the dashboard.
+
+The server address for every app is:
+
+```
+https://app-api.aide.app/mcp
+```
+
+## Which apps can connect
+
+| App | How you connect |
+| --- | --- |
+| Claude (web, desktop and mobile) | Sign in with your Aide account |
+| ChatGPT (web) | Sign in with your Aide account |
+| Claude Code, Codex, Gemini CLI | Sign in with your Aide account, or use an API key |
+| Cursor, VS Code | Sign in with your Aide account, or use an API key |
+| Perplexity | Sign in with your Aide account |
+| Devin, Gemini Enterprise | An admin adds Aide, then you sign in with your Aide account |
+
+Signing in connects the app as you: it sees what you can see in Aide and its actions are recorded as yours. An API key connects as the workspace and can only read knowledge, products, topics, macros, orders and analytics, never conversations.
+
+MCP is available on every Aide plan, including Free. What an app can do still depends on your role: refunds above your approval limit wait for an admin.
+
+## Connect Claude
+
+Claude's custom connectors work on Claude's Free, Pro, Max, Team and Enterprise plans. Claude Free allows one custom connector.
+
+On Pro or Max:
+
+1. In Claude, go to Customize > Connectors.
+2. Select "+ Add", then "Add custom connector".
+3. Name it Aide, enter `https://app-api.aide.app/mcp` and select "Continue".
+4. Review the authentication settings Claude detected and select "Continue".
+5. Under Authentication, choose "Sign in now".
+6. Under OAuth client, choose "Register automatically".
+7. Select "Add". When Aide opens, sign in, check the workspace and the permissions, and select "Approve".
+
+On Team or Enterprise, an owner first adds Aide under Organization settings > Connectors: select "Add", hover over "Custom", choose "Web", and use the same address and settings. Each member then goes to Customize > Connectors, finds Aide and selects "Connect".
+
+To use Aide in a chat, select "+" in the message box, then "Connectors", and turn Aide on. Claude asks for your approval before it uses a tool: check what a reply or an order change will do before you allow it.
+
+Claude's own steps: [Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp).
+
+## Connect ChatGPT
+
+OpenAI offers custom MCP servers in ChatGPT on the web: Business, Enterprise and Edu workspaces can read and act, and Pro accounts can read. On Business, only workspace admins and owners can add one; on Enterprise and Edu, admins choose who can.
+
+1. In ChatGPT, go to Plugins.
+2. Select the plus button, then "Add custom MCP server".
+3. Name it Aide and, under Connection, enter `https://app-api.aide.app/mcp`.
+4. For authentication, choose OAuth.
+5. Tick "I understand and want to continue" and select "Create as a plugin".
+6. When Aide opens, sign in, check the workspace and the permissions, and select "Approve".
+7. Install the plugin. In a new chat, type @ and choose Aide.
+
+ChatGPT asks you to confirm before Aide sends a reply or changes an order. ChatGPT's company knowledge and deep research can also use Aide's search tools to read your knowledge.
+
+OpenAI's steps: [Connecting custom MCP servers in ChatGPT](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
+
+## Connect Claude Code
+
+Run:
+
+```
+claude mcp add --transport http --scope user aide https://app-api.aide.app/mcp
+```
+
+Then type `/mcp` in Claude Code, choose aide and sign in to Aide in the browser window that opens. You can also run `claude mcp login aide` from your shell.
+
+To use an API key instead, add `--header "Authorization: Bearer <your API key>"` to the command. If the key is rejected, Claude Code doesn't fall back to signing in; remove the header to sign in instead.
+
+Anthropic's steps: [Connect Claude Code to tools via MCP](https://code.claude.com/docs/en/mcp).
+
+## Connect Codex
+
+Add Aide to `~/.codex/config.toml`:
+
+```
+[mcp_servers.aide]
+url = "https://app-api.aide.app/mcp"
+```
+
+Then run `codex mcp login aide` and sign in to Aide in your browser. In the ChatGPT desktop app (Settings > MCP servers) or the Codex IDE extension (gear menu > MCP servers) you can instead select "Add server", choose Streamable HTTP, enter the address, save and restart, then select "Authenticate".
+
+To use an API key instead, add `bearer_token_env_var = "AIDE_API_KEY"` under `[mcp_servers.aide]` and set `AIDE_API_KEY` in your environment.
+
+OpenAI's steps: [Codex: Model Context Protocol](https://developers.openai.com/codex/mcp).
+
+## Connect Gemini CLI
+
+Run:
+
+```
+gemini mcp add --transport http --scope user aide https://app-api.aide.app/mcp
+```
+
+Then type `/mcp auth aide` in Gemini CLI and sign in to Aide in your browser.
+
+To use an API key instead, add `--header "Authorization: Bearer <your API key>"` to the command. Gemini CLI saves the header in `~/.gemini/settings.json`, so keep that file private.
+
+Google's steps: [MCP servers with the Gemini CLI](https://geminicli.com/docs/tools/mcp-server/).
+
+## Connect Cursor
+
+Add this to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project):
+
+```
+{
+  "mcpServers": {
+    "aide": {
+      "url": "https://app-api.aide.app/mcp"
+    }
+  }
+}
+```
+
+Then open Customize in Cursor's sidebar, find aide and sign in to Aide in the browser window that opens.
+
+For Cloud Agents, a team admin adds Aide as a Team MCP server under Dashboard > Plugins & MCPs in Cursor, with the same address.
+
+To use an API key instead, create a read-only key (see [API keys and webhooks](/developers/api-keys-webhooks)), set it as `AIDE_API_KEY` in your environment, and add the header to the server:
+
+```
+{
+  "mcpServers": {
+    "aide": {
+      "url": "https://app-api.aide.app/mcp",
+      "headers": { "Authorization": "Bearer ${env:AIDE_API_KEY}" }
+    }
+  }
+}
+```
+
+Cursor's steps: [Model Context Protocol (MCP)](https://cursor.com/docs/context/mcp).
+
+## Connect VS Code
+
+1. Open the Command Palette and run "MCP: Add Server".
+2. Choose "HTTP (HTTP or Server-Sent Events)" and enter `https://app-api.aide.app/mcp`.
+3. Enter a server ID, such as aide.
+4. For a personal setup, select "Global", then "Copilot Global".
+5. When VS Code asks you to sign in, sign in to Aide in your browser, check the workspace and the permissions, and select "Approve".
+
+To use an API key instead, create a read-only key (see [API keys and webhooks](/developers/api-keys-webhooks)) and add this to `.vscode/mcp.json` in your workspace; VS Code asks for the key the first time the server starts and stores it securely:
+
+```
+{
+  "inputs": [
+    { "type": "promptString", "id": "aide-api-key", "description": "Aide API key", "password": true }
+  ],
+  "servers": {
+    "aide": {
+      "type": "http",
+      "url": "https://app-api.aide.app/mcp",
+      "headers": { "Authorization": "Bearer ${input:aide-api-key}" }
+    }
+  }
+}
+```
+
+VS Code doesn't pass servers that ask for a value like this to its Copilot harness sessions, so use Aide from a Local session.
+
+Microsoft's steps: [Add MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers) and the [MCP configuration reference](https://code.visualstudio.com/docs/copilot/reference/mcp-configuration).
+
+## Connect Perplexity
+
+Perplexity offers custom remote connectors to Enterprise organizations. Members can add one when an admin allows it, and admins can add one for the whole organization.
+
+1. For your own account, open Plugins in the sidebar (or Customize > Connectors if you don't see Plugins), then Add custom > Connector > Add MCP connector. To add it for the organization, an admin goes to Enterprise settings > Permissions > Connectors permissions and clicks "+ Custom connector".
+2. In the pop-up, select Remote.
+3. Name it Aide and enter `https://app-api.aide.app/mcp` as the MCP Server URL.
+4. Set Authentication to OAuth and Transport to Streamable HTTP.
+5. Check the acknowledgement box and click "Add".
+6. Click the connector card to sign in. When Aide opens, sign in, check the workspace and the permissions, and select "Approve".
+
+If an admin adds Aide for the organization, have each member sign in on their own rather than signing in once for everyone: Aide acts as whoever signed in. The admin then shares the connector from the Permissions screen in Enterprise settings.
+
+Perplexity's steps: [Adding Custom Remote Connectors](https://www.perplexity.ai/help-center/en/articles/13915507-adding-custom-remote-connectors).
+
+## Connect Devin and Gemini Enterprise
+
+Devin (app.devin.ai): an organization admin adds Aide under Customize > MCPs > Add MCP > Add custom MCP, with transport HTTP, Server URL `https://app-api.aide.app/mcp`, authentication OAuth and Access set to Personal, so each teammate selects Connect and signs in as themselves. Devin's steps: [MCP servers and marketplace](https://docs.devin.ai/work-with-devin/mcp).
+
+Gemini Enterprise: a Google Cloud admin adds Aide as a Custom MCP Server data store with OAuth 2.0 (authorization URL `https://app-api.aide.app/oauth/authorize`, token URL `https://app-api.aide.app/oauth/token`, scopes `aide:read aide:write`, Enable PKCE Support ticked), using a client ID and secret created once by registering at `https://app-api.aide.app/oauth/register` with `token_endpoint_auth_method` set to `client_secret_post` and the redirect URI `https://vertexaisearch.cloud.google.com/oauth-redirect`. Google's steps: [Set up your custom MCP server data store](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/custom-mcp-server/set-up-custom-mcp-server).
+
+## Signing in and permissions
+
+When an app signs in, Aide shows which app is asking, the workspace it will use and what it may do. Nothing is shared if you decline.
+
+- **Read only** (`aide:read`): read conversations, messages, knowledge, orders and analytics.
+- **Read and act** (`aide:read aide:write`): also add internal notes, update conversations, reply to customers, and ask for refunds and cancellations, which follow your approval rules.
+
+The app connects to the workspace shown on that screen, as you, within your role. Agents don't get the analytics tools. The app's own name is shown as the app chose it; Aide doesn't verify it.
+
+Apps stay connected for 30 days after they were last used. Leaving the workspace or being deactivated cuts them off.
+
+API keys are created by owners and admins under Settings > Developers (see [API keys and webhooks](/developers/api-keys-webhooks)). A read-only key is enough for MCP; a key without read access is refused.
+
+## What the app can do
+
+Read tools, for anyone connected:
+
+| Tool | What it does |
+| --- | --- |
+| `search_knowledge`, `search`, `fetch` | Search your knowledge the way Aide's replies find it, and read a result |
+| `list_knowledge_sources`, `list_knowledge_documents`, `get_knowledge_document` | Browse your knowledge |
+| `lookup_orders` | Find synced Shopify orders by customer email or order number |
+| `list_products`, `get_product` | Browse your products |
+| `list_topics`, `list_macros`, `get_macro` | Read your topics and macros |
+| `analytics_summary`, `analytics_overview`, `analytics_satisfaction` | Read your support analytics (owners and admins, and API keys) |
+
+Read tools for teammates who signed in:
+
+| Tool | What it does |
+| --- | --- |
+| `find_conversation`, `get_conversation`, `list_messages`, `get_draft` | Find a conversation, including the one for a Zendesk ticket or Front conversation, and read its messages and Aide's draft |
+| `get_conversation_orders`, `get_customer_context`, `check_return_eligibility` | See the customer's orders and details, and whether an order can be returned |
+| `list_conversation_order_actions`, `list_order_actions` | See order changes, including ones waiting for approval |
+| `render_macro`, `list_members` | Preview a macro on a conversation, list teammates |
+
+Tools that act, for teammates who signed in with read and act:
+
+| Tool | What it does |
+| --- | --- |
+| `add_note` | Add an internal note |
+| `update_conversation` | Change status, priority, assignee, team or on-hold reason. Closing can send the customer a satisfaction survey |
+| `reply_to_conversation` | Send a reply to the customer on the conversation's channel. It can't be unsent |
+| `propose_refund`, `propose_cancellation` | Ask to refund or cancel an order. Above your approval limits it waits for an admin, and the app is told so |
+| `approve_order_action`, `reject_order_action` | Approve or reject an order change waiting for approval (agents only within the refund limit) |
+
+An app is shown only the tools its sign-in or key can use. Tools that send a message to a customer or change an order are marked as such, so Claude and ChatGPT ask you before using them.
+
+## Limits
+
+- 300 MCP requests a minute per connection. Each tool call also counts against the API's limits: 600 a minute per sign-in or key and 3,000 a minute per workspace.
+- Knowledge searches share your workspace's 60 a minute.
+- When a limit is reached, the app is told how many seconds to wait.
+
+## Your data
+
+- Aide sends the app only the results of the tools it calls. The assistant's provider (Anthropic, OpenAI, Google, Cursor, Microsoft, Perplexity, Cognition for Devin) handles those results under its own terms and your settings with it.
+- Aide doesn't receive or keep your chats with the assistant. Notes, replies, updates and order requests made through the app are saved in Aide like any other, recorded as you.
+- Sign-in tokens last an hour and renew for up to 30 days; Aide stores them only in hashed form. Disconnecting deletes them straight away.
+
+## See and disconnect apps
+
+Go to Settings > Developers. "Connected apps" lists the apps you've connected, whether each can read only or read and act, and when it was last used. Select Disconnect to cut an app off at once. You can also remove Aide from the app's own settings (Customize > Connectors in Claude, the plugin's settings in ChatGPT).
+
+Owners and admins revoke API keys from their row under Settings > Developers.
+
+## Troubleshooting
+
+- **The app asks you to sign in again:** the connection was disconnected, expired after 30 days without use, or you left the workspace. Connect again.
+- **Conversations or replies are missing:** you connected with an API key, which never sees conversations, or with Read only. Disconnect and connect again choosing read and act.
+- **"insufficient_scope":** the app tried to act with a read-only connection. Reconnect with read and act.
+- **Analytics tools are missing:** analytics are for owners and admins.
+- **Claude can't finish connecting:** remove the connector and add it again with OAuth client set to "Register automatically".
+- **ChatGPT shows old or missing tools:** ChatGPT keeps the tool list from when Aide was added. Refresh the app from its settings page (on Business and Enterprise, an admin refreshes it in workspace settings).
+- **A refund didn't happen:** it is waiting for approval because it is above your limits. An admin can approve it in Aide, or through `approve_order_action`.
+- **"Too many requests":** wait the number of seconds the app reports.
+- **Wrong workspace:** disconnect the app, switch to the right workspace in Aide, and connect again.

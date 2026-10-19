@@ -1,0 +1,32 @@
+---
+title: "How shoppers prove an order is theirs"
+description: "Aide only discusses or changes an order once it knows the person asking owns it."
+---
+
+{/* Generated from the Aide help center article "order-verification" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
+
+Aide only discusses or changes an order once it knows the person asking owns it. Anyone can type someone else's email, so a typed email on its own is never enough.
+
+## Ways a shopper is verified
+
+- **Logged in to your store:** on a Shopify store with the Aide chat embed, a shopper logged in to their store account is recognised automatically. Their name, email and orders come from the store, with no extra step.
+- **Order number and email:** a shopper who isn't logged in is asked for the order number and the email used at checkout. Both must match the same order before Aide shares anything about it.
+- **From their customer account:** "Get help with this order" in a Shopify customer account opens the chat with that order already verified.
+- **On the thank-you page:** a logged-in shopper is verified for the order they just placed. A guest is asked only for the email they ordered with.
+- **By email:** Aide acts only on orders placed with the address the email came from. An order number typed into the message proves nothing; someone writing from another address is asked to write from the one on the order.
+- **Your own site's login:** a visitor your site identifies with a signed identity counts as verified. See the article on identifying logged-in customers.
+
+## When the details don't match
+
+Aide says so without revealing whether the order or the email exists. After five wrong attempts in one conversation, Aide stops trying and hands the conversation to your team.
+
+## What your team sees
+
+The conversation's Orders section shows the customer's orders either way. When a chat visitor only typed an email, the match is marked "Unverified" and "Matched by email only": your team can see those orders, but Aide's replies never use them.
+
+## Good to know
+
+- When a logged-in shopper logs out on a shared computer, the chat signs out too, so the next person can't see their conversations.
+- An email typed in the chat can't unlock someone else's orders; the store account decides.
+- A customer created a minute ago is still recognised; their orders appear once Aide has synced them.
+- Automatic recognition needs the app's default storefront path, `/apps/aide`. If you renamed it in Shopify (Settings > Apps > Aide > App proxy URL), logged-in shoppers aren't recognised.
