@@ -28,7 +28,7 @@ https://app-api.aide.app/mcp
 
 Signing in connects the app as you: it sees what you can see in Aide and its actions are recorded as yours. An API key connects as the workspace and can only read knowledge, products, topics, macros, orders and analytics, never conversations.
 
-MCP is available on every Aide plan, including Free. What an app can do still depends on your role and your plan: on Free it can look up orders but can't refund, cancel or edit them, which needs Starter or above.
+MCP is available on every Aide plan, including Free. What an app can do still depends on your role: refunds above your approval limit wait for an admin.
 
 ## Connect Claude
 
@@ -265,7 +265,6 @@ Owners and admins revoke API keys from their row under Settings > Developers.
 - **Analytics tools are missing:** analytics are for owners and admins.
 - **Claude can't finish connecting:** remove the connector and add it again with OAuth client set to "Register automatically".
 - **ChatGPT shows old or missing tools:** ChatGPT keeps the tool list from when Aide was added. Refresh the app from its settings page (on Business and Enterprise, an admin refreshes it in workspace settings).
-- **A refund or cancellation is refused on Free:** order actions need Starter or above. Lookups still work.
 - **A refund didn't happen:** it is waiting for approval because it is above your limits. An admin can approve it in Aide, or through `approve_order_action`.
 - **"Too many requests":** wait the number of seconds the app reports.
 - **Wrong workspace:** disconnect the app, switch to the right workspace in Aide, and connect again.
