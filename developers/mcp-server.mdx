@@ -234,8 +234,8 @@ Tools that act, for teammates who signed in with read and act:
 | `add_note` | Add an internal note |
 | `update_conversation` | Change status, priority, assignee, team or on-hold reason. Closing can send the customer a satisfaction survey |
 | `reply_to_conversation` | Send a reply to the customer on the conversation's channel. It can't be unsent |
-| `propose_refund`, `propose_cancellation` | Ask to refund or cancel an order (Starter and above). Above your approval limits it waits for an admin, and the app is told so |
-| `approve_order_action`, `reject_order_action` | Approve or reject an order change waiting for approval (Starter and above; agents only within the refund limit) |
+| `propose_refund`, `propose_cancellation` | Ask to refund or cancel an order. Above your approval limits it waits for an admin, and the app is told so |
+| `approve_order_action`, `reject_order_action` | Approve or reject an order change waiting for approval (agents only within the refund limit) |
 
 An app is shown only the tools its sign-in or key can use. Tools that send a message to a customer or change an order are marked as such, so Claude and ChatGPT ask you before using them.
 
