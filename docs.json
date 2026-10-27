@@ -267,6 +267,30 @@
       "destination": "/developers/api-keys-webhooks"
     },
     {
+      "source": "/hc/en-us/articles/24433288566679",
+      "destination": "/aide-helpdesk/custom-fields"
+    },
+    {
+      "source": "/hc/en-us/articles/24433288566679-*",
+      "destination": "/aide-helpdesk/custom-fields"
+    },
+    {
+      "source": "/hc/en-us/articles/23450284596503",
+      "destination": "/shopify/orders-in-conversations"
+    },
+    {
+      "source": "/hc/en-us/articles/23450284596503-*",
+      "destination": "/shopify/orders-in-conversations"
+    },
+    {
+      "source": "/hc/en-us/articles/24378061904023",
+      "destination": "/aide-helpdesk/routing-rules"
+    },
+    {
+      "source": "/hc/en-us/articles/24378061904023-*",
+      "destination": "/aide-helpdesk/routing-rules"
+    },
+    {
       "source": "/hc/:slug*",
       "destination": "/"
     }
