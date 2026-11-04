@@ -15,7 +15,7 @@ Aide can work inside the helpdesk your team already uses. It reads your tickets,
 | Front    | Conversations and comments, tags, message templates, teammates                  | Each shared inbox (private inboxes aren't read)               |
 | Gorgias  | Tickets and messages, tags, macros, customers                                   | Each chat, email, SMS, messaging and contact form integration |
 
-Connecting Zendesk, Front or Gorgias needs the Pro plan or above. Gmail works on every plan.
+Zendesk, Front, Gorgias and Gmail work on every plan, Free included. Each draft or reply Aide writes counts toward your plan's AI replies; see [Plans, pricing and AI reply allowances](/billing/plans-pricing).
 
 ## Connect a helpdesk
 
@@ -24,24 +24,28 @@ Connecting Zendesk, Front or Gorgias needs the Pro plan or above. Gmail works on
 3. Select **Connect**, sign in to the helpdesk and approve access. You're returned to Aide when it's done.
 4. Open **Inboxes** on the integration page and choose which inboxes Aide reads and where it answers.
 
-Zendesk, Front and Gorgias import the last 90 days of tickets when you connect. Aide never answers those. New brands, inboxes or integrations you add in your helpdesk show up at the next sync, or select **Sync now**.
+Zendesk, Front and Gorgias import the last 90 days of tickets when you connect. Aide never answers a message written before you connected, even when a teammate updates its ticket later; when the customer writes again, Aide drafts a reply to the new message. On Front, assign the conversation to Aide's teammate to have it answered. New brands, inboxes or integrations you add in your helpdesk show up at the next sync, or select **Sync now**.
 
 For a new workspace, Aide also reads how your team answered those tickets and writes your agent's style guide from them; see [How Aide learns your team's writing style](/aide-ai-agent/agent-style-guide).
 
 ### Setting up Gorgias
 
-If you choose Gorgias when you sign up, or install Aide from the Gorgias App Store, a setup page takes you through the Pro trial, connecting Gorgias, importing your website and choosing where drafts appear: an internal note on every new ticket, the Aide card in the Gorgias sidebar, or both.
+If you choose Gorgias when you sign up, or install Aide from the Gorgias App Store, a setup page takes you through connecting Gorgias, importing your website and changing where drafts appear: an internal note on every new ticket, the Aide card in the Gorgias sidebar, or both.
 
-## Start in shadow, then go live
+## Drafts are on as soon as you connect
 
-A new connection only watches. Aide decides what it would do and drafts it, and shows it in the integration's **Activity**, without writing anything to your helpdesk. When you're ready, open an inbox's settings and change its **Rollout**:
+When you connect Zendesk, Front or Gorgias, Aide starts drafting replies to new tickets in the helpdesk straight away, for your team to review: an internal note on each new ticket and Aide's sidebar card, or the note alone if your connection doesn't allow the card. Nothing is sent to customers. Aide uses your deployed agent, or deploys its starter agent if you have none, on every inbox no other agent answers. Connections made before 25 October 2026 keep their settings.
 
-- **Shadow: draft only, never send**
+To change where drafts appear, open the helpdesk's setup page from **Integrations** and select **Change where drafts appear**. If Aide couldn't reach the helpdesk while connecting, the setup page asks you to turn drafts on there.
+
+To have Aide keep its drafts inside Aide instead, open an inbox's settings and change its **Rollout**:
+
+- **Watch only: Aide drafts in Aide, writes nothing to your helpdesk**
 - **Test senders only**
 - **A share of conversations**
 - **Everyone**
 
-Set defaults for every inbox under **Connection defaults**, or change one inbox at a time.
+Set defaults for every inbox under **Connection defaults**, or change one inbox at a time. In Watch only, Aide decides what it would do and drafts it, and shows it in the integration's **Activity**, without writing anything to your helpdesk.
 
 ## Inbox settings
 

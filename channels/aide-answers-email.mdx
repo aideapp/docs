@@ -9,24 +9,24 @@ Your AI agent can answer the support email you bring into Aide, not just draft r
 
 ## Turn it on
 
-1. Connect your support address in Channels > Email, by forwarding or with Gmail.
-2. In Aide AI Agent, open "Where it answers" and switch the support address on.
-3. Once the agent is deployed, Aide answers new customer emails nobody on your team has taken.
+1. Connect your support address in Channels > Email, by forwarding or with Gmail. A new address starts with your agent switched on in "Test senders only", with your own email as the test sender.
+2. Once the agent is deployed, Aide replies to your own emails to the address and writes a private draft for every customer email, sending customers nothing.
+3. When the drafts look right, set "How Aide answers" to **Everyone**: Aide then answers new customer emails nobody on your team has taken.
 
-One agent can answer chat, email and your helpdesk at once. Each address has one agent; switching on an address another agent answers moves it to this one. A newly added address starts with no agent. Without an agent, emails go to your team with a Copilot draft.
+One agent can answer chat, email and your helpdesk at once. Each address has one agent: in Aide AI Agent, "Where it answers" switches an address on or off, and switching on an address another agent answers moves it to this one. A new address gets your deployed agent, or the workspace's starting agent before any agent is deployed. Without an agent, emails go to your team with a Copilot draft.
 
 ## Try it first
 
 In Channels > Email, "How Aide answers" sets who gets Aide's replies on each address:
 
 - **Shadow: draft only, never send:** Aide writes each reply as a private note and sends nothing, so your team can compare.
-- **Test senders only:** only the addresses you list (or `@domain` for everyone at a domain) get replies.
+- **Test senders only:** only the addresses you list (or `@domain` for everyone at a domain) get replies. A new address starts here, with the email of the teammate who added it.
 - **A share of conversations:** a percentage of conversations get replies.
-- **Everyone** (the default).
+- **Everyone**: every customer gets replies. Addresses added before October 2026 use this unless you changed it.
 
 Outside the rollout, emails get a private draft instead.
 
-"Quiet period (seconds)" makes Aide wait after a customer's email (30 seconds by default, up to 600), so two emails in a row get one reply that answers both.
+"Quiet period (seconds)" makes Aide wait after a customer's email (up to 600 seconds; by default it doesn't wait), so two emails in a row get one reply that answers both.
 
 ## What the reply looks like
 

@@ -5,7 +5,7 @@ description: "Your plan includes a number of AI replies each month."
 
 {/* Generated from the Aide help center article "billable-replies" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
 
-Your plan includes a number of AI replies each month. This article explains what is counted, how to follow your usage, and the daily AI usage limit.
+Your plan includes a number of AI replies each month. This article explains what is counted, how to follow your usage, what stops when AI is paused, and the daily AI usage limit.
 
 ## What counts
 
@@ -15,8 +15,9 @@ Each customer message Aide writes a reply or a draft for counts as one AI reply,
 - a draft Aide leaves for your team, in an inbox where it drafts (including Always draft) or as a reply held for review
 - a handoff that carries Aide's draft above the handoff summary (**Draft on handoff**)
 - each draft, rewrite or summary Copilot writes for your team
+- each answer Aide Superintelligence gives you or your team, however many steps it takes
 
-A customer message counts once, even if it gets a draft and later a sent reply. Retries never count twice.
+A customer message counts once, even if it gets a draft and later a sent reply. Retries never count twice. A Superintelligence answer counts once, even when it waits for your approval or an answer and then carries on.
 
 ## What does not count
 
@@ -26,10 +27,11 @@ A customer message counts once, even if it gets a draft and later a sent reply. 
 - Test traffic and previews from the dashboard
 - Messages that failed to send, or a turn that failed
 - Replies that were reversed
+- A Superintelligence answer that failed, or that you stopped before it wrote anything
 
 ## Check your usage
 
-**Settings > Billing** shows **Usage this cycle**: replies used against your allowance, as a bar and a percentage, split into **AI replies sent**, **AI drafts left in your helpdesk** and **Copilot drafts**, with daily bars and the date the allowance resets. On paid plans it also shows extra replies so far, what they cost, and your monthly cap.
+**Settings > Billing** shows **Usage this cycle**: replies used against your allowance, as a bar and a percentage, split into **AI replies sent**, **AI drafts left in your helpdesk**, **Copilot drafts** and **Superintelligence answers**, with daily bars and the date the allowance resets. On paid plans it also shows extra replies so far, what they cost, and your monthly cap.
 
 From the third day of the cycle, a projection under the bar estimates your AI replies by the reset date, from this cycle's daily average so far.
 
@@ -39,7 +41,18 @@ Owners and admins get an email at 80% and at 100% of the AI replies included in 
 
 ## The usage log
 
-**Settings > Billing > Usage** lists every AI reply and draft the workspace was billed for, or not, with its time, conversation, type (**AI reply**, **AI draft** or **Copilot draft**), channel, and whether it was billed. Filter by date and channel, and export the log as a CSV, for example to reconcile with your invoice. Owners and admins can see it.
+**Settings > Billing > Usage** lists every AI reply and draft the workspace was billed for, or not, with its time, conversation, type (**AI reply**, **AI draft**, **Copilot draft** or **Superintelligence answer**), channel, and whether it was billed. Filter by date and channel, and export the log as a CSV, for example to reconcile with your invoice. Owners and admins can see it.
+
+## When AI is paused on your plan
+
+AI pauses when the Free plan or a trial has used its AI replies, when a paid plan reaches its monthly cap on extra replies, or when a payment is overdue past its grace period. While it's paused, Aide stops all AI work on the workspace, not only replies:
+
+- No replies, drafts, Copilot or Superintelligence. New conversations go to your team, and customers see the "While AI replies are paused" message.
+- Your team gets an internal note, at most one per conversation a day, saying why AI is paused and how to resume it, for example that the workspace used this month's free AI replies and an owner or admin can upgrade in Settings > Billing. On Gorgias, Front and Zendesk the note is posted in the helpdesk ticket, unless the inbox is in Watch only.
+- No topic tagging, AI conversation titles (a conversation is named after its first message instead), field collection or knowledge suggestions from imported conversations.
+- Procedure previews and agent previews in the dashboard say AI is paused instead of drafting.
+
+Conversations, helpdesk tickets and your knowledge keep syncing, and your team works as usual. AI resumes as soon as the cycle resets or the plan changes, with the next customer message. Work skipped while AI was paused isn't redone; knowledge suggestions from an import run once AI is back.
 
 ## Daily AI usage limit
 
@@ -49,4 +62,4 @@ Each workspace also has a daily AI usage limit. When it's reached:
 - On Gorgias, Front and Zendesk, the ticket gets one internal note saying Aide didn't draft a reply, at most once per ticket per day.
 - After 00:00 UTC, AI replies resume with the next customer message. Conversations that came in meanwhile stay with your team.
 
-Only AI work for your workspace counts toward the limit: replies, drafts, Copilot, tagging, field collection and scenarios.
+Only AI work for your workspace counts toward the limit: replies, drafts, Copilot, Superintelligence, tagging, field collection and procedures.

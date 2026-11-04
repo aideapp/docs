@@ -29,7 +29,6 @@
     "aide-helpdesk/custom-fields",
     "aide-helpdesk/csat-surveys",
     "aide-helpdesk/conversation-files",
-    "aide-helpdesk/reply-templates",
     "aide-helpdesk/reply-on-helpdesk-tickets",
     "aide-helpdesk/routing-rules",
     "aide-helpdesk/saved-views",

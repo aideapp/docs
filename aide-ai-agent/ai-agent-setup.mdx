@@ -5,47 +5,53 @@ description: "The Aide AI Agent answers your customers."
 
 {/* Generated from the Aide help center article "ai-agent-setup" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
 
-The Aide AI Agent answers your customers. Your workspace has one agent, and it can answer every channel you switch on: website chat, your support email addresses, messaging and your helpdesk inboxes, all with the same knowledge, instructions and handoff rules.
+The Aide AI Agent answers your customers. Your workspace has one agent, and it can answer every channel you switch on: website chat, your support email addresses, messaging and your helpdesk inboxes, all with the same knowledge, Instructions and handoff rules.
 
-Open **Aide AI Agent** in the sidebar. Every workspace starts with an agent, switched off, so nothing reaches customers until you deploy it. Until then the sidebar shows **Deploy Aide AI Agent**.
+Open **Aide AI Agent** in the sidebar. Every workspace starts with an agent, switched off, so nothing reaches customers until it's deployed. It deploys itself the first time it answers a question in the preview; until then the sidebar shows **Deploy Aide AI Agent**.
 
-## The agent's tabs
+## The agent's sections
 
-| Group     | Tab              | What it's for                                         |
-| --------- | ---------------- | ----------------------------------------------------- |
-| Train     | Identity         | Name, how it refers to itself, tone and answer length |
-| Train     | Instructions     | How it should behave on every reply                   |
-| Train     | Fields           | What it finds out from the customer                   |
-| Train     | Content          | The knowledge it answers from                         |
-| Train     | Scenarios        | Rules for specific situations                         |
-| Deploy    | Where it answers | The channels it's switched on for                     |
-| Deploy    | Chat             | What it says in the chat widget                       |
-| Deploy    | Email            | How it answers email, and its signature               |
-| Deploy    | Handoff          | When and how it brings in your team                   |
-| Analytics | Performance      | How it's doing                                        |
-| Analytics | Logs             | Every conversation it has been in                     |
+| Section           | What it's for                                                        |
+| ----------------- | -------------------------------------------------------------------- |
+| Tone & identity   | Name, how it refers to itself, tone, answer length and writing style |
+| Instructions      | Rules and facts it follows in every conversation                     |
+| Knowledge sources | The knowledge it answers from                                        |
+| Procedures        | What to do in specific situations                                    |
+| Per channel       | Where it answers, what it says in chat, its email signature, handoff |
+| Data collection   | What it finds out from the customer                                  |
 
-## Identity
+How the agent is doing, and every conversation it has been in, is under **Analytics > AI Agent**.
+
+## Tone & identity
 
 - **Name** is how the agent introduces itself.
 - **Refers to itself as** is what it says it is when someone asks, for example "AI agent" or "virtual assistant". It never claims to be human.
 - **Tone of voice**: Friendly, Neutral, Matter-of-fact, Professional or Light-hearted.
 - **Answer length**: Concise, Standard or Thorough.
 
-Identity applies on every channel.
+Under **Style** you can add:
 
-## Instructions
-
-Write how the agent should behave in your own words, like a briefing for a new teammate: what to always mention, what never to promise. Instructions can be up to 20,000 characters. Under the main field you can add:
-
-- **Business context**
-- **Style**
+- **Style**: how replies read, such as greetings and sign-offs.
 - **Length and formatting**: how replies are laid out and what to leave out.
 - **AI disclosure**: tell customers they are talking to an AI when they ask.
 
-Keep policies in your knowledge rather than in instructions, so they stay in one place.
+Tone & identity shapes how the agent sounds, on every channel. It is never a source for what the agent promises or states as fact: put rules in Instructions and facts in your knowledge: an article if customers should read it, a snippet if it's only for Aide. **General instructions** and **Business context** show here while they hold text, such as the starter text or what you wrote before Instructions existed, so you can edit or remove it. Together, everything on this page can be up to 6,000 characters.
 
-When you connect a helpdesk that already holds conversations, Aide fills in the business context, style, and length and formatting from how your team has been replying, as long as nobody has edited the starter instructions yet. See [How Aide learns your team's writing style](/aide-ai-agent/agent-style-guide).
+When you connect a helpdesk that already holds conversations, Aide fills in the business context, style, and length and formatting from how your team has been replying, as long as nobody has edited the starter text yet. See [How Aide learns your team's writing style](/aide-ai-agent/agent-style-guide).
+
+## Instructions
+
+Instructions are short rules and facts the agent follows in every conversation, like a briefing for a new teammate: "Never promise a delivery date", "Offer store credit before a refund when the item is unworn". Unlike tone, an instruction is policy: the agent can tell a customer what it says and rely on it, the way it relies on a matching procedure.
+
+- Each instruction is up to 500 characters. Replies read the active ones in order, up to 30 instructions and 4,000 characters in total; the meter under the list shows how much you're using.
+- An instruction applies to every channel, or only the ones you pick: Aide Chat, Email and each helpdesk or messaging channel you've connected.
+- With more than one agent, an instruction can apply to every agent or to one.
+- Switch an instruction off to stop it without deleting it, and use the arrows to change the order.
+- Instructions can't run actions, tag, or hand off. For that, use a procedure.
+
+When a knowledge gap shows that the agent needs a rule rather than an article, choose **Add as instruction** on the gap to add it here.
+
+If your agent's free-text instructions held rules before Instructions existed, Aide moved each paragraph here as its own instruction, marked **Moved from your agent's instructions**, and they apply as written. "Apply to every conversation" scenarios (now procedures) that only added an instruction were moved here too and switched off.
 
 ## Fields
 
@@ -53,7 +59,7 @@ Fields are what the agent should find out from every customer, such as an order 
 
 ## Content
 
-The agent answers from everything published in Knowledge. The Content tab shows how much of its answers each source fed.
+The agent answers from everything published in Knowledge, including your internal snippets, except documents you've switched off with **Used by Aide**. The Content tab shows how much of its answers each source fed.
 
 ## Where it answers
 
@@ -78,3 +84,5 @@ Choose between faster and higher-quality replies. **Standard (best quality)** is
 ## Deploy and pause
 
 Click **Deploy** to make the agent answer in the places you switched on. Click **Pause** to stop new replies without losing your settings. Before deploying, try it in the preview (see [Test your agent before going live](/aide-ai-agent/test-agent)).
+
+In a workspace that has never had a deployed agent, the agent's first answer in the preview deploys it, so the chat answers as soon as you share it. A paused agent is never deployed this way: deploy it again yourself.
