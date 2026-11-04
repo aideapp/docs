@@ -1,20 +1,43 @@
 ---
-title: "Write articles and organise collections"
-description: "You can write knowledge directly in Aide."
+title: "Write articles and snippets, and organise collections"
+description: "You can write knowledge directly in Aide, as one of two kinds:"
 ---
 
 {/* Generated from the Aide help center article "articles-collections" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
 
-You can write knowledge directly in Aide. Aide answers from your published articles, and they show in the help section of Aide Chat.
+You can write knowledge directly in Aide, as one of two kinds:
+
+- **Articles** are help content your customers can read. Published articles show in the help section of Aide Chat, and Aide answers from them.
+- **Snippets** are internal notes: an escalation rule, an edge case, anything you'd tell a new teammate but not a customer. Aide and Copilot use them when the subject comes up. Customers never see them, and Aide never links to them in a reply.
+
+Needed in every conversation? Add it to the agent's Instructions. Needed when the subject comes up? Write a snippet. Should customers be able to read it? Write an article.
+
+Both live in the **Articles** source on the Knowledge page, on its **Articles** and **Snippets** tabs.
 
 ## Write an article
 
 1. Open **Knowledge** and choose **Write an article**.
 2. Give it a title, such as "Return and exchange policy". You write the body next.
-3. Write the body in the editor, with headings, lists and links, then choose **Save changes**.
-4. Choose **Publish** when it's ready.
+3. Write the body in the editor, with headings, lists and links, then choose **Publish**. Publish saves your changes too, and Aide answers from the article straight away.
 
-New articles start as drafts. Aide answers only from published articles, and only those show in Aide Chat. Choose **Unpublish** to take an article out of answers; save your changes before publishing or unpublishing.
+Not ready yet? Choose **Save draft** instead. Aide answers only from published articles, and only those show in Aide Chat. Once an article is published, **Save changes** updates it in place. Choose **Unpublish** to take it out of answers; save your changes first.
+
+## Write a snippet
+
+1. Open **Knowledge** and choose **New content** > **Write a snippet**, or open the **Articles** source and choose **New** > **Snippet**.
+2. Give it a title, such as "When to escalate a lost parcel", then write the body.
+3. Choose **Save changes**.
+
+A snippet has no draft and no **Publish**: Aide can use it as soon as it is saved. It shows "Internal: never shown to customers. Aide uses it when relevant." above the editor.
+
+## Used by Aide
+
+Every article and snippet has a **Used by Aide** switch under its editor, on by default. Turn it off to keep a document out of Aide's answers:
+
+- A published article that isn't used by Aide still shows in Aide Chat's help. Use this for pages customers should read but that shouldn't shape replies, such as legal terms.
+- A snippet that isn't used by Aide is kept, but nothing reads it. Turn it back on when you need it again.
+
+Drafts are never used by Aide, whatever the switch says. The line under the editor says whether Aide answers from the document.
 
 Articles imported from your help center open read-only in Aide: edit them in your help center and choose **Re-sync** on the source.
 
@@ -22,7 +45,18 @@ Not sure what to write next? Knowledge > Gaps suggests new articles and correcti
 
 ## Collections
 
-Collections group articles, like chapters of a help center. You can use them for articles you write in Aide and for an imported help center.
+Collections group articles, like chapters of a help center. You can use them for articles you write in Aide and for an imported help center. Snippets aren't filed in collections: customers never see them, so they have no place in the help center.
+
+Importing a help center brings its own groupings over as collections: Zendesk categories and sections, Gorgias categories and subcategories, Intercom collections, Help Scout collections and categories, HelpDocs categories, and Front categories and their sections. Each article goes in the collection your help center shows it in, in the same order, and the category pages themselves aren't added as articles. These collections show **From Zendesk** (or your help center's name) next to their name.
+
+Collections nest three levels deep. A help center that nests deeper, such as Zendesk sections inside sections inside sections, keeps every level: the deeper ones sit at the third level, named with the path to them, such as "Using agentic analytics › Agentic analytics basics".
+
+Choose **Re-sync** on the source to bring changes from your help center over:
+
+- A category your help center renamed, moved or reordered follows it, unless you edited that collection in Aide: your name, description, place or visibility stay.
+- An article you moved to another collection in Aide stays where you put it. Other articles follow your help center.
+- A collection you deleted in Aide stays deleted. Its articles go in the collection above it.
+- A category your help center no longer has, and an imported collection left with no published articles, is unpublished in Aide rather than deleted, so nothing you added to it is lost.
 
 To create one, open the source and choose **New collection**. Give it a name, a description, and pick where it sits: at the **Top level** or inside another collection.
 
@@ -39,4 +73,6 @@ Deleting a collection keeps its articles: they and any collections inside it mov
 
 ## Articles in Aide Chat
 
-Published articles, written in Aide or imported from your help center, appear in the help section of Aide Chat, grouped by collection. Visitors can search, browse collections, read your most-read articles, and mark whether an article was helpful. You can also open an article from your own site with the widget's `article` command.
+Published articles, written in Aide or imported from your help center, appear in the help section of Aide Chat, grouped by collection. An article in no collection still appears: visitors find it by search and it can be suggested on Home. An article in an unpublished collection doesn't. Snippets never do: they aren't listed, counted, found by search or suggested. Visitors can search, browse collections and mark whether an article was helpful. You can also open an article from your own site with the widget's `article` command.
+
+The Home screen suggests articles: first the ones you pin in Aide Chat > Spaces > Help articles (up to four, in the order you set), then your most-read articles. A pinned article that is unpublished, deleted, in an unpublished collection or turned into a snippet is skipped, and the settings mark it "Not shown". Each visitor's reads count once a day per article.

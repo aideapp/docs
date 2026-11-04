@@ -5,7 +5,7 @@ description: "When Aide writes a draft for your team to send, it writes the repl
 
 {/* Generated from the Aide help center article "draft-blanks" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
 
-When Aide writes a draft for your team to send, it writes the reply as it should go out and leaves a short blank in square brackets wherever a fact is missing, such as "Your order ships on [ship date]." Your teammate fills it in before sending.
+When Aide writes a draft for your team to send, it writes the reply as it should go out and leaves a short blank in square brackets wherever a fact is missing, such as "Your order ships on [ship date]." Your teammate fills it in before sending. You can turn blanks off for an inbox; see "Drafts with no blanks" below.
 
 ## Why blanks
 
@@ -23,11 +23,27 @@ The person sending the draft is your team, so the draft doesn't tell the custome
 
 Drafts read the customer's verified orders, their shipments and your returns portal, so they can say where an order is, link to its tracking, or link to your returns portal on the order. An order that hasn't shipped is described as not shipped yet, without a blank for a tracking number.
 
-Drafts never offer to cancel, refund or change an order, and a blank never stands for a decision: Aide still never writes that a refund, credit or exception was granted.
+Drafts never offer to cancel, refund or change an order, and a blank never stands for a decision: Aide still never writes that a refund, credit or exception was granted. With blanks off, a change the customer asked for is the one exception, as described below.
 
 ## Which conversations get blanks
 
-Inboxes where Aide only drafts (including Always draft, see [Always draft a reply on every helpdesk conversation](/copilot/always-draft)), topics set to Draft for review, scenarios that ask for a draft or escalate with a comment, and shadow mode.
+Inboxes where Aide only drafts (including Always draft, see [Always draft a reply on every helpdesk conversation](/copilot/always-draft)), topics set to Drafts, procedures that ask for a draft or escalate with a comment, and shadow mode.
+
+## Drafts with no blanks
+
+Each inbox can turn blanks off, so every draft is written complete and a teammate can send it without filling anything in. In the inbox's settings on its channel page, turn off "Leave blanks in drafts" under Replies, or turn it off in the connection's settings for every inbox that doesn't set its own. It's on by default, and it works for helpdesk inboxes and Aide's own channels alike. With the Aide API, send `{"draftBlanks": false}` to `PATCH /v1/integrations/{id}/inboxes/{inboxId}/settings` or `PATCH /v1/integrations/{id}/inbox-defaults`.
+
+With blanks off, the draft is the reply your teammate sends, and what they need to do first is listed above it on the note, under "Do before sending:", one item per line and in bold in Gorgias and Zendesk:
+
+- **Order changes the customer asked for:** when the customer asks for a routine change and gives every detail it needs (a new shipping address, a different size, item or variant, cancelling an order that hasn't shipped), and the order allows it, the draft is written as if your teammate has made the change, such as "I've updated the shipping address on #1043 to 12 Oak St." The note lists the change to make, such as "Change the shipping address on #1043 to 12 Oak St". Make it before you send.
+- **Facts to look up:** where Aide doesn't have a fact (a restock date, whether a delivery needs a signature), the draft leaves it out and says only what is known. The note lists it as "Check: restock date for the Travel Pack in Black", so you can add it before sending.
+- **Decisions for your team:** a refund or credit, a free replacement, an exception to the return window, warranty coverage or a gifting request is never decided in the draft. It gives what your policy says and what is known, and the note lists "Decide: whether to accept the warranty claim for the frayed zipper".
+- **Photos or files Aide can't see:** the draft thanks the customer for them, and the note lists "Check:" for the file to look at.
+- The draft never promises to confirm something later ("I'll confirm…") and never makes up a date or a time.
+- When the customer can give the detail themselves, such as an order number, the draft asks them for it.
+- The to-do list stays on the note: what goes into the reply box (the Aide card's "Aide: insert draft" macro, Front's shared draft, the Aide panel) is the draft alone.
+- Everything else stays the same: the draft never passes the customer on to the team, and never offers an order change the customer didn't ask for.
+- A draft that still leaves a blank is rewritten without it. If one is left anyway, it's marked on the note as above, so it isn't sent by mistake.
 
 ## Replies Aide sends itself
 

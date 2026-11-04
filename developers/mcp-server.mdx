@@ -17,22 +17,24 @@ https://app-api.aide.app/mcp
 
 ## Which apps can connect
 
-| App | How you connect |
-| --- | --- |
-| Claude (web, desktop and mobile) | Sign in with your Aide account |
-| ChatGPT (web) | Sign in with your Aide account |
-| Claude Code, Codex, Gemini CLI | Sign in with your Aide account, or use an API key |
-| Cursor, VS Code | Sign in with your Aide account, or use an API key |
-| Perplexity | Sign in with your Aide account |
-| Devin, Gemini Enterprise | An admin adds Aide, then you sign in with your Aide account |
+| App                              | How you connect                                             |
+| -------------------------------- | ----------------------------------------------------------- |
+| Claude (web, desktop and mobile) | Sign in with your Aide account                              |
+| ChatGPT (web)                    | Sign in with your Aide account                              |
+| Claude Code, Codex, Gemini CLI   | Sign in with your Aide account, or use an API key           |
+| Cursor, VS Code                  | Sign in with your Aide account, or use an API key           |
+| Perplexity                       | Sign in with your Aide account                              |
+| Devin, Gemini Enterprise         | An admin adds Aide, then you sign in with your Aide account |
 
-Signing in connects the app as you: it sees what you can see in Aide and its actions are recorded as yours. An API key connects as the workspace and can only read knowledge, products, topics, macros, orders and analytics, never conversations.
+Signing in connects the app as you: it sees what you can see in Aide and its actions are recorded as yours. An API key connects as the workspace and never sees conversations: a read-only key reads knowledge, products, topics, macros, orders and analytics, and a key that can also write can edit articles, topics and procedures.
 
-MCP is available on every Aide plan, including Free. What an app can do still depends on your role: refunds above your approval limit wait for an admin.
+MCP is available on every Aide plan, including Free. What an app can do still depends on your role: it acts as you, within the approval limits you have in Aide.
 
 ## Connect Claude
 
-Claude's custom connectors work on Claude's Free, Pro, Max, Team and Enterprise plans. Claude Free allows one custom connector.
+The easiest way is Claude's connectors directory: open [claude.ai/directory/aide](https://claude.ai/directory/aide) and add Aide from there, with no server address to type. When Aide opens, sign in, check the workspace and the permissions, and select "Approve".
+
+You can also add Aide as a custom connector. Claude's custom connectors work on Claude's Free, Pro, Max, Team and Enterprise plans. Claude Free allows one custom connector.
 
 On Pro or Max:
 
@@ -65,6 +67,10 @@ OpenAI offers custom MCP servers in ChatGPT on the web: Business, Enterprise and
 ChatGPT asks you to confirm before Aide sends a reply or changes an order. ChatGPT's company knowledge and deep research can also use Aide's search tools to read your knowledge.
 
 OpenAI's steps: [Connecting custom MCP servers in ChatGPT](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt).
+
+## New to Aide?
+
+After you approve, open a new chat with Aide turned on and send “Set up Aide for my business”. Claude checks what's left and does each step for you: it teaches Aide your website, tests your agent and gets your chat or email ready, and asks only for what it needs from you: a few facts, pasting the chat snippet and your OK to turn it on. ChatGPT does the same once you choose Aide with @.
 
 ## Connect Claude Code
 
@@ -199,7 +205,7 @@ When an app signs in, Aide shows which app is asking, the workspace it will use 
 - **Read only** (`aide:read`): read conversations, messages, knowledge, orders and analytics.
 - **Read and act** (`aide:read aide:write`): also add internal notes, update conversations, reply to customers, and ask for refunds and cancellations, which follow your approval rules.
 
-The app connects to the workspace shown on that screen, as you, within your role. Agents don't get the analytics tools. The app's own name is shown as the app chose it; Aide doesn't verify it.
+The app connects to the workspace shown on that screen, as you, within your role: it can do what you can do in Aide. Owners and admins can also change settings with it, such as setting Aide up, channels, helpdesk rules, billing and the team. Agents can't change those settings, disconnect integrations or see analytics. The app's own name is shown as the app chose it; Aide doesn't verify it.
 
 Apps stay connected for 30 days after they were last used. Leaving the workspace or being deactivated cuts them off.
 
@@ -209,46 +215,72 @@ API keys are created by owners and admins under Settings > Developers (see [API 
 
 Read tools, for anyone connected:
 
-| Tool | What it does |
-| --- | --- |
-| `search_knowledge`, `search`, `fetch` | Search your knowledge the way Aide's replies find it, and read a result |
-| `list_knowledge_sources`, `list_knowledge_documents`, `get_knowledge_document` | Browse your knowledge |
-| `lookup_orders` | Find synced Shopify orders by customer email or order number |
-| `list_products`, `get_product` | Browse your products |
-| `list_topics`, `list_macros`, `get_macro` | Read your topics and macros |
-| `analytics_summary`, `analytics_overview`, `analytics_satisfaction` | Read your support analytics (owners and admins, and API keys) |
+| Tool                                                                                                   | What it does                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `search_knowledge`, `search`, `fetch`                                                                  | Search your knowledge the way Aide's replies find it, and read a result                                                                                           |
+| `list_knowledge_sources`, `get_knowledge_source`, `list_knowledge_documents`, `get_knowledge_document` | Browse your knowledge                                                                                                                                             |
+| `lookup_orders`                                                                                        | Find synced Shopify orders by customer email or order number                                                                                                      |
+| `list_products`, `get_product`                                                                         | Browse your products                                                                                                                                              |
+| `list_topics`, `list_procedures`, `get_procedure`                                                      | Read your topics and procedures                                                                                                                                   |
+| `list_agents`, `get_agent`, `list_integrations`                                                        | See your AI agents and connected integrations                                                                                                                     |
+| `get_connection`                                                                                       | See which workspace and account the app is using, whether it can only read or also act, and what needs your attention, such as an integration to sign in to again |
+
+Any app, even a read-only one, can also use `send_feedback` to tell the Aide team when it couldn't do what you asked or something looked wrong. It changes nothing in your workspace.
 
 Read tools for teammates who signed in:
 
-| Tool | What it does |
-| --- | --- |
-| `find_conversation`, `get_conversation`, `list_messages`, `get_draft` | Find a conversation, including the one for a Zendesk ticket or Front conversation, and read its messages and Aide's draft |
-| `get_conversation_orders`, `get_customer_context`, `check_return_eligibility` | See the customer's orders and details, and whether an order can be returned |
-| `list_conversation_order_actions`, `list_order_actions` | See order changes, including ones waiting for approval |
-| `render_macro`, `list_members` | Preview a macro on a conversation, list teammates |
+| Tool                                                                          | What it does                                                                                                                                               |
+| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `find_conversation`, `get_conversation`, `list_messages`, `get_draft`         | Find a conversation, including the one for a Zendesk ticket or Front conversation, and read its messages and Aide's draft                                  |
+| `get_conversation_orders`, `get_customer_context`, `check_return_eligibility` | See the customer's orders and details, and whether an order can be returned                                                                                |
+| `list_conversation_order_actions`, `list_order_actions`                       | See order changes, including ones waiting for approval                                                                                                     |
+| `list_members`                                                                | List teammates and teams                                                                                                                                   |
+| `list_knowledge_gaps`                                                         | See where Aide's drafts fell short of the replies your team sent, each with a proposed fix                                                                 |
+| `get_setup_status`, `get_chat_page`, `list_agent_channels`                    | Check what's left to set up, get your Aide chat page link and website snippet, and see which inboxes your agent answers                                    |
+| `list_ai_app_changes`                                                         | See what AI apps and Ask Aide changed in your workspace, newest first, and who they acted as (owners and admins). It can't tell which AI app made a change |
 
 Tools that act, for teammates who signed in with read and act:
 
-| Tool | What it does |
-| --- | --- |
-| `add_note` | Add an internal note |
-| `update_conversation` | Change status, priority, assignee, team or on-hold reason. Closing can send the customer a satisfaction survey |
-| `reply_to_conversation` | Send a reply to the customer on the conversation's channel. It can't be unsent |
-| `propose_refund`, `propose_cancellation` | Ask to refund or cancel an order. Above your approval limits it waits for an admin, and the app is told so |
-| `approve_order_action`, `reject_order_action` | Approve or reject an order change waiting for approval (agents only within the refund limit) |
+| Tool                                                                                                              | What it does                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `add_note`                                                                                                        | Add an internal note                                                                                                          |
+| `update_conversation`                                                                                             | Change status, priority, assignee, team, on-hold reason or custom fields. Closing can send the customer a satisfaction survey |
+| `reply_to_conversation`                                                                                           | Send a reply to the customer on the conversation's channel. It can't be unsent                                                |
+| `refund_order`, `cancel_order`                                                                                    | Refund or cancel an order. Above your approval limits it waits for an admin, and the app is told so                           |
+| `approve_order_action`, `reject_order_action`                                                                     | Approve or reject an order change waiting for approval (agents only within the refund limit)                                  |
+| `add_knowledge_article`, `update_knowledge_article`, `publish_knowledge_document`, `unpublish_knowledge_document` | Write and edit the articles Aide answers from, and publish or unpublish them                                                  |
 
-An app is shown only the tools its sign-in or key can use. Tools that send a message to a customer or change an order are marked as such, so Claude and ChatGPT ask you before using them.
+Setup tools, for owners and admins (the ones that change something need read and act):
+
+| Tool                                                                                                                                                   | What it does                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `update_workspace`                                                                                                                                     | Save your business details                                                                                           |
+| `add_website`, `reimport_knowledge_source`                                                                                                             | Teach Aide your website or help center, and retry a failed import                                                    |
+| `update_agent`, `test_agent`, `continue_agent_test`                                                                                                    | Edit your AI agent and try it in a private preview no customer sees; a test never deploys it                         |
+| `deploy_agent`, `pause_agent`, `set_inbox_ai`                                                                                                          | Put the agent live, pause it, or turn on AI replies for an inbox                                                     |
+| `add_support_email`, `send_forwarding_test`, `get_support_email`, `get_support_email_settings`, `update_support_email_settings`, `verify_email_domain` | Set up your support email: forwarding, Gmail's confirmation code, who gets replies, and sending from your own domain |
+| `connect_integration`, `set_up_helpdesk`                                                                                                               | Start connecting Gmail, Shopify, Zendesk, Front or Gorgias, and finish setting up a helpdesk                         |
+| `mark_knowledge_gap_done`, `dismiss_knowledge_gap`                                                                                                     | Mark a knowledge gap fixed, or dismiss it                                                                            |
+| `change_plan`                                                                                                                                          | Start a paid plan or change it. Starting one opens Stripe Checkout in your browser (not available in ChatGPT)        |
+
+In Claude and the other apps (not ChatGPT), the app can also reach the rest of Aide's settings by area: topics, knowledge collections, analytics, channels, helpdesk rules, procedures and macros, more conversation and order actions, the team and billing. It looks up an area's actions when it needs one, within your role, and changes are marked so the app asks you first. In ChatGPT, the other settings aren't available: use Ask Aide in the dashboard, or Claude. ChatGPT has its own tools to read macros and analytics (owners and admins), and to manage procedures and your agent's Instructions.
+
+Procedures work as in the dashboard: an app can create one and edit it until it first goes live. Once a procedure is live, the app's edits wait in a draft until it sets the procedure live again, which keeps a version you can restore. It can also check a When to use on your recent conversations before setting it live. Setting procedures live, restoring versions, drafts, Check trigger and changing Instructions are for owners and admins.
+
+An app is shown only the tools its sign-in or key can use. Tools that send a message to a customer, update a conversation, change an order, reject an order change, replace saved settings, change Instructions or put your agent or a procedure live are marked as such, so Claude and ChatGPT can ask you before using them.
 
 ## Limits
 
 - 300 MCP requests a minute per connection. Each tool call also counts against the API's limits: 600 a minute per sign-in or key and 3,000 a minute per workspace.
 - Knowledge searches share your workspace's 60 a minute.
+- Apps can send the Aide team up to 30 notes a day per workspace.
 - When a limit is reached, the app is told how many seconds to wait.
 
 ## Your data
 
 - Aide sends the app only the results of the tools it calls. The assistant's provider (Anthropic, OpenAI, Google, Cursor, Microsoft, Perplexity, Cognition for Devin) handles those results under its own terms and your settings with it.
 - Aide doesn't receive or keep your chats with the assistant. Notes, replies, updates and order requests made through the app are saved in Aide like any other, recorded as you.
+- When the app sends the Aide team a note with `send_feedback`, Aide removes email addresses, phone, card, tracking and order numbers before saving it. Only Aide's team reads it.
 - Sign-in tokens last an hour and renew for up to 30 days; Aide stores them only in hashed form. Disconnecting deletes them straight away.
 
 ## See and disconnect apps
@@ -260,9 +292,9 @@ Owners and admins revoke API keys from their row under Settings > Developers.
 ## Troubleshooting
 
 - **The app asks you to sign in again:** the connection was disconnected, expired after 30 days without use, or you left the workspace. Connect again.
-- **Conversations or replies are missing:** you connected with an API key, which never sees conversations, or with Read only. Disconnect and connect again choosing read and act.
+- **Conversations or replies are missing:** you connected with an API key, which never sees conversations, or the app asked for read-only access. Disconnect and connect again; the consent screen shows whether the app is asking to read only or to read and act.
 - **"insufficient_scope":** the app tried to act with a read-only connection. Reconnect with read and act.
-- **Analytics tools are missing:** analytics are for owners and admins.
+- **Analytics are missing:** analytics are for owners and admins.
 - **Claude can't finish connecting:** remove the connector and add it again with OAuth client set to "Register automatically".
 - **ChatGPT shows old or missing tools:** ChatGPT keeps the tool list from when Aide was added. Refresh the app from its settings page (on Business and Enterprise, an admin refreshes it in workspace settings).
 - **A refund didn't happen:** it is waiting for approval because it is above your limits. An admin can approve it in Aide, or through `approve_order_action`.

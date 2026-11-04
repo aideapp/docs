@@ -1,20 +1,53 @@
 ---
 title: "Macros for Aide, Zendesk and Front"
-description: "A macro is a named bundle of actions that scenarios and your team can run, in Aide or your helpdesk."
+description: "A macro is a saved reply, a named bundle of actions, or both, that your team and your procedures can use in Aide or your helpdesk."
 ---
 
 {/* Generated from the Aide help center article "macros" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
 
-A macro is a named bundle of actions that scenarios and your team can run, in Aide or your helpdesk. One macro can hold actions for Aide Helpdesk, Zendesk and Front, so it works wherever the conversation lives. Find macros under **Scenarios > Macros**.
+A macro is a saved reply, a named bundle of actions, or both, that your team and your procedures can use in Aide or your helpdesk. Macros are also what other tools call canned responses or reply templates. One macro can hold actions for Aide Helpdesk, Zendesk and Front, so it works wherever the conversation lives. Find macros under **Automations > Macros**.
 
 ## Create a macro
 
-1. Open **Scenarios > Macros** and create a new macro.
-2. Name it and add a description.
-3. Under **Actions**, add each action and pick where it applies.
-4. Choose **Save macro**.
+1. Open **Automations > Macros** and create a new macro.
+2. Name it, and optionally give it a folder, a shortcut, and who it's **Visible to** (only you, or the team).
+3. Write the **Reply**. **Insert variable** adds a variable that's filled in when the macro is used.
+4. Under **Other actions**, add anything else the macro should do, and pick where each action applies.
+5. Choose **Save macro**.
 
-Each macro shows how many times it ran, when it was last updated, and the topics it's attached to.
+### Save a reply as a macro
+
+You can also save a reply without leaving the conversation:
+
+- **From the reply box:** write the reply, open the menu beside **Send**, and choose **Save as macro…**.
+- **From a sent reply:** on a public reply from a teammate or Aide, open the **⋯** menu and choose **Save as macro…**.
+
+Give it a name and, optionally, a folder, a shortcut and who it's **Visible to**. The reply is saved as written, variables included, and you can edit it first. It starts as **Only me**; owners and admins can make it visible to the team. It's in the `/` list as soon as you save it.
+
+A macro with only a reply is a saved reply. Each macro shows how many times it ran, when it was last updated, and the topics it's attached to. Filter the list by **Reply only**, **Personal**, or the helpdesk a macro came from.
+
+## Personal and shared macros
+
+A shared macro is available to the whole team, and Aide can learn from it when it drafts replies. A personal macro is only yours: nobody else sees it in the list or the reply box, and Aide never uses it in its drafts.
+
+Owners and admins create, edit and delete shared macros. Agents create personal macros and manage their own. Procedures run shared macros only.
+
+## Variables
+
+| Group          | Examples                                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Customer       | `customer.first_name`, `customer.email`, `customer.orders_count`, `customer.total_spent`                          |
+| Conversation   | `conversation.subject`, `conversation.status`, `conversation.assignee.first_name`                                 |
+| Agent and team | `agent.first_name`, `agent.signature`, `team.name`                                                                |
+| Workspace      | `workspace.name`, `workspace.hours.next_open`                                                                     |
+| Order          | `order.name`, `order.status`, `order.total`, `order.tracking.carrier`, `order.tracking.url`, `order.tracking.eta` |
+| Store          | `store.name`, `store.domain`, `store.support_email`                                                               |
+
+Write a variable in double braces, for example "Your order \{\{ order.name \}\} shipped with \{\{ order.tracking.carrier \}\}".
+
+Order variables come from your connected store: the order the conversation is about when Aide recorded one, otherwise the customer's latest. They fill in only when the customer's identity is verified, so a visitor who only typed an email address never sees someone else's orders.
+
+To check a reply, select **Preview** to see it filled in for a recent conversation.
 
 ## Actions per helpdesk
 
@@ -28,26 +61,24 @@ Zendesk and Front actions are offered while that helpdesk is connected. Each hel
 
 ## Macros from your helpdesk
 
-When Zendesk or Gorgias is connected, Aide brings in your macros from there and refreshes them every hour. They carry a "From Zendesk" or "From Gorgias" badge and open read-only: change them in your helpdesk and Aide follows at the next refresh, or select **Sync now** on the integration page.
+When Zendesk or Gorgias is connected, Aide brings in your macros from there and refreshes them every hour. They carry a "From Zendesk" or "From Gorgias" badge and open read-only: change them in your helpdesk and Aide follows at the next refresh, or select **Sync now** on the integration page. Owners and admins can still choose whether Aide uses them in its drafts.
 
 From Gorgias, archived macros are left out, and so is the "Aide: insert draft" macro Aide adds to Gorgias (see [The Aide card and insert-draft macro in Gorgias](/integrations/gorgias-aide-card)).
 
-A scenario or a teammate in Aide that runs a Zendesk macro on a Zendesk ticket applies it as Zendesk would. A macro that would reply to the customer only runs where Aide is allowed to send replies.
-
-Zendesk macros and Front message templates can also be a knowledge source, so Aide can learn your usual answers from them.
+A procedure or a teammate in Aide that runs a Zendesk macro on a Zendesk ticket applies it as Zendesk would. A macro that would reply to the customer only runs where Aide is allowed to send replies.
 
 ## Use a macro in the reply box
 
-In a conversation, the **Macros** button in the reply box lists your active macros, with search.
+In a conversation, type `/` in the reply box, or select the **Macros** button, to search your active macros by name or shortcut. Typing the start of a shortcut after `/` puts that macro first, and the highlighted macro's reply is previewed beside the list.
 
-1. Pick a macro. Its reply goes in the box ready to edit, with variables filled in as reply templates fill them.
+1. Pick a macro. Its reply goes in the box ready to edit, with its variables filled in.
 2. Its other actions show as chips above the send button, such as "Close", "Priority: High" or "Tag: refund". Remove a chip to leave that action out this time.
 3. Send. The actions run right after your reply goes. If the reply doesn't send, the actions don't run either.
 
 A macro with no reply turns the send button into **Apply macro**. In an internal note, the macro brings its actions but not its reply. The changes show in the conversation's activity as yours.
 
-Macros that only act in Zendesk or Front can't be picked in the reply box.
+Macros that only act in Zendesk or Front can't be picked in the reply box. If your team replies inside Zendesk or Front, keep your canned responses there as Zendesk macros or Front message templates.
 
-## Use macros from scenarios
+## Use macros from procedures
 
-A scenario can **Run a macro** itself or **Suggest a macro** to your team. On a Zendesk ticket or a Front conversation, the macro's actions for that helpdesk apply through the connection; on any other conversation they're skipped, and the thread says so. Copilot also suggests macros in the Aide panel inside Zendesk and Front (see [The Aide panel in Zendesk and Front](/integrations/aide-panel-zendesk-front)).
+A procedure can **Run a macro** itself or **Suggest a macro** to your team. On a Zendesk ticket or a Front conversation, the macro's actions for that helpdesk apply through the connection; on any other conversation they're skipped, and the thread says so. Copilot also suggests macros in the Aide panel inside Zendesk and Front (see [The Aide panel in Zendesk and Front](/integrations/aide-panel-zendesk-front)).

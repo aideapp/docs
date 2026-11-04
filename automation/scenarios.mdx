@@ -1,32 +1,57 @@
 ---
-title: "Build scenarios"
-description: "A scenario is a rule for what Aide does when a conversation matches certain conditions, usually a topic."
+title: "Build procedures"
+description: "A procedure tells Aide what to do in one situation: how to handle a damaged order, what to ask before a refund, when to hand off."
 ---
 
 {/* Generated from the Aide help center article "scenarios" by scripts/sync-help-center.mjs. Edit the article and re-sync instead of editing this file. */}
 
-A scenario is a rule for what Aide does when a conversation matches certain conditions, usually a topic. For example: when the topic is "Where is my order" and the customer has an order, add an instruction about delivery times, tag the conversation and assign it to your shipping team.
+A procedure tells Aide what to do in one situation: how to handle a damaged order, what to ask before a refund, when to hand off. You describe the situation in plain words under **When to use**, and Aide picks the procedure from what the customer writes. For example: when the customer says an item arrived broken, ask for a photo and the order number, then hand off to your team.
 
-Find scenarios under **Scenarios**. The list puts scenarios that apply to every conversation first, then files the rest under the topic their conditions name. Each agent's **Scenarios** tab lists the scenarios that shape its replies.
+Procedures used to be called scenarios. Old links to **Scenarios** open **Procedures**, and every scenario you had is now a procedure.
 
-## Create a scenario
+Find procedures under **Automations > Procedures**. The list files procedures under the topic their conditions name. Each agent's **Procedures** tab lists the procedures that shape its replies.
 
-1. Open **Scenarios** and create a new scenario. Give it a name.
-2. Under **If this is true**, add the conditions it should match.
-3. Under **Do this**, choose **Add an action** for each thing Aide should do.
-4. Switch the scenario **On** and choose **Save changes**.
+## Create a procedure
 
-A scenario needs at least one condition before you can turn it on, unless it applies to every conversation.
+1. Open **Procedures** and choose **New > Procedure**. Give it a name.
+2. Under **When to use**, describe the situation.
+3. Under **Only if**, add any conditions it needs, such as a channel or a topic.
+4. Write the **Steps**: what Aide should do, one step at a time. Type **@** to add a field to collect, a field to use, an action or a knowledge source.
+5. Choose how it **Finish**es.
+6. Choose **Set live**.
 
-## Conditions
+To switch a procedure on, give it a **When to use**. A procedure that was already live with only conditions keeps running on its conditions, as it did before; the editor warns you and the list marks it until you add one.
+
+### Hand off when…
+
+For a situation your team should always take over, such as a customer threatening legal action, choose **New > Hand off when…**. It starts a procedure that finishes by handing off and needs no steps: write the **When to use** and switch it on. Hand-off rules are procedures, so they show up, and can be checked, like any other. A procedure that hands off straight away takes over as soon as a message fits it, even in the middle of another procedure, whatever that procedure's "If the customer changes subject" setting says. A procedure that collects details before handing off is an ordinary procedure that ends with your team: it takes over from another one only when it fits better, and the editor says so as soon as you tick a detail.
+
+## When to use
+
+Write up to 300 characters on the situation the procedure is for, as you'd brief a teammate: "The customer says an item arrived broken or damaged." Add what it is not for in the same text, with "Not when …": "Not when the parcel is only late." The look-alikes you name there are left to another procedure, or to Aide's usual reply.
+
+Aide reads every customer message against the **When to use** of your live procedures, at the same time as it tags topics. The procedure that fits best is followed. When none fits well enough, Aide replies as usual.
+
+### Train on examples
+
+Choose **Train on examples** to add messages the procedure is for (**Use when**) and messages it is not for (**Don't use when**), one per line. You can paste a list. Each list takes up to 20 examples of up to 300 characters. Examples help most for the near misses: messages that sound alike but need something else.
+
+### Check trigger
+
+Owners and admins can choose **Check trigger** to try the **When to use** before switching the procedure on. Aide reads the last 50 conversations on the procedure's channels and lists the ones it would have matched and the ones it declined, with a short reason for each near miss. The check uses your workspace's AI budget, like any other AI work, and shows what it cost. Editing the text and checking again runs a new check.
+
+## Only if
+
+Conditions under **Only if** decide whether the procedure may run at all. Aide only considers the procedure on conversations they allow, whatever the customer writes. Leave them empty to consider it everywhere.
 
 Conditions sit in groups. Inside a group, every condition must be true; between groups, any group can match ("or"). You can have up to 20 groups of up to 20 conditions.
 
 Conditions can check:
 
+- the **channel** the conversation came in on: Aide Chat, Email, or a connected helpdesk
 - the **topic**, the **highest topic**, a **priority topic** and the **topic confidence**
 - whether it **is first message**
-- the **inbox** and the **integration** the conversation came from
+- the **inbox**
 - the ticket's tags, status and fields, and contact and user fields
 - Salesforce contact fields, when Salesforce is connected
 - Shopify order data: **order exists**, **order tag**, **order created**, **destination country**, **tracking exists**, **tracking begun**, **tracking last updated**, **shipment status** and **tracking company**
@@ -34,42 +59,60 @@ Conditions can check:
 
 Each condition uses "is" or "is not" ("matches" or "doesn't match" for a pattern).
 
-### Apply to every conversation
+### Rules for every conversation
 
-Switch on **Apply to every conversation** for instructions that should always hold, such as a tone rule. The scenario then has no conditions.
+A rule that should hold in every conversation, such as "never promise a delivery date", is an instruction, not a procedure: add it under **Aide AI Agent > Instructions** (see [Set up the Aide AI Agent](/aide-ai-agent/ai-agent-setup)). How the agent sounds belongs in **Tone & identity**. Instructions always apply; where a procedure says something more specific for its situation, the procedure wins.
+
+## Steps
+
+Write the steps the way you'd brief a teammate: "Ask for the order number. Check whether it has shipped." Up to 30 steps, each up to 1,000 characters. Type **@** in a step to add:
+
+- **Collect**: a field Aide asks the customer for. Text, number, choice and yes/no fields can be collected.
+- **Use**: a field whose value Aide reads, such as the order number it already has.
+- **Do**: update the shipping address, add a tag, tag the Shopify order, assign to a group, run a macro or add an internal note.
+- **Knowledge**: a source Aide answers from (up to 20 per procedure).
+
+Each item shows its current name. If a field, macro or source is deleted or archived, it is marked in the steps, and the procedure can't be set live until you replace or remove it.
+
+### If and Otherwise
+
+Add an **If** step when Aide should do different things depending on the conversation, such as "If the order has not shipped". Write each condition in plain words; Aide judges it from the conversation. A step can have up to five **If** branches and an **Otherwise**, each with up to 10 steps. Branches can't contain another **If**.
+
+Inside a branch you can collect and use fields, add knowledge, and update the shipping address. Tags, assignment, macros, order tags and notes run as soon as the procedure starts, so they can't depend on a branch: put them in a step outside the **If**.
 
 ## Actions
 
-A scenario runs up to 20 actions, in order:
+A procedure runs up to 20 actions, in order. In the steps editor, the actions you add with **@** come from the steps; the rest (**Write a reply**, **Send a reply**, **Pre-write a reply**, **Suggest a reply**, **Suggest a macro**, **Close the conversation**) are under **More actions**.
 
-- **Add an instruction**: a rule Aide follows while writing, such as tone, things to avoid or things to always say.
-- **Answer only from these sources**: Aide looks for its answer only in the knowledge sources you pick (up to 20). One per scenario.
+- **Steps**: what Aide does in this situation, in your words, such as what to ask, what to check and what to always say.
+- **Answer only from these sources**: Aide looks for its answer only in the knowledge sources you pick (up to 20). One per procedure.
 - **Write a reply**: Aide writes and sends the reply for this message, even on a topic that only drafts. Choose what happens when it can't answer: **Escalate with an internal comment** (its reply goes to your team as a note instead) or **Escalate with a hand-off message** (the conversation goes to your team straight away).
-- **Pre-write a reply**: prepare a Copilot draft for your team ahead of time.
+- **Send a reply**: on a connected helpdesk, its text is sent to the customer exactly as written; on Aide's own chat and email, it guides what Aide writes. One reply action per procedure.
+- **Pre-write a reply**: prepare a Copilot draft for your team ahead of time, for this procedure's conversations. For a draft ready on every conversation, set Copilot's **When to write the draft** to **In the background** (see [Copilot drafts for your team](/copilot/copilot)).
 - **Suggest a reply**: suggest the text you write to the teammate.
 - **Run a macro** or **Suggest a macro**: a suggested macro appears in the thread under the customer's message.
 - **Post internal comment**: leave a note for the team.
 - **Collect a field**: Aide asks the customer for a field's value. Text, number, choice and yes/no fields can be collected.
 - **Add a tag**, **Assign to a group**, **Close the conversation**.
 - **Tag the Shopify order**: add a tag to the customer's newest Shopify order.
-- **Run an automation**: **Update shipping address for Shopify order**. See **Order changes from a scenario** below.
+- **Run an automation**: **Update shipping address for Shopify order**. See **Order changes from a procedure** below.
 
-Scenarios carried over from the old Aide app can also have **Send a reply**: on a connected helpdesk, its text is sent to the customer exactly as written; on Aide's own chat and email, it guides what Aide writes.
-
-### Order changes from a scenario
+### Order changes from a procedure
 
 An automation never changes an order by itself. Order changes such as a new address happen only through the order action rules you've set: the topic's AI level, the customer's confirmation and your approval limits (see [Let Aide cancel, refund and change orders in chat](/shopify/aide-order-actions)).
 
-On a message where a **Write a reply** scenario lets Aide act as on a fully automated topic, Aide offers only the order changes the scenario's automation names: with **Update shipping address for Shopify order**, the address change. Without an automation, it offers none.
+On a message where a **Write a reply** procedure lets Aide act as on a topic set to AI Agent, Aide offers only the order changes the procedure's automation names: with **Update shipping address for Shopify order**, the address change. Without an automation, it offers none.
+
+Once a live procedure updates the shipping address (a **Do** step or the automation), Aide changes addresses only in conversations a procedure that updates it applies to. Everywhere else it doesn't offer the change, whatever the topic's AI level; the other order changes are not affected. Inside the procedure, the topic's AI level still decides whether a teammate approves the change. Returns and the returns portal link are not affected.
 
 ### Answer only from these sources
 
-Use this to keep one brand's questions on that brand's help center, or a wholesale inbox on the wholesale guide. It narrows where Aide looks; it doesn't change how Aide answers.
+Use this to keep one brand's questions on that brand's help center, or a wholesale inbox on the wholesale guide. It narrows where Aide looks; it doesn't change how Aide answers. While a procedure runs, Aide still searches your usual knowledge unless the procedure picks sources.
 
-- When several matching scenarios pick sources, Aide looks in all of them together.
-- An agent limited to some sources answers from the sources it shares with the scenario. If it shares none, the scenario's sources are ignored for that agent and it answers from its usual knowledge. After you save, the editor names each agent this affects.
+- When several matching procedures pick sources, Aide looks in all of them together.
+- An agent limited to some sources answers from the sources it shares with the procedure. If it shares none, the procedure's sources are ignored for that agent and it answers from its usual knowledge. After you save, the editor names each agent this affects.
 - Copilot drafts follow the same rule.
-- Deleting a source removes it from every scenario that picked it.
+- Deleting a source removes it from every procedure that picked it.
 
 ### Tag the Shopify order
 
@@ -78,29 +121,67 @@ Type the tag, for example "Do not import", so your fulfilment app skips an order
 - The tag goes on the customer's newest order, once Aide knows the customer is who they say they are (a verified chat shopper, a linked order, or a helpdesk's trusted sender). If the newest order is cancelled, nothing is tagged.
 - The tag is added at once and sits next to the order's existing tags.
 - When it can't be added, an internal note says which order wasn't tagged and why.
-- Tags are up to 40 characters, with no commas. A scenario can add up to five order tags.
+- Tags are up to 40 characters, with no commas. A procedure can add up to five order tags.
+
+## Finish
+
+Choose what happens once the procedure is done:
+
+- **Reply and stay open** (default): Aide replies and leaves the conversation open for the customer's answer.
+- **Hand off**: Aide hands the conversation to your team as soon as the procedure applies, with a hand-off message. Tick fields under **Hand off once these details are collected** to have Aide first collect what the procedure's **Collect a field** actions ask for; it hands off as soon as they all have a value.
+- **Close**: Aide closes the conversation once it has replied.
+
+## If the customer changes subject
+
+Once a procedure starts, it stays active on the customer's follow-up messages until it finishes. This section, collapsed under the procedure, says what happens when the customer moves on. Each case has a default and one alternative:
+
+- **Asks a question your knowledge answers**: Aide answers it and stays in the procedure, or answers it and leaves the procedure.
+- **Asks for a person**: Aide hands off, or stays and continues the steps first.
+- **Says something another procedure is for**: Aide switches when the other procedure fits better, or stays until this procedure finishes.
+
+## See what Aide followed
+
+In a conversation's thread, the **Trigger** row under a customer message names the procedure Aide followed, and the ones it considered but didn't follow, with the reason: a near miss, another procedure that fitted better, or the customer changing subject. The **Procedure** row below it shows the actions that ran.
 
 ## Priority and delay
 
 Under **Execution**:
 
-- **Priority**: **Low** runs only if no other matching scenario does. **Medium (default)** runs whenever its conditions match. **High** runs when its conditions match, and no other scenario's actions run.
+- **Priority**: **Low** runs only if no other matching procedure does. **Medium (default)** runs whenever it matches. **High** runs when it matches, and no other procedure's actions run.
 - **Delay**: **Immediately**, or **After 5 minutes**, **After 10 minutes** or **After 15 minutes**. A delay makes the reply feel more natural and gives your team a chance to answer first.
 
-Scenarios are checked on each customer message, chat or email, and again once Aide has tagged the message's topics. A scenario's actions run once per conversation, even when it matches again later. Each run shows in the conversation's thread, with the actions that ran and any that were skipped.
+Procedures are checked on each customer message, chat or email, and again once Aide has tagged the message's topics. Each customer message follows at most one procedure with a **When to use**. A procedure's actions run once per conversation, even when it matches again later. Each run shows in the conversation's thread, with the actions that ran and any that were skipped.
 
-## Run a scenario on existing conversations
+## Run a procedure on existing conversations
 
-A new or changed scenario doesn't have to wait for the next customer message. Owners and admins can apply it to open conversations that are already waiting:
+A new or changed procedure doesn't have to wait for the next customer message. Owners and admins can apply it to open conversations that are already waiting:
 
-1. Turn the scenario on and save it.
+1. Turn the procedure on and save it.
 2. Choose **Run on existing conversations**.
 3. Filter by status, channel, topic and when the conversations were created (**Created after**, **Created before**). With no filters, every open conversation is picked, oldest first, up to 5,000.
-4. Choose **Preview**. Aide shows how many conversations match, how many already ran this scenario and are skipped, and which actions won't run. Nothing changes yet.
-5. Run it. You can close the dialog and follow progress on the scenario, or stop it.
+4. Choose **Preview**. Aide shows how many conversations match, how many already ran this procedure and are skipped, and which actions won't run. Nothing changes yet.
+5. Run it. You can close the dialog and follow progress on the procedure, or stop it.
 
 Only actions that are safe on older conversations run: tags, assignment, closing, internal comments, reading fields from what the customer wrote, and macros. Replies and drafts never run, a helpdesk macro that would answer the customer is skipped, and delays don't apply. Closed and spam conversations are never included. One run per workspace at a time.
 
-## Turning a scenario on and off
+## Draft and live
 
-Use the **On** / **Off** switch at the top of the scenario, then save. Switching a scenario off stops it for new messages. **Times run this month** shows how often it ran; select it to see those conversations.
+A procedure that has never been live saves your changes directly. Once it has been set live, your edits are kept as a **Draft** while the live version keeps running. Customers only see the draft once you choose **Set live**.
+
+- **What changed** shows the draft next to the live version. Add a short note when you set it live; it goes in the version history.
+- **Discard draft** throws the draft away and keeps the live version.
+- **Version history** lists every version that was set live, with who did it and their note. **Restore** puts an old version back as the draft, so you can check it before setting it live. If you already have a draft, Aide asks before replacing it.
+
+Owners and admins can set procedures live.
+
+## Try it in the preview
+
+From the procedure, open the preview chat to try it. The preview follows the procedure from the first message, with your draft if you have one, even while it is off or its **When to use** wouldn't match, so you can test the steps on their own. Use **Check trigger** to test when it starts. Preview conversations never reach customers.
+
+## Turning a procedure on and off
+
+Use the **On** / **Off** switch at the top of the procedure, then save. Switching a procedure off pauses it for new messages; a draft stays a draft. Switching it back on runs the live version. **Times run this month** shows how often it ran; select it to see those conversations.
+
+## For developers
+
+The API resource is `/v1/procedures`, with `whenToUse`, `examples`, `triggerThreshold`, `finish`, `deviation`, `procedure` (the steps), `status`, `publishedAt` and `draft`. `PATCH /v1/procedures/{id}` edits a procedure that has never been live directly; on one that has been live, `isActive` pauses or resumes it at once and every other field is saved to its draft. `PUT` and `DELETE /v1/procedures/{id}/draft` save and discard a draft, `POST /v1/procedures/{id}/publications` sets it live (with `{"isActive": false}` it stays paused), and `GET /v1/procedures/{id}/versions` with `POST /v1/procedures/{id}/versions/{version}/restore` read and restore versions. `/v1/scenarios` answers the original requests and is deprecated.

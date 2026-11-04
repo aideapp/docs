@@ -18,7 +18,7 @@ Each field has a scope. A **Conversation** field belongs to one conversation. A 
 ## Name, key and description
 
 - **Name** is what your team sees.
-- **Key** is used in templates, rules and the API. It starts with a lowercase letter and uses lowercase letters, numbers and underscores, for example `order_number`. It can't be changed after the field is created.
+- **Key** is used in macros, rules and the API. It starts with a lowercase letter and uses lowercase letters, numbers and underscores, for example `order_number`. It can't be changed after the field is created.
 - **Description** is what Aide reads to recognise the value and to ask for it, so be specific: "The order number from the confirmation email, starting with #."
 
 ## How Aide fills it
@@ -30,7 +30,7 @@ Aide can read and ask for Text, Number, Single choice and Yes / no fields. Date 
 
 ## Letting Aide ask for a field
 
-Add the field to the AI Agent's **Fields** tab, or use a scenario's collect-a-field action. For each, choose how it's collected:
+Add the field to the AI Agent's **Fields** tab, or use a procedure's collect-a-field action. For each, choose how it's collected:
 
 - **Extract only**: Aide reads the value from the conversation and never asks.
 - **Ask if missing**: Aide uses the value if the customer already gave it, and asks otherwise.
