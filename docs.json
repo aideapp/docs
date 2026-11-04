@@ -296,6 +296,10 @@
     {
       "source": "/aide-helpdesk/reply-templates",
       "destination": "/automation/macros"
+    },
+    {
+      "source": "/automation/procedures",
+      "destination": "/automation/scenarios"
     }
   ],
   "footer": {
